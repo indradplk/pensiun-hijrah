@@ -1,0 +1,21 @@
+export const homeObjTwo = {
+  id: 'discover',
+  lightBg: true,
+  lightText: false,
+  lighttextDesc: false,
+  topLine: 'Muamalat DIN',
+  headline: 'Cek Saldo dan Riwayat Transaksi DPLK Lebih Cepat dan Praktis',
+  description:
+    'Kamu bisa melakukan pengecekan saldo dan riwayat transaksi DPLK tanpa ribet lewat ponsel pintar. Selain itu, kamu juga bisa melakukan berbagai layanan transaksi keuangan secara digital melalui MDIN!',
+  buttonLabel: 'Download Sekarang!',
+  imgStart: true,
+  img: '/images/image-2.svg',
+  alt: 'MDIN',
+  dark: false,
+  primary: false,
+  darkText: true,
+  img1: '/images/google.svg',
+  img2: '/images/apple.svg',
+  alt1: 'Google Play',
+  alt2: 'Apps Store',
+};

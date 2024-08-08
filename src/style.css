@@ -1,0 +1,53 @@
+.nav-link.active {
+    color: #fff !important;
+    background-color: #f9f9f9 !important;
+    background-image: linear-gradient(to right, #61298A, #D7A1FF) !important;
+}
+
+.management {
+    color: #212121 !important;
+    width: auto;
+}
+
+.panduan {
+    color: #212121 !important;
+}
+
+.news {
+    color: #212121 !important;
+}
+
+.branch {
+    font-size: 14px;
+}
+
+.riwayat {
+    font-size: 12px;
+}
+
+.riwayat-mobile {
+    font-size: 10px;
+}
+
+.klaim {
+    font-size: 14px;
+}
+
+.klaim-mobile {
+    font-size: 10px;
+}
+
+.pagination {
+    --bs-pagination-active-bg: #61298A;
+    --bs-pagination-active-border-color: #61298A;
+    --bs-pagination-color: #61298A;
+    --bs-pagination-hover-color: #F7941E;
+}
+
+.vertical-timeline-element-content {
+    background: '#61298A';
+    color: '#fff';
+    border-radius: '15px';
+    width: '500px';
+    padding: '20px 40px';
+}

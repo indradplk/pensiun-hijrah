@@ -1,0 +1,27 @@
+[
+    {
+        "id": 0,
+        "name": "Penghasilan",
+        "code": "0"
+    },
+    {
+        "id": 1,
+        "name": "Di bawah 3 Juta Rupiah",
+        "code": "1"
+    },
+    {
+        "id": 2,
+        "name": "Di antara 3 - 5 Juta Rupiah",
+        "code": "2"
+    },
+    {
+        "id": 3,
+        "name": "Di antara 5 - 10 Juta Rupiah",
+        "code": "3"
+    },
+    {
+        "id": 4,
+        "name": "Di atas 10 Juta Rupiah",
+        "code": "4"
+    }
+]

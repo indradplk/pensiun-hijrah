@@ -1,0 +1,117 @@
+[
+    {
+        "id": 0,
+        "name": "Pilih Pekerjaan",
+        "code": "0"
+    },
+    {
+        "id": 1,
+        "name": "BUMN/BUMD",
+        "code": "1"
+    },
+    {
+        "id": 2,
+        "name": "KARYAWAN SWASTA",
+        "code": "2"
+    },
+    {
+        "id": 3,
+        "name": "PEGAWAI NEGERI",
+        "code": "3"
+    },
+    {
+        "id": 4,
+        "name": "TENTARA NASIONAL INDONESIA/TNI",
+        "code": "4"
+    },
+    {
+        "id": 5,
+        "name": "PELAJAR/MAHASISWA",
+        "code": "5"
+    },
+    {
+        "id": 6,
+        "name": "PENDIDIK/DOSEN/GURU",
+        "code": "6"
+    },
+    {
+        "id": 7,
+        "name": "WIRAUSAHA",
+        "code": "7"
+    },
+    {
+        "id": 8,
+        "name": "IBU RUMAH TANGGA",
+        "code": "10"
+    },
+    {
+        "id": 9,
+        "name": "LAINNYA",
+        "code": "99"
+    },
+    {
+        "id": 10,
+        "name": "PEJABAT NEGARA",
+        "code": "12"
+    },
+    {
+        "id": 11,
+        "name": "POLISI REPUBLIK INDONESIA/POLRI",
+        "code": "11"
+    },
+    {
+        "id": 12,
+        "name": "PENSIUNAN",
+        "code": "13"
+    },
+    {
+        "id": 13,
+        "name": "PROFESIONAL",
+        "code": "14"
+    },
+    {
+        "id": 14,
+        "name": "YAYASAN/LEMBAGA BERBADAN HUKUM LAINNYA",
+        "code": "15"
+    },
+    {
+        "id": 15,
+        "name": "LSM/ORGANISASI TIDAK BERBADAN HUKUM LAINNYA",
+        "code": "16"
+    },
+    {
+        "id": 16,
+        "name": "PEMUKA AGAMA",
+        "code": "17"
+    },
+    {
+        "id": 17,
+        "name": "INFLUENCER/CONTENT CREATOR",
+        "code": "18"
+    },
+    {
+        "id": 18,
+        "name": "ATLIT/OLAHRAGAWAN",
+        "code": "19"
+    },
+    {
+        "id": 19,
+        "name": "BURUH",
+        "code": "20"
+    },
+    {
+        "id": 20,
+        "name": "TENAGA KEAMANAN",
+        "code": "21"
+    },
+    {
+        "id": 21,
+        "name": "SOPIR",
+        "code": "22"
+    },
+    {
+        "id": 22,
+        "name": "ASISTEN RUMAH TANGGA",
+        "code": "23"
+    }
+]

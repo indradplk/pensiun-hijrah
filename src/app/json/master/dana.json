@@ -1,0 +1,52 @@
+[
+    {
+        "id": 0,
+        "name": "SUMBER DANA",
+        "keterangan": "Sumber Dana"
+    },
+    {
+        "id": 1,
+        "name": "PENDAPATAN PERUSAHAAN",
+        "keterangan": "PENDAPATAN PERUSAHAAN"
+    },
+    {
+        "id": 2,
+        "name": "INVESTASI",
+        "keterangan": "INVESTASI"
+    },
+    {
+        "id": 3,
+        "name": "KOMISI/JASA",
+        "keterangan": "KOMISI/JASA"
+    },
+    {
+        "id": 4,
+        "name": "PENDAPATAN INDUK",
+        "keterangan": "PENDAPATAN INDUK"
+    },
+    {
+        "id": 5,
+        "name": "LAINNYA",
+        "keterangan": "LAINNYA"
+    },
+    {
+        "id": 6,
+        "name": "BISNIS",
+        "keterangan": "BISNIS"
+    },
+    {
+        "id": 7,
+        "name": "PENGHASILAN/GAJI",
+        "keterangan": "PENGHASILAN/GAJI"
+    },
+    {
+        "id": 8,
+        "name": "PENJUALAN INVESTASI",
+        "keterangan": "PENJUALAN INVESTASI"
+    },
+    {
+        "id": 9,
+        "name": "TABUNGAN PRIBADI",
+        "keterangan": "TABUNGAN PRIBADI"
+    }
+]

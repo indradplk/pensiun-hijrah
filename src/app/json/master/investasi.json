@@ -1,0 +1,30 @@
+[
+    {
+        "id": 0,
+        "name": "Paket Investasi",
+        "value": "",
+        "code": "",
+        "description": "Pilih paket investasi"
+    },
+    {
+        "id": 1,
+        "name": "Paket A",
+        "value": "A",
+        "code": "5",
+        "description": "Deposito Rupiah di Bank Syariah 100%"
+    },
+    {
+        "id": 2,
+        "name": "Paket B",
+        "value": "B",
+        "code": "6",
+        "description": "Deposito Rupiah di Bank Syariah (max 100%) Sukuk dan atau Surat Berharga Syariah Negara (max 80%)"
+    },
+    {
+        "id": 3,
+        "name": "Paket C",
+        "value": "C",
+        "code": "7",
+        "description": "Deposito Rupiah di Bank Syariah (max 100%) dan atau Reksadana Syariah (max 80%) dan atau Saham Syariah (max 50%)"
+    }
+]

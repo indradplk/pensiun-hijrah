@@ -1,0 +1,42 @@
+[
+    {
+        "id": 0,
+        "name": "Penghasilan Tambahan",
+        "code": "0"
+    },
+    {
+        "id": 1,
+        "name": "Kerja Paruh Waktu",
+        "code": "1"
+    },
+    {
+        "id": 2,
+        "name": "Investasi",
+        "code": "2"
+    },
+    {
+        "id": 3,
+        "name": "Hasil Usaha",
+        "code": "3"
+    },
+    {
+        "id": 4,
+        "name": "Warisan",
+        "code": "4"
+    },
+    {
+        "id": 5,
+        "name": "Hasil Sewa",
+        "code": "5"
+    },
+    {
+        "id": 6,
+        "name": "Dividen",
+        "code": "6"
+    },
+    {
+        "id": 7,
+        "name": "Lainnya",
+        "code": "7"
+    }
+]

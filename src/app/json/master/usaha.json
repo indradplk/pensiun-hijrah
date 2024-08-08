@@ -1,0 +1,362 @@
+[
+    {
+        "id": 0,
+        "code": "BIDANG",
+        "nama": "Bidang Pekerjaan"
+    },
+    {
+        "id": 1,
+        "code": "PTS",
+        "nama": "PERSEROAN TERBATAS"
+    },
+    {
+        "id": 2,
+        "code": "UDG",
+        "nama": "USAHA DAGANG"
+    },
+    {
+        "id": 3,
+        "code": "PPD",
+        "nama": "PERSEKUTUAN PERDATA"
+    },
+    {
+        "id": 4,
+        "code": "LSM",
+        "nama": "LEMBAGA SWADAYA MASYARAKAT"
+    },
+    {
+        "id": 5,
+        "code": "KPW",
+        "nama": "KANTOR PERWAKILAN"
+    },
+    {
+        "id": 6,
+        "code": "FCV",
+        "nama": "FIRMA/CV"
+    },
+    {
+        "id": 7,
+        "code": "YYS",
+        "nama": "YAYASAN"
+    },
+    {
+        "id": 8,
+        "code": "ORG",
+        "nama": "ORGANISASI"
+    },
+    {
+        "id": 9,
+        "code": "BND",
+        "nama": "BUMN/BUMD"
+    },
+    {
+        "id": 10,
+        "code": "PSR",
+        "nama": "PERSERO"
+    },
+    {
+        "id": 11,
+        "code": "PTK",
+        "nama": "PERSERO TERBUKA"
+    },
+    {
+        "id": 12,
+        "code": "PUM",
+        "nama": "PERUSAHAAN UMUM"
+    },
+    {
+        "id": 13,
+        "code": "LNY",
+        "nama": "LAINNYA"
+    },
+    {
+        "id": 14,
+        "code": "01",
+        "nama": "PENDIDIKAN DAN YAYASAN"
+    },
+    {
+        "id": 15,
+        "code": "02",
+        "nama": "JASA"
+    },
+    {
+        "id": 16,
+        "code": "03",
+        "nama": "WIRASWASTA"
+    },
+    {
+        "id": 17,
+        "code": "04",
+        "nama": "PERBANKAN"
+    },
+    {
+        "id": 18,
+        "code": "05",
+        "nama": "KOPERASI"
+    },
+    {
+        "id": 19,
+        "code": "06",
+        "nama": "KONSULTAN"
+    },
+    {
+        "id": 20,
+        "code": "07",
+        "nama": "ASURANSI"
+    },
+    {
+        "id": 21,
+        "code": "08",
+        "nama": "KONTRAKTOR"
+    },
+    {
+        "id": 22,
+        "code": "09",
+        "nama": "PARIWISATA"
+    },
+    {
+        "id": 23,
+        "code": "10",
+        "nama": "PEMASARAN"
+    },
+    {
+        "id": 24,
+        "code": "11",
+        "nama": "PERCETAKAN"
+    },
+    {
+        "id": 25,
+        "code": "12",
+        "nama": "LAIN-LAIN"
+    },
+    {
+        "id": 26,
+        "code": "13",
+        "nama": "PALAWIJA / TANAMAN PANGAN"
+    },
+    {
+        "id": 27,
+        "code": "14",
+        "nama": "PERKEBUNAN"
+    },
+    {
+        "id": 28,
+        "code": "15",
+        "nama": "PETERNAKAN"
+    },
+    {
+        "id": 29,
+        "code": "16",
+        "nama": "PERIKANAN"
+    },
+    {
+        "id": 30,
+        "code": "17",
+        "nama": "LAINNYA PERTANIAN"
+    },
+    {
+        "id": 31,
+        "code": "18",
+        "nama": "PERTAMBANGAN BATU BARA"
+    },
+    {
+        "id": 32,
+        "code": "19",
+        "nama": "PERTAMBANGAN MINYAK & GAS BUMI"
+    },
+    {
+        "id": 33,
+        "code": "20",
+        "nama": "PERTAMBANGAN LOGAM & MINERAL "
+    },
+    {
+        "id": 34,
+        "code": "21",
+        "nama": "PERTAMBANGAN BATU BATUAN"
+    },
+    {
+        "id": 35,
+        "code": "22",
+        "nama": "SEMEN"
+    },
+    {
+        "id": 36,
+        "code": "23",
+        "nama": "KERAMIK, PERSELEN & KACA"
+    },
+    {
+        "id": 37,
+        "code": "24",
+        "nama": "LOGAM & SEJENISNYA"
+    },
+    {
+        "id": 38,
+        "code": "25",
+        "nama": "KIMIA"
+    },
+    {
+        "id": 39,
+        "code": "26",
+        "nama": "PLASTIK & KEMASAN"
+    },
+    {
+        "id": 40,
+        "code": "27",
+        "nama": "PAKAN TERNAK"
+    },
+    {
+        "id": 41,
+        "code": "28",
+        "nama": "KAYU & PENGOLAHANNYA"
+    },
+    {
+        "id": 42,
+        "code": "29",
+        "nama": "PULP & KERTAS"
+    },
+    {
+        "id": 43,
+        "code": "30",
+        "nama": "OTOMOTIF & KOMPONENNYA"
+    },
+    {
+        "id": 44,
+        "code": "31",
+        "nama": "TEKSTIL & GARMEN"
+    },
+    {
+        "id": 45,
+        "code": "32",
+        "nama": "ALAS KAKI"
+    },
+    {
+        "id": 46,
+        "code": "33",
+        "nama": "KABEL"
+    },
+    {
+        "id": 47,
+        "code": "34",
+        "nama": "ELEKTRONIKA"
+    },
+    {
+        "id": 48,
+        "code": "35",
+        "nama": "LAINNYA ANEKA INDUSTRI"
+    },
+    {
+        "id": 49,
+        "code": "36",
+        "nama": "MAKANAN & MINUMAN"
+    },
+    {
+        "id": 50,
+        "code": "37",
+        "nama": "ROKOK"
+    },
+    {
+        "id": 51,
+        "code": "38",
+        "nama": "FARMASI"
+    },
+    {
+        "id": 52,
+        "code": "39",
+        "nama": "KOSMETIK"
+    },
+    {
+        "id": 53,
+        "code": "40",
+        "nama": "PERALATAN RUMAH TANGGA"
+    },
+    {
+        "id": 54,
+        "code": "41",
+        "nama": "PROPERTI & REAL ESTATE"
+    },
+    {
+        "id": 55,
+        "code": "42",
+        "nama": "KONSTRUKSI BANGUNAN"
+    },
+    {
+        "id": 56,
+        "code": "43",
+        "nama": "ENERGI"
+    },
+    {
+        "id": 57,
+        "code": "44",
+        "nama": "JALAN TOL, PELABUHAN, BANDARA"
+    },
+    {
+        "id": 58,
+        "code": "45",
+        "nama": "TELEKOMUNIKASI"
+    },
+    {
+        "id": 59,
+        "code": "46",
+        "nama": "TRANSPORTASI"
+    },
+    {
+        "id": 60,
+        "code": "47",
+        "nama": "KONSTRUKSI NON BANGUNAN"
+    },
+    {
+        "id": 61,
+        "code": "48",
+        "nama": "BANK"
+    },
+    {
+        "id": 62,
+        "code": "49",
+        "nama": "LEMBAGA PEMBIAYAAN"
+    },
+    {
+        "id": 63,
+        "code": "50",
+        "nama": "PERUSAHAAN EFEK"
+    },
+    {
+        "id": 64,
+        "code": "51",
+        "nama": "ASURANSI"
+    },
+    {
+        "id": 65,
+        "code": "52",
+        "nama": "LAINNYA KEUANGAN"
+    },
+    {
+        "id": 66,
+        "code": "54",
+        "nama": "PERDAGANGAN ECERAN"
+    },
+    {
+        "id": 67,
+        "code": "55",
+        "nama": "RESTORAN, HOTEL & PARIWISATA"
+    },
+    {
+        "id": 68,
+        "code": "56",
+        "nama": "ADVERTISING, PRINTING & MEDIA"
+    },
+    {
+        "id": 69,
+        "code": "57",
+        "nama": "JASA KOMPUTER & PERANGKATNYA "
+    },
+    {
+        "id": 70,
+        "code": "58",
+        "nama": "PERUSAHAAN INVESTASI"
+    },
+    {
+        "id": 71,
+        "code": "59",
+        "nama": "LAINNYA PERDGANGAN,JASA,INVEST"
+    }
+]

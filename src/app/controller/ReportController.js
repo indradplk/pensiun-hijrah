@@ -58,8 +58,8 @@ exports.create = async (req, res) => {
         if (!title || !kategori) {
             return res.status(400).json({ message: "Semua field harus diisi!" });
         }
-
-        const path_report = `${path.relative('../../../html/pensiun-hijrah/public/media/laporan', req.files.path_report[0].path)}`;
+        
+        const path_report = path.basename(req.files.path_report[0].path);
 
         // Validasi form
         const newReport = await Report.create({
@@ -104,10 +104,10 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingReport.path_report) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/media/laporan', existingReport.path_report));
+            fs.unlinkSync(path.join('../../public/media/laporan', existingReport.path_report));
         }
 
-        const path_report = `${path.relative('../../../html/pensiun-hijrah/public/media/laporan', req.files.path_report[0].path)}`;
+        const path_report = path.basename(req.files.path_report[0].path);
 
         // Update data Report
         const updatedReport = await existingReport.update({
@@ -143,7 +143,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (ReportToDelete.path_report) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/media/laporan', ReportToDelete.path_report));
+            fs.unlinkSync(path.join('../../public/media/laporan', ReportToDelete.path_report));
         }
 
         await ReportToDelete.destroy();

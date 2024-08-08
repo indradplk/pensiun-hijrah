@@ -52,7 +52,7 @@ exports.create = async (req, res) => {
             return res.status(400).json({ message: "Deskripsi harus diisi!" });
         }
 
-        const path_award = `${path.relative('../../../html/pensiun-hijrah/public/about/penghargaan', req.files.path_award[0].path)}`;
+        const path_award = path.basename(req.files.path_award[0].path);
 
         // Validasi form
         const newAward = await Award.create({
@@ -97,10 +97,10 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingAward.path_award) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/about/penghargaan', existingAward.path_award));
+            fs.unlinkSync(path.join('../../public/about/penghargaan', existingAward.path_award));
         }
 
-        const path_award = `${path.relative('../../../html/pensiun-hijrah/public/about/penghargaan', req.files.path_award[0].path)}`;
+        const path_award = path.basename(req.files.path_award[0].path);
 
         // Update data Award
         const updatedAward = await existingAward.update({
@@ -136,7 +136,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (awardToDelete.path_award) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/about/penghargaan', awardToDelete.path_award));
+            fs.unlinkSync(path.join('../../public/about/penghargaan', awardToDelete.path_award));
         }
 
         await awardToDelete.destroy();

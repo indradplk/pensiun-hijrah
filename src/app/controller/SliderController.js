@@ -51,9 +51,9 @@ exports.create = async (req, res) => {
         if (!judul) {
             return res.status(400).json({ message: "Judul harus diisi!" });
         }
-
-        const path_web = `slider/${path.relative('../../../html/pensiun-hijrah/public/slider', req.files.path_web[0].path)}`;
-        const path_mobile = `slider/${path.relative('../../../html/pensiun-hijrah/public/slider', req.files.path_mobile[0].path)}`;
+        
+        const path_web = path.basename(req.files.path_web[0].path);
+        const path_mobile = path.basename(req.files.path_mobile[0].path);
 
         // Validasi form
         const newSlider = await Slider.create({
@@ -101,14 +101,14 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingSlider.path_web) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public', existingSlider.path_web));
+            fs.unlinkSync(path.join('../../public', existingSlider.path_web));
         }
         if (existingSlider.path_mobile) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public', existingSlider.path_mobile));
+            fs.unlinkSync(path.join('../../public', existingSlider.path_mobile));
         }
 
-        const path_web = `slider/${path.relative('../../../html/pensiun-hijrah/public/slider', req.files.path_web[0].path)}`;
-        const path_mobile = `slider/${path.relative('../../../html/pensiun-hijrah/public/slider', req.files.path_mobile[0].path)}`;
+        const path_web = path.basename(req.files.path_web[0].path);
+        const path_mobile = path.basename(req.files.path_mobile[0].path);
 
         // Update data slider
         const updatedSlider = await existingSlider.update({
@@ -147,10 +147,10 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (sliderToDelete.path_web) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public', sliderToDelete.path_web));
+            fs.unlinkSync(path.join('../../public', sliderToDelete.path_web));
         }
         if (sliderToDelete.path_mobile) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public', sliderToDelete.path_mobile));
+            fs.unlinkSync(path.join('../../public', sliderToDelete.path_mobile));
         }
 
         await sliderToDelete.destroy();

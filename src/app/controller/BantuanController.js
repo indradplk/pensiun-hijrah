@@ -59,7 +59,7 @@ exports.create = async (req, res) => {
             return res.status(400).json({ message: "Semua field harus diisi!" });
         }
 
-        const path_bantuan = `${path.relative('../../../html/pensiun-hijrah/public/bantuan/panduan', req.files.path_bantuan[0].path)}`;
+        const path_bantuan = path.basename(req.files.path_bantuan[0].path);
 
         // Validasi form
         const newBantuan = await Bantuan.create({
@@ -104,10 +104,10 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingBantuan.path_bantuan) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/bantuan/panduan', existingBantuan.path_bantuan));
+            fs.unlinkSync(path.join('../../public/bantuan/panduan', existingBantuan.path_bantuan));
         }
 
-        const path_bantuan = `${path.relative('../../../html/pensiun-hijrah/public/bantuan/panduan', req.files.path_bantuan[0].path)}`;
+        const path_bantuan = path.basename(req.files.path_bantuan[0].path);
 
         // Update data Bantuan
         const updatedBantuan = await existingBantuan.update({
@@ -143,7 +143,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (BantuanToDelete.path_bantuan) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/bantuan/panduan', BantuanToDelete.path_bantuan));
+            fs.unlinkSync(path.join('../../public/bantuan/panduan', BantuanToDelete.path_bantuan));
         }
 
         await BantuanToDelete.destroy();

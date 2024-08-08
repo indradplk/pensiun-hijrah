@@ -104,7 +104,7 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingBantuan.path_bantuan) {
-            fs.unlinkSync(path.join('../../build/bantuan/panduan', existingBantuan.path_bantuan));
+            fs.unlinkSync(path.join(__dirname, '..', '..', '..', 'public', 'bantuan', 'panduan', existingBantuan.path_bantuan));
         }
 
         const path_bantuan = path.basename(req.files.path_bantuan[0].path);
@@ -143,7 +143,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (BantuanToDelete.path_bantuan) {
-            fs.unlinkSync(path.join('../../build/bantuan/panduan', BantuanToDelete.path_bantuan));
+            fs.unlinkSync(path.join(__dirname, '..', '..', '..', 'public', 'bantuan', 'panduan', BantuanToDelete.path_bantuan));
         }
 
         await BantuanToDelete.destroy();

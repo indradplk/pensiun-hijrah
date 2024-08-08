@@ -98,7 +98,7 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingManagement.path_management) {
-            fs.unlinkSync(path.join('../../build/about/manajemen', existingManagement.path_management));
+            fs.unlinkSync(path.join(__dirname, '..', '..', '..', 'public', 'about', 'manajemen', existingManagement.path_management));    
         }
 
         const path_management = path.basename(req.files.path_management[0].path);
@@ -137,7 +137,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (ManagementToDelete.path_management) {
-            fs.unlinkSync(path.join('../../build/about/manajemen', ManagementToDelete.path_management));
+            fs.unlinkSync(path.join(__dirname, '..', '..', '..', 'public', 'about', 'manajemen', ManagementToDelete.path_management));
         }
 
         await ManagementToDelete.destroy();

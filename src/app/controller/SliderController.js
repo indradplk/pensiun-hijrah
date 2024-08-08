@@ -101,10 +101,10 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingSlider.path_web) {
-            fs.unlinkSync(path.join('../../public', existingSlider.path_web));
+            fs.unlinkSync(path.join('../../build', existingSlider.path_web));
         }
         if (existingSlider.path_mobile) {
-            fs.unlinkSync(path.join('../../public', existingSlider.path_mobile));
+            fs.unlinkSync(path.join('../../build', existingSlider.path_mobile));
         }
 
         const path_web = path.basename(req.files.path_web[0].path);
@@ -147,10 +147,10 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (sliderToDelete.path_web) {
-            fs.unlinkSync(path.join('../../public', sliderToDelete.path_web));
+            fs.unlinkSync(path.join('../../build', sliderToDelete.path_web));
         }
         if (sliderToDelete.path_mobile) {
-            fs.unlinkSync(path.join('../../public', sliderToDelete.path_mobile));
+            fs.unlinkSync(path.join('../../build', sliderToDelete.path_mobile));
         }
 
         await sliderToDelete.destroy();

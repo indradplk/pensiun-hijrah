@@ -105,7 +105,7 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingNews.path_news) {
-            fs.unlinkSync(path.join('../../public/media/berita', existingNews.path_news));
+            fs.unlinkSync(path.join('../../build/media/berita', existingNews.path_news));
         }
 
         const path_news = path.basename(req.files.path_news[0].path);
@@ -149,7 +149,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (NewsToDelete.path_news) {
-            fs.unlinkSync(path.join('../../public/media/berita', NewsToDelete.path_news));
+            fs.unlinkSync(path.join('../../build/media/berita', NewsToDelete.path_news));
         }
 
         await NewsToDelete.destroy();

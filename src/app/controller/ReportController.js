@@ -104,7 +104,7 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingReport.path_report) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/media/laporan', existingReport.path_report));
+            fs.unlinkSync(path.join('../../build/media/laporan', existingReport.path_report));
         }
 
         const path_report = path.basename(req.files.path_report[0].path);
@@ -143,7 +143,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (ReportToDelete.path_report) {
-            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/media/laporan', ReportToDelete.path_report));
+            fs.unlinkSync(path.join('../../build/media/laporan', ReportToDelete.path_report));
         }
 
         await ReportToDelete.destroy();

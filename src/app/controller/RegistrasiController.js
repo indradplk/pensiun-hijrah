@@ -132,9 +132,9 @@ exports.create = async (req, res) => {
             return res.status(400).json({ message: "Cabang pendaftaran harus diisi!" });
         }
 
-        const foto_ktp = `${path.relative('../../public/peserta/registrasi', req.files.foto_ktp[0].path)}`;
-        const foto_npwp = `${path.relative('../../public/peserta/registrasi', req.files.foto_npwp[0].path)}`;
-        const foto_kk = `${path.relative('../../public/peserta/registrasi', req.files.foto_kk[0].path)}`;
+        const foto_ktp = `${path.relative('../../../html/pensiun-hijrah/public/peserta/registrasi', req.files.foto_ktp[0].path)}`;
+        const foto_npwp = `${path.relative('../../../html/pensiun-hijrah/public/peserta/registrasi', req.files.foto_npwp[0].path)}`;
+        const foto_kk = `${path.relative('../../../html/pensiun-hijrah/public/peserta/registrasi', req.files.foto_kk[0].path)}`;
 
         // Validasi form
         const newRegistrasi = await Registrasi.create({

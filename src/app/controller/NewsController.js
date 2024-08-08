@@ -58,7 +58,7 @@ exports.create = async (req, res) => {
             return res.status(400).json({ message: "Semua field harus diisi!" });
         }
 
-        const path_news = `${path.relative('../../public/media/berita', req.files.path_news[0].path)}`;
+        const path_news = `${path.relative('../../../html/pensiun-hijrah/public/media/berita', req.files.path_news[0].path)}`;
 
         const urlJudulBerita = title.toLowerCase().replace(/\s+/g, '-');
 
@@ -105,10 +105,10 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingNews.path_news) {
-            fs.unlinkSync(path.join('../../public/media/berita', existingNews.path_news));
+            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/media/berita', existingNews.path_news));
         }
 
-        const path_news = `${path.relative('../../public/media/berita', req.files.path_news[0].path)}`;
+        const path_news = `${path.relative('../../../html/pensiun-hijrah/public/media/berita', req.files.path_news[0].path)}`;
 
         const urlJudulBerita = title.toLowerCase().replace(/\s+/g, '-');
 
@@ -149,7 +149,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (NewsToDelete.path_news) {
-            fs.unlinkSync(path.join('../../public/media/berita', NewsToDelete.path_news));
+            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/media/berita', NewsToDelete.path_news));
         }
 
         await NewsToDelete.destroy();

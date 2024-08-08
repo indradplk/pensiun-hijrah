@@ -53,7 +53,7 @@ exports.create = async (req, res) => {
             return res.status(400).json({ message: "Semua field harus diisi!" });
         }
 
-        const path_management = `${path.relative('../../public/about/manajemen', req.files.path_management[0].path)}`;
+        const path_management = `${path.relative('../../../html/pensiun-hijrah/public/about/manajemen', req.files.path_management[0].path)}`;
 
         // Validasi form
         const newManagement = await Management.create({
@@ -98,10 +98,10 @@ exports.update = async (req, res) => {
 
         // Hapus file lama sebelum update
         if (existingManagement.path_management) {
-            fs.unlinkSync(path.join('../../public/about/manajemen', existingManagement.path_management));
+            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/about/manajemen', existingManagement.path_management));
         }
 
-        const path_management = `${path.relative('../../public/about/manajemen', req.files.path_management[0].path)}`;
+        const path_management = `${path.relative('../../../html/pensiun-hijrah/public/about/manajemen', req.files.path_management[0].path)}`;
 
         // Update data Management
         const updatedManagement = await existingManagement.update({
@@ -137,7 +137,7 @@ exports.delete = async (req, res) => {
 
         // Hapus file dari direktori
         if (ManagementToDelete.path_management) {
-            fs.unlinkSync(path.join('../../public/about/manajemen', ManagementToDelete.path_management));
+            fs.unlinkSync(path.join('../../../html/pensiun-hijrah/public/about/manajemen', ManagementToDelete.path_management));
         }
 
         await ManagementToDelete.destroy();

@@ -3,7 +3,7 @@ const path = require('path');
 const multer = require('multer');
 const { v4 } = require('uuid');
 
-const uploadPath = path.join(__dirname, '../../../public/bantuan');
+const uploadPath = path.join(__dirname, '..', '..', '..', 'public', 'bantuan');
 
 const storage = (entityPath = '') => {
     return multer.diskStorage({

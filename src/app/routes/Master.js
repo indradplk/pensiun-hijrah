@@ -1,18 +1,19 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const { Router } = require('express');
 const route = Router();
 
 // Membaca file JSON
-const investasiData = JSON.parse(fs.readFileSync('./json/master/investasi.json'));
-const agamaData = JSON.parse(fs.readFileSync('./json/master/agama.json'));
-const pendidikanData = JSON.parse(fs.readFileSync('./json/master/pendidikan.json'));
-const pekerjaanData = JSON.parse(fs.readFileSync('./json/master/pekerjaan.json'));
-const pemilikanData = JSON.parse(fs.readFileSync('./json/master/kepemilikan.json'));
-const usahaData = JSON.parse(fs.readFileSync('./json/master/usaha.json'));
-const penghasilanData = JSON.parse(fs.readFileSync('./json/master/penghasilan.json'));
-const sampinganData = JSON.parse(fs.readFileSync('./json/master/sampingan.json'));
-const danaData = JSON.parse(fs.readFileSync('./json/master/dana.json'));
+const investasiData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'investasi.json')));
+const agamaData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'agama.json')));
+const pendidikanData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'pendidikan.json')));
+const pekerjaanData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'pekerjaan.json')));
+const pemilikanData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'kepemilikan.json')));
+const usahaData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'usaha.json')));
+const penghasilanData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'penghasilan.json')));
+const sampinganData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'sampingan.json')));
+const danaData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'dana.json')));
 
 route.get('/v1/master/investasi', (req, res) => {
     res.json(investasiData);

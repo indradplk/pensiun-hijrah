@@ -1,13 +1,14 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const { Router } = require('express');
 const route = Router();
 
 // Membaca file JSON untuk provinsi, kabupaten, kecamatan, dan kelurahan
-const provincesData = JSON.parse(fs.readFileSync('./json/wilayah/provinsi.json'));
-const districtsData = JSON.parse(fs.readFileSync('./json/wilayah/kabupaten.json'));
-const subdistrictsData = JSON.parse(fs.readFileSync('./json/wilayah/kecamatan.json'));
-const villagesData = JSON.parse(fs.readFileSync('./json/wilayah/kelurahan.json'));
+const provincesData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'wilayah', 'provinsi.json')));
+const districtsData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'wilayah', 'kabupaten.json')));
+const subdistrictsData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'wilayah', 'kecamatan.json')));
+const villagesData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'wilayah', 'kelurahan.json')));
 
 route.get('/v1/wilayah/province', (req, res) => {
     res.json(provincesData);

@@ -1,2 +1,0 @@
-INSERT INTO `admin` (`nik`, `uuid`, `email`, `nama`, `password`, `role`, `status`, `userUpdate`, `createdAt`, `updatedAt`) VALUES
-('20990000', '308da37d-916b-411b-b7e1-d6aa1f949454', 'dplk@bankmuamalat.co.id', 'Admin DPLK', '$2a$10$A5N/VnFYGp2f6bJfgDQCx.Dxt1dfeZDo5j0xIaBe2RVUYewDqKvj6', 'admin', 1, '20990000', NOW(), NOW());

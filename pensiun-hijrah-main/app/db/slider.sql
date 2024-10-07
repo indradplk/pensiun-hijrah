@@ -1,0 +1,3 @@
+INSERT INTO `slider` (`id`, `judul`, `path_web`, `path_mobile`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, 'Solusi Kebebasan Finansial di Masa Pensiun', '252a0c7f-c1d1-43e0-9ff3-f8a0d83ff2aa.jpg', '5a84fe87-d37b-47e7-820c-7299cfe82e09.jpg', 1, NOW(), NOW()),
+(2, 'Ayo Lakukan Pengkinian Data Pribadi Anda', '9fde2f7a-5c21-43a3-85d5-59a143810fc5.jpg', '5bd9f981-5350-4424-91b4-44a660d2fa1c.jpg', 1, NOW(), NOW());

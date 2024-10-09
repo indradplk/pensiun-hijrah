@@ -130,6 +130,50 @@ exports.getPengkinianData = async (req, res) => {
   }
 };
 
+exports.getPaketInvestasi = async (req, res) => {
+  try {
+    const { status } = req.query;
+    
+    let query = `
+        SELECT no_peserta, nama_lengkap, kode_paket_lama, kode_paket_baru, flag, dateadd, dateupd, useradd FROM test_pindah_paket
+    `;
+
+    if (status === 'false') {
+      query += `AND flag = 'F'`;
+    } else if (status === 'true') {
+      query += `AND flag = 'T'`;
+    }    
+
+    const pool = await connectToDatabaseMDPLK();
+    const [result] = await pool.execute(query);
+
+    if (result.length > 0) {
+        return response(res, {
+          code: 200,
+          success: true,
+          message: `Successfully retrieved investment package data!`,
+          content: result,
+        });
+    } else {
+        throw new NotFoundError(`Investment package data not found!`);
+    }
+  } catch (error) {
+    if (error.name === 'NotFoundError') {
+      return response(res, {
+        code: 404,
+        success: false,
+        message: error.message,
+      });
+    }
+  
+    return response(res, {
+      code: 500,
+      success: false,
+      message: error.message || 'Something went wrong!',
+    });
+  }
+};
+
 exports.getLCF = async (req, res) => {
   try {
     const { no_peserta } = req.params;
@@ -469,6 +513,48 @@ exports.ubahPaket = async (req, res) => {
       no_peserta,
       no_peserta,
       ...sanitizedValues,
+      no_peserta,
+    ];
+
+    const pool = await connectToDatabaseMDPLK();
+    await pool.query(query, values);
+
+    return response(res, {
+      code: 200,
+      success: true,
+      message: 'Data updated successfully.',
+    });
+  } catch (error) {  
+    return response(res, {
+      code: 500,
+      success: false,
+      message: error.message || 'Something went wrong!',
+    });
+  }
+};
+
+exports.approvePaket = async (req, res) => {
+  try {
+    const { no_peserta } = req.params;
+    const userUpdate = req.user.username;
+    const role = req.user.role;
+
+    // Only allow user to update their own data
+    if (role !== 'admin') {
+        return response(res, {
+        code: 403,
+        success: false,
+        message: 'You are not authorized to edit data!',
+        });
+    }
+
+    const query = `
+        UPDATE test_pindah_paket SET flag = 'T', dateupd = NOW(), useradd = ?
+        WHERE userid = ?
+    `;
+
+    const values = [
+      userUpdate,
       no_peserta,
     ];
 

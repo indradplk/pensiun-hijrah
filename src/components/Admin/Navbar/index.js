@@ -112,6 +112,7 @@ const Navbar = ({ toggle, userData }) => {
                   {/* <NavLinks to="/admin/perusahaan/block/" onClick={toggleHome}>Buka Blokir Perusahaan</NavLinks> */}
                   <NavLinks to="/admin/peserta/registrasi/" onClick={toggleHome}>Registrasi Peserta</NavLinks>
                   <NavLinks to="/admin/perusahaan/registrasi/" onClick={toggleHome}>Registrasi Perusahaan</NavLinks>
+                  <NavLinks to="/admin/peserta/paket-investasi/" onClick={toggleHome}>Paket Investasi Peserta</NavLinks>
                   <NavLinks to="/admin/tanya-dplk/" onClick={toggleHome}>Tanya DPLK</NavLinks>
                 </NavDropdown>
               </NavItems>

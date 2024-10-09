@@ -46,6 +46,9 @@ export const TanyaDPLKHeader = {
 export const ParameterPaketHeader = {
     headline: 'Parameter Paket Investasi',
 };
+export const PaketInvestasiHeader = {
+    headline: 'Perubahan Paket Investasi',
+};
 export const LogAdminHeader = {
     headline: 'Aktivitas Admin',
 };

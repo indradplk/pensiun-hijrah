@@ -35,7 +35,6 @@ const UbahPaketInvestasi = () => {
   };
 
   useEffect(() => {
-    const token = cookies.get('token');
     const role = cookies.get('role');
     const username = cookies.get('username');
     const email = cookies.get('email');
@@ -131,7 +130,6 @@ const UbahPaketInvestasi = () => {
         const currentDate = new Date();
         const diffTime = Math.abs(currentDate - startDate);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        console.log(diffDays);
 
         if (diffDays < daysParameter) {
           setShowAlertModal(true);
@@ -170,7 +168,7 @@ const UbahPaketInvestasi = () => {
       }
     };
 
-    if (userData.userId) {
+    if (userData.username) {
       fetchData();
     }
   }, [userData, token]);

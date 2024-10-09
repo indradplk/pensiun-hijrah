@@ -366,7 +366,7 @@ exports.getParameter = async (req, res) => {
   try {
     const { key_parameter } = req.params;
   
-    const query = `
+    let query = `
       SELECT * FROM PARAMETER
       WHERE KEY_PARAMETER = '${key_parameter}'
     `;
@@ -378,7 +378,7 @@ exports.getParameter = async (req, res) => {
       return response(res, {
         code: 200,
         success: true,
-        message: `Successfully retrieved parameter data!`,
+        message: 'Successfully retrieved parameter data!',
         content: result.recordset,
       });
     } else {
@@ -593,7 +593,6 @@ exports.paketInvestasi = async (req, res) => {
   try {
     const { noPeserta } = req.params;
     const { paket_investasi } = req.body;
-    const userUpdate = req.user.username;
     
     const pool = await connectToDatabasePPIP();
 

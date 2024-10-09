@@ -62,6 +62,7 @@ import PasswordPeserta from './pages/admin/peserta/reset-password';
 import BlockPeserta from './pages/admin/peserta/block';
 import TanyaDPLKAdmin from './pages/admin/tanya-dplk';
 import RegistrasiPesertaAdmin from './pages/admin/peserta/registrasi';
+import PaketInvestasiAdmin from './pages/admin/peserta/paket-investasi';
 import ParameterPaketAdmin from './pages/admin/parameter/investasi';
 import PasswordPerusahaan from './pages/admin/perusahaan/reset-password';
 import BlockPerusahaan from './pages/admin/perusahaan/block';
@@ -133,7 +134,7 @@ function App() {
         <Route path="/admin/dokumen/report/" component={ReportAdmin} exact />
         <Route path="/admin/dokumen/bantuan/" component={BantuanAdmin} exact />
         <Route path="/admin/peserta/reset-password/" component={BlockPeserta} exact />
-        {/* <Route path="/admin/peserta/block/" component={BlockPeserta} exact /> */}
+        <Route path="/admin/peserta/paket-investasi/" component={PaketInvestasiAdmin} exact />
         <Route path="/admin/peserta/registrasi/" component={() => <RegistrasiPesertaAdmin isSingleItem={false} />} exact />
         <Route path="/admin/peserta/registrasi/:id" component={() => <RegistrasiPesertaAdmin isSingleItem={true} />} exact />
         <Route path="/admin/perusahaan/reset-password/" component={BlockPerusahaan} exact />

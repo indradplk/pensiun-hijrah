@@ -100,6 +100,9 @@ const Sidebar = ({ isOpen, toggle, userData }) => {
             <SidebarLink to="/admin/perusahaan/registrasi/" onClick={toggleHome}>
               Registrasi Perusahaan
             </SidebarLink>
+            <SidebarLink to="/admin/peserta/paket-investasi/" onClick={toggleHome}>
+              Paket Investasi Peserta
+            </SidebarLink>
             <SidebarLink to="/admin/tanya-dplk/" onClick={toggleHome}>
               Tanya DPLK
             </SidebarLink>

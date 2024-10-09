@@ -10,7 +10,7 @@ router.get('/saldo/:noPeserta', authenticateToken, verifyRole('peserta'), ppipCo
 router.get('/transaksi/:noPeserta', authenticateToken, verifyRole('peserta'), ppipController.getTransaction);
 router.get('/pindah-paket/:noPeserta', authenticateToken, verifyRole('peserta'), ppipController.lastPackage);
 router.get('/usia-pensiun/:noPeserta', authenticateToken, verifyRole('peserta'), ppipController.retirementAge);
-router.get('/parameter/:key_parameter', authenticateToken, ppipController.getParameter);
+router.get('/parameter/:key_parameter', ppipController.getParameter);
 router.post('/usia-pensiun/:noPeserta', authenticateToken, verifyRole('peserta'), ppipController.updateRetirementAge);
 router.post('/life-cycle-fund/:noPeserta', authenticateToken, verifyRole('peserta'), ppipController.lifeCycleFund);
 router.post('/paket-investasi/:noPeserta', authenticateToken, verifyRole('admin'), ppipController.paketInvestasi);

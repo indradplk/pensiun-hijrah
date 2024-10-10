@@ -58,18 +58,20 @@ import BeritaAdmin from './pages/admin/media/berita';
 import VideoAdmin from './pages/admin/media/video';
 import ReportAdmin from './pages/admin/dokumen/report';
 import BantuanAdmin from './pages/admin/dokumen/bantuan';
-import PasswordPeserta from './pages/admin/peserta/reset-password';
 import BlockPeserta from './pages/admin/peserta/block';
 import TanyaDPLKAdmin from './pages/admin/tanya-dplk';
 import RegistrasiPesertaAdmin from './pages/admin/peserta/registrasi';
 import PaketInvestasiAdmin from './pages/admin/peserta/paket-investasi';
 import ParameterPaketAdmin from './pages/admin/parameter/investasi';
-import PasswordPerusahaan from './pages/admin/perusahaan/reset-password';
 import BlockPerusahaan from './pages/admin/perusahaan/block';
 import RegisPerusahaan from './pages/admin/perusahaan/registrasi';
 import LogAdmin from './pages/admin/aktivitas/admin';
 import CreateAdmin from './pages/admin/user/create';
 import AdminResetPassword from './pages/admin/user/reset-password';
+
+import SignInPageAbsen from './pages/absen';
+import DashboardAbsen from './pages/absen/dashboard';
+import VisitAbsen from './pages/absen/visit';
 
 function App() {
   return (
@@ -145,6 +147,10 @@ function App() {
         <Route path="/admin/aktivitas/admin/" component={LogAdmin} exact />
         <Route path="/admin/user/create/" component={CreateAdmin} exact />
         <Route path="/admin/user/reset-password/" component={AdminResetPassword} exact />
+
+        <Route path="/absen" component={SignInPageAbsen} exact />
+        <Route path="/absen/dashboard" component={DashboardAbsen} exact />
+        <Route path="/absen/visit" component={VisitAbsen} exact />
       </Switch>
     </Router>
   );

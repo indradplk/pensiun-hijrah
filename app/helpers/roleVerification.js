@@ -34,4 +34,32 @@ module.exports = {
       }
     };
   },
+  verifyRoleHRIS: (role) => {
+    return async (req, res, next) => {
+      try {
+        // use locals variable from previous middleware
+        const username = parseJwtPayload(res.locals.token).username;
+        const tokenrole = parseJwtPayload(res.locals.token).role;
+        if (username === null)
+          throw new NotFoundError('Username Not Found');
+
+        if (tokenrole === role) next();
+        else throw new WrongIdentityError(`This user is not an ${role}`);
+      } catch (error) {
+        if (error.name === 'NotFoundError')
+          return response(res, {
+            code: 401,
+            success: false,
+            message: error.message,
+          });
+
+        if (error.name === 'WrongIdentityError')
+          return response(res, {
+            code: 403,
+            success: false,
+            message: error.message,
+          });
+      }
+    };
+  },
 };

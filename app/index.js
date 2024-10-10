@@ -4,6 +4,7 @@ const { db, connectDb } = require('./config/db');
 const { connectToDatabasePPIP } = require('./config/db_ppip_test');
 const { connectToDatabasePPUKP } = require('./config/db_ppukp_test');
 const { connectToDatabaseMDPLK } = require('./config/db_mdplk');
+const { connectToDatabaseHRIS } = require('./config/db_hris');
 
 function normalizePort(port) {
   if (typeof port === 'string') {
@@ -20,6 +21,7 @@ function normalizePort(port) {
   await connectToDatabasePPIP();
   await connectToDatabasePPUKP();
   await connectToDatabaseMDPLK();
+  await connectToDatabaseHRIS();
   await db.sync({});
 })();
 

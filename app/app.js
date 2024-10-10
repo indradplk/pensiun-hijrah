@@ -31,6 +31,9 @@ const MDPLK = require('./routes/support/MDPLK');
 const RegistrasiPeserta = require('./routes/RegistrasiPeserta');
 const RegistrasiPerusahaan = require('./routes/RegistrasiPerusahaan');
 
+const AuthHRIS = require('./routes/hris/Auth');
+const HRIS = require('./routes/hris/HRIS');
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -68,5 +71,7 @@ app.use('/wilayah', Region);
 app.use('/registrasi', RegistrasiPeserta);
 app.use('/registrasi-perusahaan', RegistrasiPerusahaan);
 app.use('/parameter', Parameter);
+app.use('/hris', AuthHRIS);
+app.use('/absen', HRIS);
 
 module.exports = app;

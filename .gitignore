@@ -26,8 +26,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# images
-# /public/slider
-# /public/about/penghargaan
-# /public/about/manajemen
-# /public/media/berita
+# component
+/src/components/DataServer.js

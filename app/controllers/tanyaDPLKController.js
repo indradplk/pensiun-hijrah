@@ -7,6 +7,15 @@ exports.getAll = async (req, res) => {
     try {
         const statusFilter = req.query.status;
         const whereClause = {};
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Jika filter tersedia dan valid, tambahkan filter berdasarkan status
         if (statusFilter && ['true', 'false'].includes(statusFilter.toLowerCase())) {
@@ -48,6 +57,15 @@ exports.getAll = async (req, res) => {
 exports.getOne = async (req, res) => {
     try {
         const id = req.params;
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         const getMail = await TanyaDPLK.findOne({
             where: { id: id }
@@ -84,6 +102,15 @@ exports.update = async (req, res) => {
     try {
         const { id } = req.params;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check if the mail with the given ID exists
         const existingMail = await TanyaDPLK.findByPk(id);

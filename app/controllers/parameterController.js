@@ -87,6 +87,15 @@ exports.update = async (req, res) => {
         const { NUMERIC_VALUE } = req.body;
         const { id } = req.params;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check if the Parameter with the given ID exists
         const existingParameter = await Parameter.findByPk(id);

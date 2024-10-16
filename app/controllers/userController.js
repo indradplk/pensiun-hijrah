@@ -7,6 +7,15 @@ exports.getAll = async (req, res) => {
   try {
     const roleFilter = req.query.role;
     const whereClause = {};
+    const role = req.user.role;
+    
+    if (role !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
 
     // filter by role
     if (roleFilter) {
@@ -101,6 +110,15 @@ exports.getOne = async (req, res) => {
 
 exports.delete = async (req, res) => {
   const { id } = req.params;
+  const role = req.user.role;
+  
+  if (role !== 'admin') { 
+    return response(res, {
+      code: 403,
+      success: false,
+      message: 'Access denied!',
+    });
+  }
 
   try {
     const user = await User.findByPk(id);

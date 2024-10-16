@@ -13,7 +13,16 @@ function isValidEmail(email) {
 exports.getAll = async (req, res) => {
     try {
         const statusFilter = req.query.status;
-        const whereClause = {};
+        const whereClause = {}; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // filter by status
         if (statusFilter && ['true', 'false'].includes(statusFilter.toLowerCase())) {
@@ -54,7 +63,16 @@ exports.getAll = async (req, res) => {
 
 exports.getOne = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.params; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         const getRegistrasi = await RegistrasiPeserta.findByPk(id);
 

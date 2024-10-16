@@ -211,7 +211,16 @@ exports.registrasiPerusahaan = async (req, res) => {
 exports.unblockAccount = async (req, res) => {
   try {
     const { no_peserta } = req.params;
-    const userUpdate = req.user.username;
+    const userUpdate = req.user.username; 
+    const role = req.user.role;
+    
+    if (role !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
 
     // Check if the user with the given ID exists
     const userExists = await User.findOne({ where: { username: no_peserta } });

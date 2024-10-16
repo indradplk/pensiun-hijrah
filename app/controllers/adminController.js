@@ -14,6 +14,16 @@ function isValidEmail(email) {
 exports.getOne = async (req, res) => {
   try {
     const id = req.params.id;
+    const role = req.user.role;
+
+    // Only allow admin to see another admin
+    if (role !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
 
     const user = await Admin.findByPk(id);
 
@@ -47,10 +57,35 @@ exports.addAdmin = async (req, res) => {
   try {
     const { nama, username, email, role } = req.body;
     const userUpdate = req.user.username; 
+    const roles = req.user.role;
+
+    // Only allow admin to see another admin
+    if (roles !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
 
     // Check if the admin with the role administrator
     const user = await User.findOne({ where: { username: userUpdate } });
+    if (!user) {
+      return response(res, {
+        code: 404,
+        success: false,
+        message: 'You are not authorized to add another admin!',
+      });
+    }
+
     const userAdmin = await Admin.findOne({ where: { id: user.adminId } });
+    if (!userAdmin) {
+      return response(res, {
+        code: 404,
+        success: false,
+        message: 'You are not authorized to add another admin!',
+      });
+    }
 
     if (userAdmin.role !== 'administrator') {
       return response(res, {
@@ -163,6 +198,16 @@ exports.editAdmin = async (req, res) => {
     const { name, email, currentPassword, newPassword } = req.body;
     const { username } = req.params;
     const userUpdate = req.user.username;
+    const role = req.user.role;
+
+    // Only allow admin to see another admin
+    if (role !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
 
     // Only allow admins to edit themselves
     if (username !== userUpdate) {
@@ -260,6 +305,16 @@ exports.unblockAccount = async (req, res) => {
   try {
     const { username } = req.params;
     const userUpdate = req.user.username;
+    const role = req.user.role;
+
+    // Only allow admin to see another admin
+    if (role !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
 
     // Check if the user with the given ID exists
     const userExists = await User.findOne({ where: { username } });

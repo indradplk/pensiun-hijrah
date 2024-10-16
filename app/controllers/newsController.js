@@ -1,4 +1,5 @@
 const News = require('../models/News');
+const { User, Admin } = require('../models');
 const ActivityAdmin = require('../models/ActivityAdmin');
 const { NotFoundError } = require('../errors');
 const sanitizeInput = require('../helpers/sanitizeInput');
@@ -93,7 +94,16 @@ exports.getOne = async (req, res) => {
 exports.create = async (req, res) => {
     try {
         const { title, description, kategori } = req.body;
-        const userUpdate = req.user.username; 
+        const userUpdate = req.user.username;  
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check uploaded image
         if (!req.files || !req.files.path_news || !req.files.path_news.length === 0) {
@@ -167,7 +177,16 @@ exports.update = async (req, res) => {
     try {
         const { title, description, kategori } = req.body;
         const { id } = req.params;
-        const userUpdate = req.user.username; 
+        const userUpdate = req.user.username;  
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check if the News with the given ID exists
         const existingNews = await News.findByPk(id);
@@ -260,7 +279,16 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
     try {
         const userUpdate = req.user.username; 
-        const { id } = req.params;
+        const { id } = req.params; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check the News to be deleted
         const NewsToDelete = await News.findByPk(id);
@@ -308,6 +336,42 @@ exports.accept = async (req, res) => {
     try {
         const { id } = req.params;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
+
+        // Check if the admin with the role supervisor
+        const user = await User.findOne({ where: { username: userUpdate } });
+        if (!user) {
+            return response(res, {
+                code: 404,
+                success: false,
+                message: 'You are not authorized to approve data!',
+            });
+        }
+
+        const userAdmin = await Admin.findOne({ where: { id: user.adminId } });
+        if (!userAdmin) {
+            return response(res, {
+                code: 404,
+                success: false,
+                message: 'You are not authorized to approve data!',
+            });
+        }
+
+        if (userAdmin.role !== 'supervisor') {
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'You are not authorized to approve data!',
+            });
+        }
 
         // Check if the News with the given ID exists
         const existingNews = await News.findByPk(id);

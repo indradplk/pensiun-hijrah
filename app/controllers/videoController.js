@@ -1,4 +1,5 @@
 const Video = require('../models/Video');
+const { User, Admin } = require('../models');
 const ActivityAdmin = require('../models/ActivityAdmin');
 const { NotFoundError } = require('../errors');
 const sanitizeInput = require('../helpers/sanitizeInput');
@@ -83,6 +84,15 @@ exports.create = async (req, res) => {
     try {
         const { title, link } = req.body;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Validate form
         if (!title || !link) {
@@ -134,6 +144,15 @@ exports.update = async (req, res) => {
         const { title, link } = req.body;
         const { id } = req.params;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check if the Video with the given ID exists
         const existingVideo = await Video.findByPk(id);
@@ -198,6 +217,15 @@ exports.delete = async (req, res) => {
     try {
         const { id } = req.params;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check the Video to be deleted
         const VideoToDelete = await Video.findByPk(id);
@@ -239,6 +267,42 @@ exports.accept = async (req, res) => {
     try {
         const { id } = req.params;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
+
+        // Check if the admin with the role supervisor
+        const user = await User.findOne({ where: { username: userUpdate } });
+        if (!user) {
+            return response(res, {
+                code: 404,
+                success: false,
+                message: 'You are not authorized to approve data!',
+            });
+        }
+
+        const userAdmin = await Admin.findOne({ where: { id: user.adminId } });
+        if (!userAdmin) {
+            return response(res, {
+                code: 404,
+                success: false,
+                message: 'You are not authorized to approve data!',
+            });
+        }
+
+        if (userAdmin.role !== 'supervisor') {
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'You are not authorized to approve data!',
+            });
+        }
 
         // Check if the Video with the given ID exists
         const existingVideo = await Video.findByPk(id);

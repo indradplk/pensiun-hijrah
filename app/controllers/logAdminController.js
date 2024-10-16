@@ -1,4 +1,5 @@
 const ActivityAdmin = require('../models/ActivityAdmin');
+const { User, Admin } = require('../models');
 const { NotFoundError } = require('../errors');
 const { response, isEmpty } = require('../helpers/bcrypt');
 
@@ -6,6 +7,16 @@ exports.getAll = async (req, res) => {
     try {
         const statusFilter = req.query.status;
         const whereClause = {};
+        const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // filter by status
         if (statusFilter && ['true', 'false'].includes(statusFilter.toLowerCase())) {

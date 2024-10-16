@@ -344,6 +344,15 @@ router.post(
         const { no_peserta, email } = req.body;
         const id = req.params.id;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Validate form
         if (!email || !no_peserta) {
@@ -558,6 +567,15 @@ router.post(
         const { email, text } = req.body;
         const id = req.params.id;
         const userUpdate = req.user.username; 
+        const role = req.user.role;
+        
+        if (role !== 'admin') { 
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Validate form
         if (!email || !text) {

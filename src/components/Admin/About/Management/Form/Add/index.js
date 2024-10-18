@@ -4,6 +4,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
+import sanitizeHtml from 'sanitize-html';
 import {
   Form,
   FormH1,
@@ -36,12 +37,25 @@ const AddManagementForm = ({ show, handleClose, addData, handleAddInputChange })
   const cookies = new Cookies();
   const token = cookies.get('token');
 
+  // Function to sanitize description input
+  const sanitizeInput = (input) => {
+    return sanitizeHtml(input, {
+      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote', 'div', 'span'],
+      allowedAttributes: { 'a': ['href', 'name', 'target'], 'div': ['style'], 'span': ['style'] },
+      allowedSchemes: ['http', 'https', 'mailto'],
+    });
+  };
+
   const handleAddSubmit = async () => {
     setLoading(true);
+    
+    // Sanitize description input before sending to server
+    const sanitizedDescription = sanitizeInput(formData.description);
+
     const data = new FormData();
     data.append('nama', formData.nama);
     data.append('jabatan', formData.jabatan);
-    data.append('description', formData.description);
+    data.append('description', sanitizedDescription); // use sanitized description
     data.append('kategori', formData.kategori);
     data.append('path_management', formData.path_management);
 

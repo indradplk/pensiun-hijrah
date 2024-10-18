@@ -4,10 +4,20 @@
  * @returns {boolean} - Returns true if forbidden characters are found, otherwise false
  */
 const sanitizeInput = (input) => {
-    // Regex to match single quote ('), double quote ("), greater than (>), less than (<), and backtick (`)
-    const forbiddenCharacters = /['"<>`]/;
-    return forbiddenCharacters.test(input);
-  };
+  // Regex to match single quote ('), double quote ("), greater than (>), less than (<), and backtick (`)
+  const forbiddenCharacters = /['"<>`]/;
+  return forbiddenCharacters.test(input);
+};
+
+const containsScriptTag = (input) => {
+  const scriptTagPattern = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  return scriptTagPattern.test(input);
+};
+
+const containsEventAttributes = (input) => {
+  const eventAttrPattern = /\bon\w+="[^"]*"|\bon\w+='[^']*'/gi;
+  return eventAttrPattern.test(input);
+};
   
-  module.exports = sanitizeInput;
+module.exports = {sanitizeInput, containsScriptTag, containsEventAttributes};
   

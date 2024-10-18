@@ -4,6 +4,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
+import sanitizeHtml from 'sanitize-html';
 import {
   Form,
   FormH1,
@@ -35,17 +36,29 @@ const EditNewsForm = ({ show, handleClose, editData, handleEditInputChange }) =>
   const cookies = new Cookies();
   const token = cookies.get('token');
 
+  // Function to sanitize description input
+  const sanitizeInput = (input) => {
+    return sanitizeHtml(input, {
+      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote', 'div', 'span'],
+      allowedAttributes: { 'a': ['href', 'name', 'target'], 'div': ['style'], 'span': ['style'] },
+      allowedSchemes: ['http', 'https', 'mailto'],
+    });
+  };
+
   const handleEditSubmit = async () => {
     setLoading(true);
 
     setTimeout(() => {
       setLoading(false);
     }, 3000);
+    
+    // Sanitize description input before sending to server
+    const sanitizedDescription = sanitizeInput(editData.description);
 
     try {
       const formData = new FormData();
       formData.append('title', editData.title);
-      formData.append('description', editData.description);
+      formData.append('description', sanitizedDescription);
       formData.append('kategori', editData.kategori);
       formData.append('path_news', editData.path_news);
 

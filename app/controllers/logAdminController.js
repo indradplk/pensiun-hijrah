@@ -7,7 +7,6 @@ exports.getAll = async (req, res) => {
     try {
         const statusFilter = req.query.status;
         const whereClause = {};
-        const userUpdate = req.user.username; 
         const role = req.user.role;
         
         if (role !== 'admin') { 

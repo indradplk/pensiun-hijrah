@@ -2,12 +2,11 @@ const Management = require('../models/Management');
 const { User, Admin } = require('../models');
 const ActivityAdmin = require('../models/ActivityAdmin');
 const { NotFoundError } = require('../errors');
-const sanitizeInput = require('../helpers/sanitizeInput');
+const { sanitizeInput, containsEventAttributes, containsScriptTag } = require('../helpers/sanitizeInput');
 const { response, isEmpty } = require('../helpers/bcrypt');
 const path = require('path');
 const fs = require('fs');
 const { encode } = require('html-entities');
-const sanitizeHtml = require('sanitize-html');
 
 exports.getAll = async (req, res) => {
     try {
@@ -93,18 +92,72 @@ exports.getOne = async (req, res) => {
 exports.create = async (req, res) => {
     try {
         const { nama, jabatan, description, kategori } = req.body;
-        const userUpdate = req.user.username; 
+        const userUpdate = req.user.username;
         const role = req.user.role;
-        
-        if (role !== 'admin') { 
-          return response(res, {
-            code: 403,
-            success: false,
-            message: 'Access denied!',
-          });
+
+        // Validasi role
+        if (role !== 'admin') {
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
         }
 
-        // Check uploaded image
+        // Validasi input kosong
+        if (!nama || !jabatan || !description || !kategori) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
+                fs.unlinkSync(req.files.path_management[0].path);
+            }
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Name, position, description, and category must be filled in!',
+            });
+        }
+
+        // Validasi kategori
+        const validCategory = ['pengurus', 'pendiri', 'pengawas', 'dps'];
+        if (!validCategory.includes(kategori)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
+                fs.unlinkSync(req.files.path_management[0].path);
+            }
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Invalid category!',
+            });
+        }
+
+        // Validasi input nama dan jabatan
+        if (sanitizeInput(nama) || sanitizeInput(jabatan)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
+                fs.unlinkSync(req.files.path_management[0].path);
+            }
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Input contains invalid characters!',
+            });
+        }
+
+        // Validasi tag <script> atau atribut event HTML dalam deskripsi
+        if (containsScriptTag(description) || containsEventAttributes(description)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
+                fs.unlinkSync(req.files.path_management[0].path);
+            }
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Input contains invalid characters like <script> or event attributes!',
+            });
+        }
+
+        // Validasi apakah file diupload
         if (!req.files || !req.files.path_management || req.files.path_management.length === 0) {
             return response(res, {
                 code: 400,
@@ -113,49 +166,23 @@ exports.create = async (req, res) => {
             });
         }
 
-        if (!nama || !jabatan || !description || !kategori) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Name, position, description, and category must be filled in!',
-            });
-        }
-
-        const validCategory = ['pengurus', 'pendiri', 'pengawas', 'dps'];
-        if (!validCategory.includes(kategori)) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Invalid category!',
-            });
-        }
-
-        if (sanitizeInput(nama) || sanitizeInput(jabatan)) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Input contains invalid characters!',
-            });
-        }
-
-        const sanitizedDescription = sanitizeHtml(description, {
-            allowedTags: [ 'b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote' ],
-            allowedAttributes: {
-                'a': [ 'href', 'name', 'target' ]
-            },
-            allowedSchemes: [ 'http', 'https', 'mailto' ]
-        });
-
         const path_management = `${path.relative('../public/manajemen', req.files.path_management[0].path)}`;
 
+        // Sanitasi input nama dan jabatan
         const sanitizedNama = encode(nama);
         const sanitizedJabatan = encode(jabatan);
 
-        // Validate form
+        // Menyimpan data manajemen ke database
         const newManagement = await Management.create({
-            nama: sanitizedNama, jabatan: sanitizedJabatan, description: sanitizedDescription, kategori, path_management, userUpdate
+            nama: sanitizedNama,
+            jabatan: sanitizedJabatan,
+            description,
+            kategori,
+            path_management,
+            userUpdate
         });
 
+        // Menyimpan aktivitas ke log admin
         await ActivityAdmin.create({
             nik: userUpdate,
             log: `${userUpdate} menambahkan manajemen ${sanitizedNama}`
@@ -168,6 +195,7 @@ exports.create = async (req, res) => {
             content: newManagement,
         });
     } catch (error) {
+        // Hapus file jika ada error
         if (req.files && req.files.path_management && req.files.path_management.length > 0) {
             fs.unlinkSync(req.files.path_management[0].path);
         }
@@ -178,7 +206,7 @@ exports.create = async (req, res) => {
             content: error,
         });
     }
-}
+};
 
 exports.update = async (req, res) => {
     try {
@@ -201,16 +229,12 @@ exports.update = async (req, res) => {
             throw new NotFoundError(`Management not found!`);
         }
 
-        // Check uploaded image
-        if (!req.files || !req.files.path_management || req.files.path_management.length === 0) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Please upload the image!',
-            });
-        }
-
+        // Validasi input kosong
         if (!nama || !jabatan || !description || !kategori) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
+                fs.unlinkSync(req.files.path_management[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
@@ -218,8 +242,13 @@ exports.update = async (req, res) => {
             });
         }
 
+        // Validasi kategori
         const validCategory = ['pengurus', 'pendiri', 'pengawas', 'dps'];
         if (!validCategory.includes(kategori)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
+                fs.unlinkSync(req.files.path_management[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
@@ -227,7 +256,12 @@ exports.update = async (req, res) => {
             });
         }
 
+        // Validasi input nama dan jabatan
         if (sanitizeInput(nama) || sanitizeInput(jabatan)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
+                fs.unlinkSync(req.files.path_management[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
@@ -235,13 +269,27 @@ exports.update = async (req, res) => {
             });
         }
 
-        const sanitizedDescription = sanitizeHtml(description, {
-            allowedTags: [ 'b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote' ],
-            allowedAttributes: {
-                'a': [ 'href', 'name', 'target' ]
-            },
-            allowedSchemes: [ 'http', 'https', 'mailto' ]
-        });
+        // Validasi tag <script> atau atribut event HTML dalam deskripsi
+        if (containsScriptTag(description) || containsEventAttributes(description)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
+                fs.unlinkSync(req.files.path_management[0].path);
+            }
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Input contains invalid characters like <script> or event attributes!',
+            });
+        }
+
+        // Validasi apakah file diupload
+        if (!req.files || !req.files.path_management || req.files.path_management.length === 0) {
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Please upload the image!',
+            });
+        }
 
         // Delete old files before updating
         if (existingManagement.path_management) {
@@ -255,7 +303,7 @@ exports.update = async (req, res) => {
 
         // Update data Management
         const updatedManagement = await existingManagement.update({
-            nama: sanitizedNama, jabatan: sanitizedJabatan, description: sanitizedDescription, kategori, status: false, path_management, userUpdate
+            nama: sanitizedNama, jabatan: sanitizedJabatan, description, kategori, status: false, path_management, userUpdate
         });
 
         await ActivityAdmin.create({

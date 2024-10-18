@@ -2,7 +2,7 @@ const News = require('../models/News');
 const { User, Admin } = require('../models');
 const ActivityAdmin = require('../models/ActivityAdmin');
 const { NotFoundError } = require('../errors');
-const sanitizeInput = require('../helpers/sanitizeInput');
+const { sanitizeInput, containsEventAttributes, containsScriptTag } = require('../helpers/sanitizeInput');
 const { response, isEmpty } = require('../helpers/bcrypt');
 const path = require('path');
 const fs = require('fs');
@@ -105,16 +105,11 @@ exports.create = async (req, res) => {
           });
         }
 
-        // Check uploaded image
-        if (!req.files || !req.files.path_news || !req.files.path_news.length === 0) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Please upload the image!',
-            });
-        }
-
         if (!title || !description || !kategori) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
+                fs.unlinkSync(req.files.path_news[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
@@ -124,6 +119,10 @@ exports.create = async (req, res) => {
 
         const validCategory = ['artikel', 'berita'];
         if (!validCategory.includes(kategori)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
+                fs.unlinkSync(req.files.path_news[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
@@ -132,10 +131,35 @@ exports.create = async (req, res) => {
         }
 
         if (sanitizeInput(title)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
+                fs.unlinkSync(req.files.path_news[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
                 message: 'Input contains invalid characters!',
+            });
+        }
+
+        if (containsScriptTag(description) || containsEventAttributes(description)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
+                fs.unlinkSync(req.files.path_news[0].path);
+            }
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Input contains invalid characters like <script> or event attributes!',
+            });
+        }
+
+        // Check uploaded image
+        if (!req.files || !req.files.path_news || !req.files.path_news.length === 0) {
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Please upload the image!',
             });
         }
 
@@ -194,16 +218,11 @@ exports.update = async (req, res) => {
             throw new NotFoundError(`News not found!`);
         }
 
-        // Check uploaded image
-        if (!req.files || !req.files.path_news || !req.files.path_news.length === 0) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Please upload the image!',
-            });
-        }
-
         if (!title || !description || !kategori) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.path_news && req.path_news.length > 0) {
+                fs.unlinkSync(req.path_news[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
@@ -213,6 +232,10 @@ exports.update = async (req, res) => {
 
         const validCategory = ['artikel', 'berita'];
         if (!validCategory.includes(kategori)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
+                fs.unlinkSync(req.files.path_news[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
@@ -221,10 +244,35 @@ exports.update = async (req, res) => {
         }
 
         if (sanitizeInput(title)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
+                fs.unlinkSync(req.files.path_news[0].path);
+            }
             return response(res, {
                 code: 400,
                 success: false,
                 message: 'Input contains invalid characters!',
+            });
+        }
+
+        if (containsScriptTag(description) || containsEventAttributes(description)) {
+            // Hapus file jika sudah diunggah
+            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
+                fs.unlinkSync(req.files.path_news[0].path);
+            }
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Input contains invalid characters like <script> or event attributes!',
+            });
+        }
+
+        // Check uploaded image
+        if (!req.files || !req.files.path_news || !req.files.path_news.length === 0) {
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Please upload the image!',
             });
         }
 

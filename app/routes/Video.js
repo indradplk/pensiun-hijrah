@@ -6,7 +6,7 @@ const { verifyRole } = require('../helpers/roleVerification');
 const router = Router();
 
 router.get('/', videoController.getAll);
-router.get('/:id', authenticateToken, verifyRole('admin'), videoController.getOne);
+router.get('/:id', videoController.getOne);
 router.post('/', authenticateToken, verifyRole('admin'), videoController.create);
 router.put('/:id', authenticateToken, verifyRole('admin'), videoController.update);
 router.put('/approve/:id', authenticateToken, verifyRole('admin'), videoController.accept);

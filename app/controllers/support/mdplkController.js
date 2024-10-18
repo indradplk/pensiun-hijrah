@@ -133,6 +133,15 @@ exports.getPengkinianData = async (req, res) => {
 exports.getPaketInvestasi = async (req, res) => {
   try {
     const { status } = req.query;
+    const role = req.user.role;
+    
+    if (role !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
     
     let query = `
         SELECT no_peserta, nama_lengkap, kode_paket_lama, kode_paket_baru, flag, dateadd, dateupd, useradd FROM test_pindah_paket

@@ -593,6 +593,15 @@ exports.paketInvestasi = async (req, res) => {
   try {
     const { noPeserta } = req.params;
     const { paket_investasi } = req.body;
+    const role = req.user.role;
+        
+    if (role !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
     
     const pool = await connectToDatabasePPIP();
 

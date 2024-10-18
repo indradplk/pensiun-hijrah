@@ -63,11 +63,10 @@ exports.getAll = async (req, res) => {
 exports.getOne = async (req, res) => {
   const { username } = req.params;
   const userUpdate = req.user.username;
-  const role = req.user.role;
 
   try {
     // Only allow user to see themselves
-    if (role !== 'admin' && username !== userUpdate) { 
+    if (username !== userUpdate) { 
       return response(res, {
         code: 403,
         success: false,

@@ -24,7 +24,7 @@ module.exports = {
         (err, user) => {
           if (err)
             throw new WrongIdentityError(
-              "Your token doesn't matched our credentials"
+              "Access denied."
             );
           req.user = user;
           next();

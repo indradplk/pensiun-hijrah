@@ -2,7 +2,7 @@ const { User, Admin } = require('../models');
 const ActivityAdmin = require('../models/ActivityAdmin');
 const { response, hashPassword, comparePassword } = require('../helpers/bcrypt');
 const { DuplicatedDataError, NotFoundError } = require('../errors');
-const sanitizeInput = require('../helpers/sanitizeInput');
+const { sanitizeInput } = require('../helpers/sanitizeInput');
 const { encode } = require('html-entities');
 
 // Function to validate email format
@@ -13,11 +13,24 @@ function isValidEmail(email) {
 
 exports.getOne = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
+    const userUpdate = req.user.username;
     const role = req.user.role;
 
-    // Only allow admin to see another admin
-    if (role !== 'admin') { 
+    // Check if the admin with the role administrator
+    const admin = await User.findOne({ where: { username: userUpdate } });
+    const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+
+    // Only allow themself and administrator to see user
+    if (role === 'admin') {
+      if (id !== admin.adminId && userAdmin.role !== 'administrator') { 
+        return response(res, {
+          code: 403,
+          success: false,
+          message: 'Access denied!',
+        });
+      }
+    } else {
       return response(res, {
         code: 403,
         success: false,
@@ -59,39 +72,24 @@ exports.addAdmin = async (req, res) => {
     const userUpdate = req.user.username; 
     const roles = req.user.role;
 
-    // Only allow admin to see another admin
-    if (roles !== 'admin') { 
+    // Check if the admin with the role administrator
+    const admin = await User.findOne({ where: { username: userUpdate } });
+    const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+
+    // Only allow administrator to create admin
+    if (roles === 'admin') {
+      if (userAdmin.role !== 'administrator') { 
+        return response(res, {
+          code: 403,
+          success: false,
+          message: 'Access denied!',
+        });
+      }
+    } else {
       return response(res, {
         code: 403,
         success: false,
         message: 'Access denied!',
-      });
-    }
-
-    // Check if the admin with the role administrator
-    const user = await User.findOne({ where: { username: userUpdate } });
-    if (!user) {
-      return response(res, {
-        code: 404,
-        success: false,
-        message: 'You are not authorized to add another admin!',
-      });
-    }
-
-    const userAdmin = await Admin.findOne({ where: { id: user.adminId } });
-    if (!userAdmin) {
-      return response(res, {
-        code: 404,
-        success: false,
-        message: 'You are not authorized to add another admin!',
-      });
-    }
-
-    if (userAdmin.role !== 'administrator') {
-      return response(res, {
-        code: 403,
-        success: false,
-        message: 'You are not authorized to add another admin!',
       });
     }
   
@@ -214,7 +212,7 @@ exports.editAdmin = async (req, res) => {
       return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to edit another admin!',
+        message: 'Access denied!',
       });
     }
 
@@ -307,8 +305,20 @@ exports.unblockAccount = async (req, res) => {
     const userUpdate = req.user.username;
     const role = req.user.role;
 
-    // Only allow admin to see another admin
-    if (role !== 'admin') { 
+    // Check if the admin with the role administrator
+    const admin = await User.findOne({ where: { username: userUpdate } });
+    const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+
+    // Only allow administrator to create admin
+    if (role === 'admin') {
+      if (userAdmin.role !== 'administrator') { 
+        return response(res, {
+          code: 403,
+          success: false,
+          message: 'Access denied!',
+        });
+      }
+    } else {
       return response(res, {
         code: 403,
         success: false,

@@ -320,7 +320,9 @@ const Management = ({ userData }) => {
                       </Text>
                     </td>
                     <td>
-                      <ManagementP dangerouslySetInnerHTML={{ __html: item.description }} />
+                      <ManagementP style={{ whiteSpace: 'pre-line' }}>
+                        {item.description }
+                      </ManagementP>
                     </td>
                     <td>{item.kategori}</td>
                     <td>{item.status}</td>

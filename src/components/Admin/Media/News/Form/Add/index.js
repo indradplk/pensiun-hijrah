@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
-import sanitizeHtml from 'sanitize-html';
 import {
   Form,
   FormH1,
@@ -13,7 +10,8 @@ import {
   FormSelect,
   FormOption,
   FormButton,
-  FormButtonCancel
+  FormButtonCancel,
+  FormText
 } from '../FormElements';
 import {
   ErrorCard,
@@ -36,24 +34,12 @@ const AddNewsForm = ({ show, handleClose, addData, handleAddInputChange }) => {
   const cookies = new Cookies();
   const token = cookies.get('token');
 
-  // Function to sanitize description input
-  const sanitizeInput = (input) => {
-    return sanitizeHtml(input, {
-      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote', 'div', 'span'],
-      allowedAttributes: { 'a': ['href', 'name', 'target'], 'div': ['style'], 'span': ['style'] },
-      allowedSchemes: ['http', 'https', 'mailto'],
-    });
-  };
-
   const handleAddSubmit = async () => {
     setLoading(true);
-    
-    // Sanitize description input before sending to server
-    const sanitizedDescription = sanitizeInput(addData.description);
 
     const formData = new FormData();
     formData.append('title', addData.title);
-    formData.append('description', sanitizedDescription);
+    formData.append('description', addData.description);
     formData.append('kategori', addData.kategori);
     formData.append('path_news', addData.path_news);
 
@@ -99,15 +85,6 @@ const AddNewsForm = ({ show, handleClose, addData, handleAddInputChange }) => {
     });
   }, [addData]);
 
-  const handleDescriptionChange = (value) => {
-    handleAddInputChange({
-      target: {
-        name: 'description',
-        value: value
-      }
-    });
-  };
-
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
@@ -129,7 +106,7 @@ const AddNewsForm = ({ show, handleClose, addData, handleAddInputChange }) => {
             <p>{formData.path_news.name}</p>
           )}
           <FormLabel htmlFor="description">Deskripsi</FormLabel>
-          <ReactQuill value={formData.description} onChange={handleDescriptionChange} />
+          <FormText id="description" name="description" onChange={handleAddInputChange} value={formData.description} />
           {error && (
             <ErrorCard>
               <MessageH1><b>Gagal!</b></MessageH1>

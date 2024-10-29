@@ -63,15 +63,30 @@ exports.getAll = async (req, res) => {
 exports.getOne = async (req, res) => {
   const { username } = req.params;
   const userUpdate = req.user.username;
+  const role = req.user.role;
 
   try {
-    // Only allow user to see themselves
-    if (username !== userUpdate) { 
-      return response(res, {
-        code: 403,
-        success: false,
-        message: 'You are not authorized to see another user!',
-      });
+    // Check if the admin with the role administrator
+    const admin = await User.findOne({ where: { username: userUpdate } });
+    const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+
+    // Only allow themself and administrator to see user
+    if (role === 'admin') {
+      if (userAdmin.role !== 'administrator') {
+        return response(res, {
+          code: 403,
+          success: false,
+          message: 'Access denied!',
+        });
+      }
+    } else {
+      if (username !== userUpdate) {
+        return response(res, {
+          code: 403,
+          success: false,
+          message: 'Access denied!',
+        });
+      }
     }
 
     let user = await User.findOne({ where: { username } });
@@ -108,18 +123,32 @@ exports.getOne = async (req, res) => {
 }
 
 exports.delete = async (req, res) => {
-  const { id } = req.params;
-  const role = req.user.role;
-  
-  if (role !== 'admin') { 
-    return response(res, {
-      code: 403,
-      success: false,
-      message: 'Access denied!',
-    });
-  }
+  try { 
+    const { id } = req.params;
+    const userUpdate = req.user.username;
+    const role = req.user.role;
 
-  try {
+    // Check if the admin with the role administrator
+    const admin = await User.findOne({ where: { username: userUpdate } });
+    const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+
+    // Only allow administrator to delete user
+    if (role === 'admin') {
+      if (userAdmin.role !== 'administrator') {
+        return response(res, {
+          code: 403,
+          success: false,
+          message: 'Access denied!',
+        });
+      }
+    } else {
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
+
     const user = await User.findByPk(id);
 
     if (!user) throw new NotFoundError('User not found!');

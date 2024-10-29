@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { Admin } = require('../models');
 const ActivityAdmin = require('../models/ActivityAdmin');
 const { connectToDatabasePPUKP } = require('../config/db_ppukp_test');
 const { response, hashPassword, comparePassword } = require('../helpers/bcrypt');
@@ -128,6 +129,14 @@ exports.registrasiPerusahaan = async (req, res) => {
   try {
     const { no_peserta, email, password } = req.body;
 
+    if (!email || !password) {
+      return response(res, {
+        code: 400,
+        success: false,
+        message: 'All fields are required!',
+      });
+    }
+
     // Check if the user with the given ID exists
     const isRegistered = await checkIfExists(no_peserta);
     if (!isRegistered) {
@@ -141,14 +150,6 @@ exports.registrasiPerusahaan = async (req, res) => {
     const userExists = await User.findOne({ where: { username: no_peserta } });
     if (userExists) {
       throw new NotFoundError(`Akun sudah terdaftar!`);
-    }
-
-    if (!email || !password) {
-      return response(res, {
-        code: 400,
-        success: false,
-        message: 'All fields are required!',
-      });
     }
 
     if (email && !isValidEmail(email)) {
@@ -211,7 +212,7 @@ exports.registrasiPerusahaan = async (req, res) => {
 exports.unblockAccount = async (req, res) => {
   try {
     const { no_peserta } = req.params;
-    const userUpdate = req.user.username; 
+    const userUpdate = req.user.username;  
     const role = req.user.role;
     
     if (role !== 'admin') { 

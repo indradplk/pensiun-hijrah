@@ -1,7 +1,6 @@
 const { connectToDatabasePPUKP } = require('../../config/db_ppukp_test');
 const { response } = require('../../helpers/bcrypt');
 const { NotFoundError } = require('../../errors');
-const sanitizeInput = require('../../helpers/sanitizeInput');
 
 function isValidDate(dateString) {
     const regex = /^\d{4}-\d{2}-\d{2}$/;

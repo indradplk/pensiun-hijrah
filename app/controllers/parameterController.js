@@ -1,7 +1,9 @@
 const Parameter = require('../models/Parameter');
 const ActivityAdmin = require('../models/ActivityAdmin');
+const { User } = require('../models');
+const { Admin } = require('../models');
 const { NotFoundError } = require('../errors');
-const sanitizeInput = require('../helpers/sanitizeInput');
+const { sanitizeInput } = require('../helpers/sanitizeInput');
 const { response, isEmpty } = require('../helpers/bcrypt');
 const { encode } = require('html-entities');
 
@@ -86,15 +88,28 @@ exports.update = async (req, res) => {
     try {
         const { NUMERIC_VALUE } = req.body;
         const { id } = req.params;
-        const userUpdate = req.user.username; 
-        const role = req.user.role;
-        
-        if (role !== 'admin') { 
-          return response(res, {
-            code: 403,
-            success: false,
-            message: 'Access denied!',
-          });
+        const userUpdate = req.user.username;   
+        const role = req.user.role; 
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
+          }
+        } else {
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
         }
 
         // Check if the Parameter with the given ID exists

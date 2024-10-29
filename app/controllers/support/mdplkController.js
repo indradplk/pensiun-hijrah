@@ -1,7 +1,7 @@
 const { connectToDatabaseMDPLK } = require('../../config/db_mdplk');
 const { response } = require('../../helpers/bcrypt');
 const { NotFoundError } = require('../../errors');
-const sanitizeInput = require('../../helpers/sanitizeInput');
+const { sanitizeInput } = require('../../helpers/sanitizeInput');
 const { encode } = require('html-entities');
 const fs = require('fs');
 
@@ -15,7 +15,7 @@ exports.getKlaim = async (req, res) => {
     return response(res, {
       code: 403,
       success: false,
-      message: 'You are not authorized to see another user!',
+      message: 'Access denied!',
     });
   }
   
@@ -85,7 +85,7 @@ exports.getPengkinianData = async (req, res) => {
         return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to see another user!',
+        message: 'Access denied!',
         });
     }
     
@@ -193,7 +193,7 @@ exports.getLCF = async (req, res) => {
         return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to see another user!',
+        message: 'Access denied!',
         });
     }
     
@@ -242,7 +242,7 @@ exports.lastPackage = async (req, res) => {
         return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to see another user!',
+        message: 'Access denied!',
         });
     }
     
@@ -553,7 +553,7 @@ exports.approvePaket = async (req, res) => {
         return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to edit data!',
+        message: 'Access denied!',
         });
     }
 

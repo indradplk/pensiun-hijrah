@@ -314,7 +314,9 @@ const News = ({ userData }) => {
                       </Text>
                     </td>
                     <td>
-                      <NewsP dangerouslySetInnerHTML={{ __html: item.description }} />
+                      <NewsP style={{ whiteSpace: 'pre-line' }}>
+                        {item.description }
+                      </NewsP>
                     </td>
                     <td>{item.kategori}</td>
                     <td>{item.status}</td>

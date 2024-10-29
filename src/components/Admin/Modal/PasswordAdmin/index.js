@@ -28,11 +28,11 @@ const PasswordAdminModal = ({ show, handleClose, pesertaData }) => {
   
   useEffect(() => {
     fetchData();
-  }, [pesertaData.id]);  
+  }, [pesertaData.adminId]);  
 
   const fetchData = () => {
     axios
-      .get(process.env.REACT_APP_API_BASE_URL + `/admin/${pesertaData.id}`, {
+      .get(process.env.REACT_APP_API_BASE_URL + `/admin/${pesertaData.adminId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

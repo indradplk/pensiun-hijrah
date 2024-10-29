@@ -1,7 +1,7 @@
 const { connectToDatabaseHRIS } = require('../../config/db_hris');
 const { response } = require('../../helpers/bcrypt');
 const { NotFoundError } = require('../../errors');
-const sanitizeInput = require('../../helpers/sanitizeInput');
+const { sanitizeInput } = require('../../helpers/sanitizeInput');
 const moment = require('moment');
 
 exports.show = async (req, res) => {

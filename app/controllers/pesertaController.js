@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { Admin } = require('../models');
 const ActivityAdmin = require('../models/ActivityAdmin');
 const { connectToDatabasePPIP } = require('../config/db_ppip_test');
 const { response, hashPassword, comparePassword } = require('../helpers/bcrypt');
@@ -128,6 +129,14 @@ exports.registrasiPeserta = async (req, res) => {
   try {
     const { no_peserta, email, password } = req.body;
 
+    if (!email || !password) {
+      return response(res, {
+        code: 400,
+        success: false,
+        message: 'All fields are required!',
+      });
+    }
+
     // Check if the user with the given ID exists
     const isRegistered = await checkIfExists(no_peserta);
     if (!isRegistered) {
@@ -141,14 +150,6 @@ exports.registrasiPeserta = async (req, res) => {
     const userExists = await User.findOne({ where: { username: no_peserta } });
     if (userExists) {
       throw new NotFoundError(`Akun sudah terdaftar!`);
-    }
-
-    if (!email || !password) {
-      return response(res, {
-        code: 400,
-        success: false,
-        message: 'All fields are required!',
-      });
     }
 
     if (email && !isValidEmail(email)) {

@@ -6,7 +6,7 @@ const TanyaDPLK = require('../models/TanyaDPLK');
 const User = require('../models/User');
 const RegistrasiPerusahaan = require('../models/RegistrasiPerusahaan');
 const ActivityAdmin = require('../models/ActivityAdmin');
-const sanitizeInput = require('../helpers/sanitizeInput');
+const { sanitizeInput } = require('../helpers/sanitizeInput');
 const { response, hashPassword } = require('../helpers/bcrypt');
 const { encode } = require('html-entities');
 const { authenticateToken } = require('../helpers/jwt');
@@ -332,15 +332,6 @@ router.post(
         body('email').isEmail().withMessage('Invalid email').notEmpty().withMessage('Email is required'),
     ],
     async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: errors.array(),
-            });
-        }
-
         const { no_peserta, email } = req.body;
         const id = req.params.id;
         const userUpdate = req.user.username; 
@@ -352,6 +343,15 @@ router.post(
             success: false,
             message: 'Access denied!',
           });
+        }
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return response(res, {
+                code: 400,
+                success: false,
+                message: errors.array(),
+            });
         }
 
         // Validate form
@@ -555,15 +555,6 @@ router.post(
         body('text').notEmpty().withMessage('Description is required'),
     ],
     async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: errors.array(),
-            });
-        }
-
         const { email, text } = req.body;
         const id = req.params.id;
         const userUpdate = req.user.username; 
@@ -575,6 +566,15 @@ router.post(
             success: false,
             message: 'Access denied!',
           });
+        }
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return response(res, {
+                code: 400,
+                success: false,
+                message: errors.array(),
+            });
         }
 
         // Validate form

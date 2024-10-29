@@ -1,5 +1,8 @@
 const Office = require('../models/Office');
+const { User, Admin } = require('../models');
+const ActivityAdmin = require('../models/ActivityAdmin');
 const { NotFoundError } = require('../errors');
+const { sanitizeInput, containsEventAttributes, containsScriptTag } = require('../helpers/sanitizeInput');
 const { response, isEmpty } = require('../helpers/bcrypt');
 
 exports.getAll = async (req, res) => {
@@ -97,7 +100,29 @@ exports.getOne = async (req, res) => {
 exports.create = async (req, res) => {
     try {
         const { kode_cabang, nama, cabang, area, alamat, telepon } = req.body;
-        const userUpdate = req.user.username; 
+        const userUpdate = req.user.username;   
+        const role = req.user.role;      
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
+          }
+        } else {
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
+        }
 
         // Validasi form
         if (!kode_cabang || !nama || !cabang || !area || !alamat || !telepon) {
@@ -133,7 +158,29 @@ exports.update = async (req, res) => {
     try {
         const { kode_cabang, nama, cabang, area, alamat, telepon } = req.body;
         const { id } = req.params;
-        const userUpdate = req.user.username; 
+        const userUpdate = req.user.username;    
+        const role = req.user.role;    
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check if the Office with the given ID exists
         const existingOffice = await Office.findByPk(id);
@@ -182,6 +229,29 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
     try {
         const id = req.params.id;
+        const userUpdate = req.user.username;         
+        const role = req.user.role;   
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check the Office to be deleted
         const OfficeToDelete = await Office.findByPk(id);
@@ -217,7 +287,29 @@ exports.delete = async (req, res) => {
 exports.accept = async (req, res) => {
     try {
         const { id } = req.params;
-        const userUpdate = req.user.username; 
+        const userUpdate = req.user.username;      
+        const role = req.user.role;     
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
+          return response(res, {
+            code: 403,
+            success: false,
+            message: 'Access denied!',
+          });
+        }
 
         // Check if the Office with the given ID exists
         const existingOffice = await Office.findByPk(id);

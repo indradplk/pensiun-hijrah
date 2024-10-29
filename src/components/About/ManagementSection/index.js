@@ -66,7 +66,7 @@ const ManagementSection = () => {
                           <ManagementCardTextWrapper>
                             <ManagementH2><b>{item.nama}</b></ManagementH2>
                             <Subtitle>{item.jabatan}</Subtitle>
-                            <TopLine dangerouslySetInnerHTML={{ __html: item.description }} />
+                            <TopLine style={{ whiteSpace: 'pre-line' }}>{item.description}</TopLine>
                           </ManagementCardTextWrapper>
                         </ManagementCard2>
                       )
@@ -83,7 +83,7 @@ const ManagementSection = () => {
                           <ManagementCardTextWrapper>
                             <ManagementH2><b>{item.nama}</b></ManagementH2>
                             <Subtitle>{item.jabatan}</Subtitle>
-                            <TopLine dangerouslySetInnerHTML={{ __html: item.description }} />
+                            <TopLine style={{ whiteSpace: 'pre-line' }}>{item.description}</TopLine>
                           </ManagementCardTextWrapper>
                         </ManagementCard2>
                       )
@@ -100,7 +100,7 @@ const ManagementSection = () => {
                           <ManagementCardTextWrapper>
                             <ManagementH2><b>{item.nama}</b></ManagementH2>
                             <Subtitle>{item.jabatan}</Subtitle>
-                            <TopLine dangerouslySetInnerHTML={{ __html: item.description }} />
+                            <TopLine style={{ whiteSpace: 'pre-line' }}>{item.description}</TopLine>
                           </ManagementCardTextWrapper>
                         </ManagementCard2>
                       )

@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
-import sanitizeHtml from 'sanitize-html';
 import {
   Form,
   FormH1,
@@ -13,7 +10,8 @@ import {
   FormSelect,
   FormOption,
   FormButton,
-  FormButtonCancel
+  FormButtonCancel,
+  FormText
 } from '../FormElements';
 import {
   ErrorCard,
@@ -37,25 +35,13 @@ const AddManagementForm = ({ show, handleClose, addData, handleAddInputChange })
   const cookies = new Cookies();
   const token = cookies.get('token');
 
-  // Function to sanitize description input
-  const sanitizeInput = (input) => {
-    return sanitizeHtml(input, {
-      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote', 'div', 'span'],
-      allowedAttributes: { 'a': ['href', 'name', 'target'], 'div': ['style'], 'span': ['style'] },
-      allowedSchemes: ['http', 'https', 'mailto'],
-    });
-  };
-
   const handleAddSubmit = async () => {
     setLoading(true);
-    
-    // Sanitize description input before sending to server
-    const sanitizedDescription = sanitizeInput(formData.description);
 
     const data = new FormData();
     data.append('nama', formData.nama);
     data.append('jabatan', formData.jabatan);
-    data.append('description', sanitizedDescription); // use sanitized description
+    data.append('description', formData.description);
     data.append('kategori', formData.kategori);
     data.append('path_management', formData.path_management);
 
@@ -102,15 +88,6 @@ const AddManagementForm = ({ show, handleClose, addData, handleAddInputChange })
     });
   }, [addData]);
 
-  const handleDescriptionChange = (value) => {
-    handleAddInputChange({
-      target: {
-        name: 'description',
-        value: value
-      }
-    });
-  };
-
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
@@ -132,7 +109,7 @@ const AddManagementForm = ({ show, handleClose, addData, handleAddInputChange })
           <FormLabel htmlFor="path_management">Gambar</FormLabel>
           <FormInput id="path_management" type="file" name="path_management" onChange={handleAddInputChange} />
           <FormLabel htmlFor="description">Deskripsi</FormLabel>
-          <ReactQuill value={formData.description} onChange={handleDescriptionChange} />
+          <FormText id="description" name="description" value={formData.description} onChange={handleAddInputChange} />
           {error && (
             <ErrorCard>
               <MessageH1><b>Gagal!</b></MessageH1>

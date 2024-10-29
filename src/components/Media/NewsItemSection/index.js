@@ -12,7 +12,6 @@ import {
   NewsItemIcon,
   Paragraph,
 } from './NewsItemElements';
-import { dataServer } from '../../DataServer';
 
 const NewsItemSection = () => {
   const { seo } = useParams(); // Ambil SEO berita dari URL
@@ -58,7 +57,7 @@ const NewsItemSection = () => {
           <Heading>{NewsItem.title}</Heading>
           <Subtitle>{NewsItem.createdAt}</Subtitle>
           <NewsItemIcon src={`/berita/${NewsItem.path_news}`} />
-          <Paragraph dangerouslySetInnerHTML={{ __html: NewsItem.description }} />
+          <Paragraph style={{ whiteSpace: 'pre-line' }}>{NewsItem.description}</Paragraph>
         </NewsItemWrapper>
       )}
     </NewsItemContainer>

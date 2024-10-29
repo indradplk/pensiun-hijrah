@@ -92,11 +92,23 @@ exports.getOne = async (req, res) => {
 exports.create = async (req, res) => {
     try {
         const { nama, jabatan, description, kategori } = req.body;
-        const userUpdate = req.user.username;
-        const role = req.user.role;
+        const userUpdate = req.user.username;     
+        const role = req.user.role;  
 
-        // Validasi role
-        if (role !== 'admin') {
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
+          }
+        } else {
             return response(res, {
                 code: 403,
                 success: false,
@@ -132,7 +144,7 @@ exports.create = async (req, res) => {
         }
 
         // Validasi input nama dan jabatan
-        if (sanitizeInput(nama) || sanitizeInput(jabatan)) {
+        if (sanitizeInput(nama) || sanitizeInput(jabatan) || sanitizeInput(description)) {
             // Hapus file jika sudah diunggah
             if (req.files && req.files.path_management && req.files.path_management.length > 0) {
                 fs.unlinkSync(req.files.path_management[0].path);
@@ -141,19 +153,6 @@ exports.create = async (req, res) => {
                 code: 400,
                 success: false,
                 message: 'Input contains invalid characters!',
-            });
-        }
-
-        // Validasi tag <script> atau atribut event HTML dalam deskripsi
-        if (containsScriptTag(description) || containsEventAttributes(description)) {
-            // Hapus file jika sudah diunggah
-            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
-                fs.unlinkSync(req.files.path_management[0].path);
-            }
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Input contains invalid characters like <script> or event attributes!',
             });
         }
 
@@ -171,12 +170,13 @@ exports.create = async (req, res) => {
         // Sanitasi input nama dan jabatan
         const sanitizedNama = encode(nama);
         const sanitizedJabatan = encode(jabatan);
+        const sanitizedDescription = encode(description);
 
         // Menyimpan data manajemen ke database
         const newManagement = await Management.create({
             nama: sanitizedNama,
             jabatan: sanitizedJabatan,
-            description,
+            description: sanitizedDescription,
             kategori,
             path_management,
             userUpdate
@@ -212,10 +212,23 @@ exports.update = async (req, res) => {
     try {
         const { nama, jabatan, description, kategori } = req.body;
         const { id } = req.params;
-        const userUpdate = req.user.username; 
-        const role = req.user.role;
-        
-        if (role !== 'admin') { 
+        const userUpdate = req.user.username;    
+        const role = req.user.role;   
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
           return response(res, {
             code: 403,
             success: false,
@@ -257,7 +270,7 @@ exports.update = async (req, res) => {
         }
 
         // Validasi input nama dan jabatan
-        if (sanitizeInput(nama) || sanitizeInput(jabatan)) {
+        if (sanitizeInput(nama) || sanitizeInput(jabatan) || sanitizeInput(description)) {
             // Hapus file jika sudah diunggah
             if (req.files && req.files.path_management && req.files.path_management.length > 0) {
                 fs.unlinkSync(req.files.path_management[0].path);
@@ -266,19 +279,6 @@ exports.update = async (req, res) => {
                 code: 400,
                 success: false,
                 message: 'Input contains invalid characters!',
-            });
-        }
-
-        // Validasi tag <script> atau atribut event HTML dalam deskripsi
-        if (containsScriptTag(description) || containsEventAttributes(description)) {
-            // Hapus file jika sudah diunggah
-            if (req.files && req.files.path_management && req.files.path_management.length > 0) {
-                fs.unlinkSync(req.files.path_management[0].path);
-            }
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Input contains invalid characters like <script> or event attributes!',
             });
         }
 
@@ -300,10 +300,11 @@ exports.update = async (req, res) => {
 
         const sanitizedNama = encode(nama);
         const sanitizedJabatan = encode(jabatan);
+        const sanitizedDescription = encode(description);
 
         // Update data Management
         const updatedManagement = await existingManagement.update({
-            nama: sanitizedNama, jabatan: sanitizedJabatan, description, kategori, status: false, path_management, userUpdate
+            nama: sanitizedNama, jabatan: sanitizedJabatan, description: sanitizedDescription, kategori, status: false, path_management, userUpdate
         });
 
         await ActivityAdmin.create({
@@ -343,10 +344,23 @@ exports.delete = async (req, res) => {
     try {
 
         const { id } = req.params;
-        const userUpdate = req.user.username;
-        const role = req.user.role;
-        
-        if (role !== 'admin') { 
+        const userUpdate = req.user.username;      
+        const role = req.user.role; 
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
           return response(res, {
             code: 403,
             success: false,
@@ -399,42 +413,28 @@ exports.delete = async (req, res) => {
 exports.accept = async (req, res) => {
     try {
         const { id } = req.params;
-        const userUpdate = req.user.username; 
-        const role = req.user.role;
-        
-        if (role !== 'admin') { 
+        const userUpdate = req.user.username;   
+        const role = req.user.role;   
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
           return response(res, {
             code: 403,
             success: false,
             message: 'Access denied!',
           });
-        }
-
-        // Check if the admin with the role supervisor
-        const user = await User.findOne({ where: { username: userUpdate } });
-        if (!user) {
-            return response(res, {
-                code: 404,
-                success: false,
-                message: 'You are not authorized to approve data!',
-            });
-        }
-
-        const userAdmin = await Admin.findOne({ where: { id: user.adminId } });
-        if (!userAdmin) {
-            return response(res, {
-                code: 404,
-                success: false,
-                message: 'You are not authorized to approve data!',
-            });
-        }
-
-        if (userAdmin.role !== 'supervisor') {
-            return response(res, {
-                code: 403,
-                success: false,
-                message: 'You are not authorized to approve data!',
-            });
         }
 
         // Check if the Management with the given ID exists

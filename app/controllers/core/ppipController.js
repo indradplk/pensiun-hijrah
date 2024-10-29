@@ -1,7 +1,7 @@
 const { connectToDatabasePPIP } = require('../../config/db_ppip_test');
 const { response } = require('../../helpers/bcrypt');
 const { NotFoundError } = require('../../errors');
-const sanitizeInput = require('../../helpers/sanitizeInput');
+const { sanitizeInput } = require('../../helpers/sanitizeInput');
 
 function isValidDate(dateString) {
     const regex = /^\d{4}-\d{2}-\d{2}$/;
@@ -19,7 +19,7 @@ exports.getOne = async (req, res) => {
       return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to see another user!',
+        message: 'Access denied!',
       });
     }
 
@@ -79,7 +79,7 @@ exports.getBalance = async (req, res) => {
       return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to see another user!',
+        message: 'Access denied!',
       });
     }
   
@@ -161,7 +161,7 @@ exports.getTransaction = async (req, res) => {
       return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to see another user!',
+        message: 'Access denied!',
       });
     }
   
@@ -244,7 +244,7 @@ exports.lastPackage = async (req, res) => {
       return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to see another user!',
+        message: 'Access denied!',
       });
     }
   
@@ -300,7 +300,7 @@ exports.retirementAge = async (req, res) => {
       return response(res, {
         code: 403,
         success: false,
-        message: 'You are not authorized to see another user!',
+        message: 'Access denied!',
       });
     }
   
@@ -601,6 +601,15 @@ exports.paketInvestasi = async (req, res) => {
         success: false,
         message: 'Access denied!',
       });
+    }
+
+    // Validate form
+    if (!paket_investasi) {
+        return response(res, {
+            code: 400,
+            success: false,
+            message: 'All fields must be filled in!',
+        });
     }
     
     const pool = await connectToDatabasePPIP();

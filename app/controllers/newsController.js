@@ -94,15 +94,28 @@ exports.getOne = async (req, res) => {
 exports.create = async (req, res) => {
     try {
         const { title, description, kategori } = req.body;
-        const userUpdate = req.user.username;  
-        const role = req.user.role;
-        
-        if (role !== 'admin') { 
-          return response(res, {
-            code: 403,
-            success: false,
-            message: 'Access denied!',
-          });
+        const userUpdate = req.user.username;    
+        const role = req.user.role;     
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
+          }
+        } else {
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
         }
 
         if (!title || !description || !kategori) {
@@ -130,7 +143,7 @@ exports.create = async (req, res) => {
             });
         }
 
-        if (sanitizeInput(title)) {
+        if (sanitizeInput(title) || sanitizeInput(description)) {
             // Hapus file jika sudah diunggah
             if (req.files && req.files.path_news && req.files.path_news.length > 0) {
                 fs.unlinkSync(req.files.path_news[0].path);
@@ -139,18 +152,6 @@ exports.create = async (req, res) => {
                 code: 400,
                 success: false,
                 message: 'Input contains invalid characters!',
-            });
-        }
-
-        if (containsScriptTag(description) || containsEventAttributes(description)) {
-            // Hapus file jika sudah diunggah
-            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
-                fs.unlinkSync(req.files.path_news[0].path);
-            }
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Input contains invalid characters like <script> or event attributes!',
             });
         }
 
@@ -167,10 +168,11 @@ exports.create = async (req, res) => {
 
         const urlJudulBerita = title.toLowerCase().replace(/\s+/g, '-');
         const sanitizedTitle = encode(title);
+        const sanitizedDescription = encode(description);
 
         // Validate form
         const newNews = await News.create({
-            title: sanitizedTitle, seo: urlJudulBerita, description, kategori, path_news, userUpdate
+            title: sanitizedTitle, seo: urlJudulBerita, description: sanitizedDescription, kategori, path_news, userUpdate
         });
 
         await ActivityAdmin.create({
@@ -201,10 +203,23 @@ exports.update = async (req, res) => {
     try {
         const { title, description, kategori } = req.body;
         const { id } = req.params;
-        const userUpdate = req.user.username;  
-        const role = req.user.role;
-        
-        if (role !== 'admin') { 
+        const userUpdate = req.user.username;      
+        const role = req.user.role;     
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
           return response(res, {
             code: 403,
             success: false,
@@ -243,7 +258,7 @@ exports.update = async (req, res) => {
             });
         }
 
-        if (sanitizeInput(title)) {
+        if (sanitizeInput(title) || sanitizeInput(description)) {
             // Hapus file jika sudah diunggah
             if (req.files && req.files.path_news && req.files.path_news.length > 0) {
                 fs.unlinkSync(req.files.path_news[0].path);
@@ -252,18 +267,6 @@ exports.update = async (req, res) => {
                 code: 400,
                 success: false,
                 message: 'Input contains invalid characters!',
-            });
-        }
-
-        if (containsScriptTag(description) || containsEventAttributes(description)) {
-            // Hapus file jika sudah diunggah
-            if (req.files && req.files.path_news && req.files.path_news.length > 0) {
-                fs.unlinkSync(req.files.path_news[0].path);
-            }
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Input contains invalid characters like <script> or event attributes!',
             });
         }
 
@@ -285,10 +288,11 @@ exports.update = async (req, res) => {
 
         const urlJudulBerita = title.toLowerCase().replace(/\s+/g, '-');
         const sanitizedTitle = encode(title);
+        const sanitizedDescription = encode(description);
 
         // Update data News
         const updatedNews = await existingNews.update({
-            title: sanitizedTitle, seo: urlJudulBerita, description, kategori, path_news, status: false, userUpdate
+            title: sanitizedTitle, seo: urlJudulBerita, description: sanitizedDescription, kategori, path_news, status: false, userUpdate
         });
 
         await ActivityAdmin.create({
@@ -327,10 +331,23 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
     try {
         const userUpdate = req.user.username; 
-        const { id } = req.params; 
-        const role = req.user.role;
-        
-        if (role !== 'admin') { 
+        const { id } = req.params;        
+        const role = req.user.role;  
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
           return response(res, {
             code: 403,
             success: false,
@@ -383,42 +400,28 @@ exports.delete = async (req, res) => {
 exports.accept = async (req, res) => {
     try {
         const { id } = req.params;
-        const userUpdate = req.user.username; 
-        const role = req.user.role;
-        
-        if (role !== 'admin') { 
+        const userUpdate = req.user.username;     
+        const role = req.user.role;    
+
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+    
+        // Only allow administrator to unblock account
+        if (role === 'admin') { 
+          if (userAdmin.role !== 'supervisor') { 
+            return response(res, {
+              code: 403,
+              success: false,
+              message: 'Access denied!',
+            });
+          }
+        } else {
           return response(res, {
             code: 403,
             success: false,
             message: 'Access denied!',
           });
-        }
-
-        // Check if the admin with the role supervisor
-        const user = await User.findOne({ where: { username: userUpdate } });
-        if (!user) {
-            return response(res, {
-                code: 404,
-                success: false,
-                message: 'You are not authorized to approve data!',
-            });
-        }
-
-        const userAdmin = await Admin.findOne({ where: { id: user.adminId } });
-        if (!userAdmin) {
-            return response(res, {
-                code: 404,
-                success: false,
-                message: 'You are not authorized to approve data!',
-            });
-        }
-
-        if (userAdmin.role !== 'supervisor') {
-            return response(res, {
-                code: 403,
-                success: false,
-                message: 'You are not authorized to approve data!',
-            });
         }
 
         // Check if the News with the given ID exists

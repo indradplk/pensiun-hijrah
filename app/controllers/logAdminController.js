@@ -1,5 +1,6 @@
 const ActivityAdmin = require('../models/ActivityAdmin');
-const { User, Admin } = require('../models');
+const User = require('../models/User');
+const Admin = require('../models/Admin');
 const { NotFoundError } = require('../errors');
 const { response, isEmpty } = require('../helpers/bcrypt');
 
@@ -7,14 +8,28 @@ exports.getAll = async (req, res) => {
     try {
         const statusFilter = req.query.status;
         const whereClause = {};
+        const userUpdate = req.user.username;
         const role = req.user.role;
+    
+        // Check if the admin with the role administrator
+        const admin = await User.findOne({ where: { username: userUpdate } });
+        const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
         
-        if (role !== 'admin') { 
-          return response(res, {
-            code: 403,
-            success: false,
-            message: 'Access denied!',
-          });
+        // Only allow administrator to see log activity
+        if (role === 'admin') {
+            if (userAdmin.role !== 'administrator') { 
+                return response(res, {
+                    code: 403,
+                    success: false,
+                    message: 'Access denied!',
+                });
+            }
+        } else {
+            return response(res, {
+                code: 403,
+                success: false,
+                message: 'Access denied!',
+            });
         }
 
         // filter by status

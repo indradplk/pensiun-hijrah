@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
-import sanitizeHtml from 'sanitize-html';
 import {
   Form,
   FormH1,
@@ -13,7 +10,8 @@ import {
   FormSelect,
   FormOption,
   FormButton,
-  FormButtonCancel
+  FormButtonCancel,
+  FormText
 } from '../FormElements';
 import {
   ErrorCard,
@@ -37,15 +35,6 @@ const EditManagementForm = ({ show, handleClose, editData, handleEditInputChange
   const cookies = new Cookies();
   const token = cookies.get('token');
 
-  // Function to sanitize description input
-  const sanitizeInput = (input) => {
-    return sanitizeHtml(input, {
-      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'h2', 'h3', 'ul', 'ol', 'li', 'blockquote', 'div', 'span'],
-      allowedAttributes: { 'a': ['href', 'name', 'target'], 'div': ['style'], 'span': ['style'] },
-      allowedSchemes: ['http', 'https', 'mailto'],
-    });
-  };
-
   const handleEditSubmit = async () => {
     setLoading(true);
 
@@ -54,13 +43,10 @@ const EditManagementForm = ({ show, handleClose, editData, handleEditInputChange
     }, 3000);
 
     try {
-      // Sanitize description input before sending to server
-      const sanitizedDescription = sanitizeInput(editData.description);
-
       const formData = new FormData();
       formData.append('nama', editData.nama);
       formData.append('jabatan', editData.jabatan);
-      formData.append('description', sanitizedDescription);
+      formData.append('description', editData.description);
       formData.append('kategori', editData.kategori);
       formData.append('path_management', editData.path_management);
 
@@ -107,15 +93,6 @@ const EditManagementForm = ({ show, handleClose, editData, handleEditInputChange
     });
   }, [editData]);
 
-  const handleDescriptionChange = (value) => {
-    handleEditInputChange({
-      target: {
-        name: 'description',
-        value: value
-      }
-    });
-  };
-
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
@@ -137,7 +114,7 @@ const EditManagementForm = ({ show, handleClose, editData, handleEditInputChange
           <FormLabel htmlFor="path_management">Gambar</FormLabel>
           <FormInput id="path_management" type="file" name="path_management" onChange={handleEditInputChange} />
           <FormLabel htmlFor="description">Deskripsi</FormLabel>
-          <ReactQuill value={formData.description} onChange={handleDescriptionChange} />
+          <FormText id="description" name="description" value={formData.description} onChange={handleEditInputChange} />
           {error && (
             <ErrorCard>
               <MessageH1><b>Gagal!</b></MessageH1>

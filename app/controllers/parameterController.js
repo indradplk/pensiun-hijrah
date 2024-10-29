@@ -97,7 +97,7 @@ exports.update = async (req, res) => {
     
         // Only allow administrator to unblock account
         if (role === 'admin') { 
-          if (userAdmin.role !== 'operator' && userAdmin.role !== 'supervisor') { 
+          if (userAdmin.role !== 'administrator' && userAdmin.role !== 'supervisor') { 
             return response(res, {
                 code: 403,
                 success: false,

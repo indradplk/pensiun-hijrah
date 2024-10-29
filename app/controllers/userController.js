@@ -71,15 +71,7 @@ exports.getOne = async (req, res) => {
     const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
 
     // Only allow themself and administrator to see user
-    if (role === 'admin') {
-      if (userAdmin.role !== 'administrator') {
-        return response(res, {
-          code: 403,
-          success: false,
-          message: 'Access denied!',
-        });
-      }
-    } else {
+    if (role !== 'admin') {
       if (username !== userUpdate) {
         return response(res, {
           code: 403,

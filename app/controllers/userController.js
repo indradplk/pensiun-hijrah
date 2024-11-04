@@ -2,19 +2,27 @@ const { response, isEmpty } = require('../helpers/bcrypt');
 const { NotFoundError } = require('../errors');
 const User = require('../models/User');
 const Admin = require('../models/Admin');
+const { Op } = require('sequelize');
 
 exports.getAll = async (req, res) => {
   try {
     const roleFilter = req.query.role;
     const whereClause = {};
     const role = req.user.role;
-    
-    if (role !== 'admin') { 
-      return response(res, {
-        code: 403,
-        success: false,
-        message: 'Access denied!',
-      });
+
+    // Check if the admin with the role administrator
+    const admin = await User.findOne({ where: { username: userUpdate } });
+    const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
+
+    // Only allow administrator to see user
+    if (role !== 'admin') {
+      if (userAdmin.role !== 'administrator') { 
+        return response(res, {
+          code: 403,
+          success: false,
+          message: 'Access denied!',
+        });
+      }
     }
 
     // filter by role
@@ -81,10 +89,26 @@ exports.getOne = async (req, res) => {
       }
     }
 
-    let user = await User.findOne({ where: { username } });
+    let user;
+    if (userAdmin.role !== 'administrator') {
+      user = await User.findOne({
+          where: {
+            username,
+            [Op.or]: [
+              { role: { [Op.or]: ['peserta', 'perusahaan'] } },
+              { username: userUpdate }
+            ]
+          }
+      });
 
-    if (!user)
-      throw new NotFoundError(`User with username ${username} not found!`);
+      if (!user)
+        throw new NotFoundError(`Access denied!`);
+    } else {
+        user = await User.findOne({ where: { username } });
+
+        if (!user)
+          throw new NotFoundError(`User with username ${username} not found!`);
+    }
       
     // prevent password to be shown in response
     user.password = undefined;

@@ -4,7 +4,7 @@ INSERT INTO `panduan` (`id`, `title`, `path_panduan`, `kategori`, `status`, `use
 (3, 'Top Up Iuran via MDIN', '92e6085f-1f86-48fd-a6e0-acce0363fdbd.pdf', 'iuran', 1, 'SYSTEM', NOW(), NOW()),
 (4, 'Pengambilan Manfaat Pensiun Karena Cacat', '6b7878ea-51c5-4c3b-9262-cf15374e3d06.pdf', 'klaim', 1, 'SYSTEM', NOW(), NOW()),
 (5, 'Pengambilan Manfaat Pensiun Karena Meninggal Dunia', 'dcaf8059-5116-4761-b0f4-bcbf8fc66a61.pdf', 'klaim', 1, 'SYSTEM', NOW(), NOW()),
-(6, 'Pengambilan Manfaat Pensiun dengan Saldo ≤ Rp100.000.000', '2cf8ef61-d84b-4393-a612-428bbf70e5f4.pdf', 'klaim', 1, 'SYSTEM', NOW(), NOW()),
+(6, 'Pengambilan Manfaat Pensiun dengan Saldo <= Rp100.000.000', '2cf8ef61-d84b-4393-a612-428bbf70e5f4.pdf', 'klaim', 1, 'SYSTEM', NOW(), NOW()),
 (7, 'Pengambilan Manfaat Pensiun Normal', '4af3fcdf-36a6-4a86-bdd2-38549bd392a1.pdf', 'klaim', 1, 'SYSTEM', NOW(), NOW()),
 (8, 'Pengambilan Manfaat Pensiun Dipercepat', '5ca58e03-2b94-44f2-89c1-ff9294d90f83.pdf', 'klaim', 1, 'SYSTEM', NOW(), NOW()),
 (9, 'Pengambilan Manfaat Pensiun Karena Tidak Berpenghasilan', '765d2d57-a1c9-4508-a6a2-4f3ab8f9f612.pdf', 'klaim', 1, 'SYSTEM', NOW(), NOW()),

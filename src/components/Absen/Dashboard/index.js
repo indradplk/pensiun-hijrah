@@ -20,6 +20,7 @@ import {
   BtnLink,
 } from './DashboardElements';
 import SuccessModal from '../Modal/Success';
+import ErrorModal from '../Modal/Error';
 
 const Dashboard = ({
   lightBg,
@@ -41,6 +42,7 @@ const Dashboard = ({
   const [lon, setLon] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
   const getLocation = () => {
@@ -53,12 +55,12 @@ const Dashboard = ({
         (error) => {
           console.error(error);
           setModalMessage('Geolocation failed. Please allow location access.');
-          setIsModalOpen(true);
+          setIsErrorModalOpen(true);
         }
       );
     } else {
       setModalMessage('Geolocation is not supported by this browser.');
-      setIsModalOpen(true);
+      setIsErrorModalOpen(true);
     }
   };
 
@@ -84,8 +86,8 @@ const Dashboard = ({
     setLoading(true);
 
     if (!lat || !lon) {
-      setModalMessage('Location is missing.');
-      setIsModalOpen(true);
+      setModalMessage('Location not found.');
+      setIsErrorModalOpen(true);
       setLoading(false);
       return;
     }
@@ -115,7 +117,7 @@ const Dashboard = ({
       } catch (error) {
         setModalMessage(error.response?.data?.message || 'Terjadi kesalahan saat absen.');
       } finally {
-        setIsModalOpen(true);
+        setIsErrorModalOpen(true);
         setLoading(false);
       }
     }
@@ -126,8 +128,8 @@ const Dashboard = ({
     setLoading(true);
 
     if (!lat || !lon) {
-      setModalMessage('Location is missing.');
-      setIsModalOpen(true);
+      setModalMessage('Location not found.');
+      setIsErrorModalOpen(true);
       setLoading(false);
       return;
     }
@@ -150,7 +152,7 @@ const Dashboard = ({
       } catch (error) {
         setModalMessage(error.response?.data?.message || 'Terjadi kesalahan saat absen.');
       } finally {
-        setIsModalOpen(true);
+        setIsErrorModalOpen(true);
         setLoading(false);
       }
     }
@@ -202,6 +204,11 @@ const Dashboard = ({
         <SuccessModal
           show={isModalOpen}
           onHide={() => setIsModalOpen(false)}
+          message={modalMessage}
+        />
+        <ErrorModal
+          show={isErrorModalOpen}
+          onHide={() => setIsErrorModalOpen(false)}
           message={modalMessage}
         />
       </DashboardContainer>

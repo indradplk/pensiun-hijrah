@@ -79,6 +79,7 @@ exports.getOne = async (req, res) => {
     const userAdmin = await Admin.findOne({ where: { id: admin.adminId } });
 
     // Only allow themself and administrator to see user
+    let user;
     if (role !== 'admin') {
       if (username !== userUpdate) {
         return response(res, {
@@ -86,28 +87,32 @@ exports.getOne = async (req, res) => {
           success: false,
           message: 'Access denied!',
         });
-      }
-    }
-
-    let user;
-    if (userAdmin.role !== 'administrator') {
-      user = await User.findOne({
-          where: {
-            username,
-            [Op.or]: [
-              { role: { [Op.or]: ['peserta', 'perusahaan'] } },
-              { username: userUpdate }
-            ]
-          }
-      });
-
-      if (!user)
-        throw new NotFoundError(`Access denied!`);
-    } else {
+      } else {
         user = await User.findOne({ where: { username } });
 
         if (!user)
           throw new NotFoundError(`User with username ${username} not found!`);
+      }
+    } else {
+      if (userAdmin.role !== 'administrator') {
+        user = await User.findOne({
+            where: {
+              username,
+              [Op.or]: [
+                { role: { [Op.or]: ['peserta', 'perusahaan'] } },
+                { username: userUpdate }
+              ]
+            }
+        });
+
+        if (!user)
+          throw new NotFoundError(`Access denied!`);
+      } else {
+          user = await User.findOne({ where: { username } });
+
+          if (!user)
+            throw new NotFoundError(`User with username ${username} not found!`);
+      }
     }
       
     // prevent password to be shown in response

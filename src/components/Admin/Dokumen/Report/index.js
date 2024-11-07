@@ -121,7 +121,7 @@ const Report = ({ userData }) => {
   };
   
   const handleDownload = (path) => {
-    window.open(`/laporan/${path}`, '_blank');
+    window.open(`/report/${path}`, '_blank');
   };
 
   const handleShowEditForm = (id) => {

@@ -1,12 +1,19 @@
 # Pensiun Hijrah
 
-Install dependencies
+Step to use application
 
+In root directory to install dependencies
 ```sh
    npm install
 ```
 
-Start the development server
+In app directory to install dependencies for backend
+```sh
+   cd app
+   npm install
+```
+
+Start the development server for backend in app directory
 
 ```sh
    npm run start

@@ -90,7 +90,7 @@ exports.getPengkinianData = async (req, res) => {
     }
     
     let query = `
-        SELECT no_peserta, nama_lengkap FROM test_pengkinian_data
+        SELECT no_peserta, nama_lengkap FROM pengkinian_data
         WHERE no_peserta = ?
     `;
 
@@ -353,7 +353,7 @@ exports.pengkinianData = async (req, res) => {
     }
 
     const query = `
-        INSERT INTO test_pengkinian_data (
+        INSERT INTO pengkinian_data (
             userid, no_peserta, nama_lengkap, tanggal_lahir, tempat_lahir, no_identitas_diri, npwp, jenis_kelamin, ibu_kandung, nohp, 
             alamat_jalan, alamat_rtrw, alamat_kelurahan, alamat_kecamatan, alamat_kota, alamat_propinsi, alamat_kode_pos, email, 
             pekerjaan, pemilikan, nama_perusahaan, bidang_pekerjaan, penghasilan_tetap, penghasilan_tidak_tetap, flag, dateadd, 

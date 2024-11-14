@@ -5,7 +5,7 @@ const config = {
     user: 'sa',
     password: 'B!sm!ll@h',
     server: '10.55.255.11',
-    database: 'templk',
+    database: 'dplk_ppip',
     port: 1433,
     options: {
         encrypt: false

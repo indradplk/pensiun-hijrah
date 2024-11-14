@@ -5,7 +5,7 @@ const config = {
     user: 'root',
     password: 'dplk',
     host: '10.55.130.11',
-    database: 'hc_dplk_test'
+    database: 'hc_dplk'
 };
 
 async function connectToDatabaseHRIS() {

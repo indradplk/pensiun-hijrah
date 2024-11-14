@@ -5,7 +5,7 @@ const config = {
     user: 'sa',
     password: 'B!sm!ll@h',
     server: '10.55.255.11',
-    database: 'dplk07_query',
+    database: 'dplk_ppukp',
     port: 1433,
     options: {
         encrypt: false

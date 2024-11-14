@@ -75,7 +75,7 @@ router.post(
 
         const mailData = {
             from: 'no-reply@dplksyariahmuamalat.co.id',
-            to: 'indra.rizky@bankmuamalat.co.id',
+            to: 'dplk@bankmuamalat.co.id',
             subject: sanitizedSubject,
             html: `
                 <p><i>Assalaamu'alaikum Warrahmatullahi Wabarakatuh,</i></p>
@@ -489,7 +489,7 @@ router.post(
         try {
             const mailData = {
                 from: 'no-reply@dplksyariahmuamalat.co.id',
-                to: 'indra.rizky@bankmuamalat.co.id',
+                to: 'dplk@bankmuamalat.co.id',
                 subject: 'Pendaftaran Peserta Korporat DPLK Syariah Muamalat',
                 html: `
                   <p><i>Assalaamu'alaikum Warrahmatullahi Wabarakatuh,</i></p>

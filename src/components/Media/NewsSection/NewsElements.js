@@ -47,12 +47,11 @@ export const NewsCardWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: start;
-  grid-gap: auto;
+  grid-gap: 20px;
   width: auto;
 
   @media screen and (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
-    margin-bottom: 60px;
   }
 
   @media screen and (max-width: 820px) {

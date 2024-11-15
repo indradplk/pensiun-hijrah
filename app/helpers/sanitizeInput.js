@@ -5,7 +5,7 @@
  */
 const sanitizeInput = (input) => {
   // Regex to match single quote ('), double quote ("), greater than (>), less than (<), and backtick (`)
-  const forbiddenCharacters = /['"<>`]/;
+  const forbiddenCharacters = /['<>`]/;
   return forbiddenCharacters.test(input);
 };
 

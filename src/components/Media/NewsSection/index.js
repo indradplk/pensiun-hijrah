@@ -39,6 +39,8 @@ const NewsSection = () => {
           createdAt: format(new Date(item.createdAt), 'dd MMM yyyy', { locale: id }),
         }));
 
+        formattedData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
         setNewsData(formattedData);
       })
       .catch((error) => {

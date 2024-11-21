@@ -44,8 +44,14 @@ app.use(compression());
 app.use(
   morgan(':method :url :status :res[content-length] - :response-time ms')
 );
-app.use(cors());
-app.options('*', cors());
+app.use(cors({
+  origin: process.env.API_BASE_URL,
+  credentials: true,
+}));
+app.options('*', cors({
+  origin: process.env.API_BASE_URL,
+  credentials: true,
+}));
 
 app.use('/', Auth);
 app.use('/user', User);

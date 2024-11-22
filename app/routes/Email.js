@@ -16,6 +16,7 @@ const { verifyRole } = require('../helpers/roleVerification');
 const transporter = nodemailer.createTransport({
     host: "m014.dapurhosting.com",
     port: 465,
+    secure: true,
     auth: {
       user: 'no-reply@dplksyariahmuamalat.co.id',
       pass: 'Bismillah123!'
@@ -37,91 +38,82 @@ router.post(
         body('text').notEmpty().withMessage('Description is required'),
         body('no_telp').notEmpty().withMessage('Phone number is required'),
     ],
-    (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: errors.array(),
-            });
-        }
-
-        const { name, subject, email, no_telp, text } = req.body;
-
-        const validSubject = ['Tanya DPLK - Pertanyaan Umum', 'Tanya DPLK - Informasi Produk', 'Tanya DPLK - Kendala Teknis di Website', 'Tanya DPLK - Transaksi', 'Tanya DPLK - MDIN'];
-
-        if (!validSubject.includes(subject)) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Invalid subject!',
-            });
-        }
-
-        if (sanitizeInput(name) || sanitizeInput(subject) || sanitizeInput(email) || sanitizeInput(no_telp) || sanitizeInput(text)) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Input contains invalid characters!',
-            });
-        }
-
-        const sanitizedName = encode(name);
-        const sanitizedSubject = encode(subject);
-        const sanitizedEmail = encode(email);
-        const sanitizedNoTelp = encode(no_telp);
-        const sanitizedText = encode(text);
-
-        const mailData = {
-            from: 'no-reply@dplksyariahmuamalat.co.id',
-            to: 'dplk@bankmuamalat.co.id',
-            subject: sanitizedSubject,
-            html: `
-                <p><i>Assalaamu'alaikum Warrahmatullahi Wabarakatuh,</i></p>
-                <p>Segala puji hanya milik Allah SWT, sholawat dan salam semoga tercurah kepada Nabi Muhammad SAW, semoga kita semua senantiasa diberi rahmat dan hidayah-Nya dalam menjalankan aktivitas sehari-hari, Aamiin.</p>
-                <p>Dear, DPLK Syariah Muamalat</p>
-                <p>Berikut adalah pesan yang masuk melalui fitur Tanya DPLK di website:</p>
-                <p style="margin : 0; padding-top:0;">Nama: ${sanitizedName}</p>
-                <p style="margin : 0; padding-top:0;">Email: ${sanitizedEmail}</p>
-                <p style="margin : 0; padding-top:0;">Nomor Telepon/HP: ${sanitizedNoTelp}</p>
-                <p style="margin : 0; padding-top:0;">Pesan: ${sanitizedText}</p>
-                <p>Atas perhatian dan kerjasamanya, terima kasih.</p>
-                <p><i>Wassalamu'alaikum Warrahmatullahi Wabarakatuh</i></p>
-            `,
-        };
-
-        transporter.sendMail(mailData, (error, info) => {
-            if (error) {
+    async (req, res) => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
                 return response(res, {
-                    code: 500,
+                    code: 400,
                     success: false,
-                    message: error.message || 'Something went wrong!',
-                    content: error.toString(),
+                    message: errors.array(),
                 });
             }
+
+            const { name, subject, email, no_telp, text } = req.body;
+
+            const validSubject = ['Tanya DPLK - Pertanyaan Umum', 'Tanya DPLK - Informasi Produk', 'Tanya DPLK - Kendala Teknis di Website', 'Tanya DPLK - Transaksi', 'Tanya DPLK - MDIN'];
+
+            if (!validSubject.includes(subject)) {
+                return response(res, {
+                    code: 400,
+                    success: false,
+                    message: 'Invalid subject!',
+                });
+            }
+
+            if (sanitizeInput(name) || sanitizeInput(subject) || sanitizeInput(email) || sanitizeInput(no_telp) || sanitizeInput(text)) {
+                return response(res, {
+                    code: 400,
+                    success: false,
+                    message: 'Input contains invalid characters!',
+                });
+            }
+
+            const sanitizedName = encode(name);
+            const sanitizedSubject = encode(subject);
+            const sanitizedEmail = encode(email);
+            const sanitizedNoTelp = encode(no_telp);
+            const sanitizedText = encode(text);
+
+            const mailData = {
+                from: 'no-reply@dplksyariahmuamalat.co.id',
+                to: 'dplk@bankmuamalat.co.id',
+                subject: sanitizedSubject,
+                html: `
+                    <p><i>Assalaamu'alaikum Warrahmatullahi Wabarakatuh,</i></p>
+                    <p>Segala puji hanya milik Allah SWT, sholawat dan salam semoga tercurah kepada Nabi Muhammad SAW, semoga kita semua senantiasa diberi rahmat dan hidayah-Nya dalam menjalankan aktivitas sehari-hari, Aamiin.</p>
+                    <p>Dear, DPLK Syariah Muamalat</p>
+                    <p>Berikut adalah pesan yang masuk melalui fitur Tanya DPLK di website:</p>
+                    <p style="margin : 0; padding-top:0;">Nama: ${sanitizedName}</p>
+                    <p style="margin : 0; padding-top:0;">Email: ${sanitizedEmail}</p>
+                    <p style="margin : 0; padding-top:0;">Nomor Telepon/HP: ${sanitizedNoTelp}</p>
+                    <p style="margin : 0; padding-top:0;">Pesan: ${sanitizedText}</p>
+                    <p>Atas perhatian dan kerjasamanya, terima kasih.</p>
+                    <p><i>Wassalamu'alaikum Warrahmatullahi Wabarakatuh</i></p>
+                `,
+            };
+
+            const info = await transporter.sendMail(mailData);
             
             const tanyaDPLK = new TanyaDPLK({
                 name: sanitizedName, subject: sanitizedSubject, email: sanitizedEmail, no_telp: sanitizedNoTelp, text: sanitizedText
             });
 
-            tanyaDPLK.save()
-                .then(() => {
-                    return response(res, {
-                        code: 200,
-                        success: true,
-                        message: 'Message send successfully!',
-                    });
-                })
-                .catch((error) => {
-                    return response(res, {
-                        code: 500,
-                        success: false,
-                        message: error.message || 'Something went wrong!',
-                        content: error,
-                    });
-                });
-        });
+            await tanyaDPLK.save();
+
+            return response(res, {
+                code: 200,
+                success: true,
+                message: 'Message sent successfully!',
+            });
+        } catch (error) {
+            return response(res, {
+                code: 500,
+                success: false,
+                message: error.message || 'Something went wrong!',
+                content: error.toString(),
+            });
+        }
     }
 );
 

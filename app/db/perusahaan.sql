@@ -8,7 +8,7 @@ INSERT INTO `user` (`username`, `perusahaanEmail`, `password`, `role`, `createdA
 ('00099008800', 'sulaiman.amcf@gmail.com', '$2y$10$HTHo3zsInzXlsaAKGdGN2uk..OlvnfiRsk16OISaQnlipT7RjFwg6', 'perusahaan', NOW(), NOW()),
 ('00099011049', 'suhera@nittoh.co.id', '$2y$10$HTHo3zsInzXlsaAKGdGN2uk..OlvnfiRsk16OISaQnlipT7RjFwg6', 'perusahaan', NOW(), NOW()),
 ('00099012048', 'sitifinance@mpp.co.id', '$2y$10$BaG9WfxmS7F4TDcs0M5GceoxsYQrLDgNNeDi7RpdW5.xQZj.oz6yW', 'perusahaan', NOW(), NOW()),
-('00099012115', 'mstdinar7@gmail.com', '$2y$10$oGhEMk/VD5xi1SeSBrionuKRq78OZ1/58m4sL85RjSbcsDPwf2SWu', 'perusahaan', NOW(), NOW()),
+('00099012115', 'mstdinar7@gmail.com', '$2y$10$QmBfAcppSWnB3ysh0JC.5OMqvz8aiC8Xgd5/DdIy1Qm5n.wMTmwoG', 'perusahaan', NOW(), NOW()),
 ('00099012369', 'sekretariat@mitradhuafa.com', '$2y$10$5ciuQcGHFJNppAmQ7gLG.eTGDeVedj40xrnqqLyTuoOiIryR7j3fq', 'perusahaan', NOW(), NOW()),
 ('00099013477', 'bprsbaspwt@yahoo.co.id', '$2y$10$3yJXg..xjV1TH1wFwWwHbuwZLytwYY9CI/ZsmIVyB5k5jKx7AC0HW', 'perusahaan', NOW(), NOW()),
 ('00099013585', 'artaleksana@gmail.com', '$2y$10$Ysy6gLrZ47oQv4VNUrMSm.O3zpX1lhbsCrH5qV8cFlOP7FovWN1Q2', 'perusahaan', NOW(), NOW()),
@@ -35,4 +35,5 @@ INSERT INTO `user` (`username`, `perusahaanEmail`, `password`, `role`, `createdA
 ('00099027407', 'rio@bpkh.go.id', '$2y$10$YODAdQIAyvw3CYY53xVl6uxEZN8ZGU4sgrzWOdQqO4uq4C7Hqo9hG', 'perusahaan', NOW(), NOW()),
 ('00099027698', '', '$2y$10$YODAdQIAyvw3CYY53xVl6uxEZN8ZGU4sgrzWOdQqO4uq4C7Hqo9hG', 'perusahaan', NOW(), NOW()),
 ('00099027699', '', '$2y$10$YODAdQIAyvw3CYY53xVl6uxEZN8ZGU4sgrzWOdQqO4uq4C7Hqo9hG', 'perusahaan', NOW(), NOW()),
-('00099028522', '', '$2y$10$YODAdQIAyvw3CYY53xVl6uxEZN8ZGU4sgrzWOdQqO4uq4C7Hqo9hG', 'perusahaan', NOW(), NOW());
+('00099028522', '', '$2y$10$YODAdQIAyvw3CYY53xVl6uxEZN8ZGU4sgrzWOdQqO4uq4C7Hqo9hG', 'perusahaan', NOW(), NOW()),
+('00099028674', '', '$2y$10$YODAdQIAyvw3CYY53xVl6uxEZN8ZGU4sgrzWOdQqO4uq4C7Hqo9hG', 'perusahaan', NOW(), NOW());

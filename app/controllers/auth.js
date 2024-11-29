@@ -69,7 +69,7 @@ exports.login = async (req, res) => {
 
     // store the token in user browser cookie
     res.cookie('token', token, { 
-      httpOnly: true, 
+      httpOnly: false, 
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
       path: '/' 
@@ -142,7 +142,7 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    res.clearCookie('token', { httpOnly: true, secure: true });
+    res.clearCookie('token', { httpOnly: false, secure: true });
 
     return response(res, {
       code: 200,

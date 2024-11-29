@@ -102,6 +102,7 @@ const Navbar = ({ toggle }) => {
                   <NavLinks to="/media/keuangan/" onClick={toggleHome}>Laporan Keuangan</NavLinks>
                   <NavLinks to="/media/dewan-pengawas/" onClick={toggleHome}>Laporan Dewan Pengawas</NavLinks>
                   <NavLinks to="/media/berita/" onClick={toggleHome}>Berita</NavLinks>
+                  <NavLinks to="/media/pengumuman/" onClick={toggleHome}>Pengumuman</NavLinks>
                   <NavLinks to="/media/video/" onClick={toggleHome}>Video</NavLinks>
                 </NavDropdown>
               </NavItems>

@@ -128,6 +128,9 @@ const Sidebar = ({ isOpen, toggle, userData }) => {
               <SidebarLink to="/admin/media/berita/" onClick={toggleHome}>
                 Berita
               </SidebarLink>
+              <SidebarLink to="/admin/media/pengumuman/" onClick={toggleHome}>
+                Pengumuman
+              </SidebarLink>
               <SidebarLink to="/admin/media/video/" onClick={toggleHome}>
                 Video
               </SidebarLink>

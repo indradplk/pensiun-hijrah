@@ -32,6 +32,7 @@ import Management from './pages/about/manajemen';
 import Lokasi from './pages/about/kantor';
 import Award from './pages/about/award';
 import News from './pages/media/berita';
+import Announcement from './pages/media/pengumuman';
 import Video from './pages/media/video';
 import Investasi from './pages/media/investasi';
 import Keuangan from './pages/media/keuangan';
@@ -55,6 +56,7 @@ import ManagementAdmin from './pages/admin/about/manajemen';
 import AwardAdmin from './pages/admin/about/penghargaan';
 import SliderAdmin from './pages/admin/media/slider';
 import BeritaAdmin from './pages/admin/media/berita';
+import PengumumanAdmin from './pages/admin/media/pengumuman';
 import VideoAdmin from './pages/admin/media/video';
 import ReportAdmin from './pages/admin/dokumen/report';
 import BantuanAdmin from './pages/admin/dokumen/bantuan';
@@ -109,6 +111,8 @@ function App() {
         <Route path="/about/penghargaan/" component={Award} exact />
         <Route path="/media/berita/" component={() => <News isSingleItem={false} />} exact />
         <Route path="/media/berita/:seo" component={() => <News isSingleItem={true} />} exact />
+        <Route path="/media/pengumuman/" component={() => <Announcement isSingleItem={false} />} exact />
+        <Route path="/media/pengumuman/:seo" component={() => <Announcement isSingleItem={true} />} exact />
         <Route path="/media/video/" component={Video} exact />
         <Route path="/media/investasi/" component={Investasi} exact />
         <Route path="/media/keuangan/" component={Keuangan} exact />
@@ -132,6 +136,7 @@ function App() {
         <Route path="/admin/about/penghargaan/" component={AwardAdmin} exact />
         <Route path="/admin/media/slider/" component={SliderAdmin} exact />
         <Route path="/admin/media/berita/" component={BeritaAdmin} exact />
+        <Route path="/admin/media/pengumuman/" component={PengumumanAdmin} exact />
         <Route path="/admin/media/video/" component={VideoAdmin} exact />
         <Route path="/admin/dokumen/report/" component={ReportAdmin} exact />
         <Route path="/admin/dokumen/bantuan/" component={BantuanAdmin} exact />

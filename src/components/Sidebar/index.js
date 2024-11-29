@@ -85,6 +85,9 @@ const Sidebar = ({ isOpen, toggle }) => {
             <SidebarLink to="/media/berita/" onClick={toggleHome}>
               Berita
             </SidebarLink>
+            <SidebarLink to="/media/pengumuman/" onClick={toggleHome}>
+              Pengumuman
+            </SidebarLink>
             <SidebarLink to="/media/video/" onClick={toggleHome}>
               Video
             </SidebarLink>

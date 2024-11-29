@@ -22,6 +22,9 @@ export const AwardHeader = {
 export const NewsHeader = {
     headline: 'Berita dan Artikel',
 };
+export const AnnouncementHeader = {
+    headline: 'Pengumuman',
+};
 export const VideoHeader = {
     headline: 'Video',
 };

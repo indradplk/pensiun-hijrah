@@ -128,6 +128,7 @@ const Navbar = ({ toggle, userData }) => {
                 <NavItems>
                   <NavDropdown title="Media">
                     <NavLinks to="/admin/media/berita/" onClick={toggleHome}>Berita</NavLinks>
+                    <NavLinks to="/admin/media/pengumuman/" onClick={toggleHome}>Pengumuman</NavLinks>
                     <NavLinks to="/admin/media/video/" onClick={toggleHome}>Video</NavLinks>
                     <NavLinks to="/admin/media/slider/" onClick={toggleHome}>Slider</NavLinks>
                   </NavDropdown>

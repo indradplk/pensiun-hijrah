@@ -31,7 +31,6 @@ import {
   MessageH2,
 } from './MessageElements';
 import SuccessModal from '../Modal/Sukses';
-import { dataServer } from '../../DataServer';
 
 const Registrasi = () => {
   const [formData, setFormData] = useState({
@@ -54,12 +53,12 @@ const Registrasi = () => {
       [name]: value,
     }));
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${dataServer.href}:4000/api/v1/mail/registrasi-perusahaan`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/mail/registrasi-perusahaan`, {
         nama: formData.nama,
         pic: formData.pic,
         jabatan: formData.jabatan,

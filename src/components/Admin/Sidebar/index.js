@@ -40,7 +40,7 @@ const Sidebar = ({ isOpen, toggle, userData }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      })
+      }, { withCredentials: true })
       .then((response) => {
         setUser(response.data.content);
       })

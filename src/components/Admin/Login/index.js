@@ -52,7 +52,8 @@ const SignInAdmin = () => {
         username,
         password,
         role: 'admin'
-      });
+      },
+      { withCredentials: true });
 
       const { content } = response.data;
 

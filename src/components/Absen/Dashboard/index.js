@@ -65,20 +65,21 @@ const Dashboard = ({
   };
 
   const checkAttendance = async () => {
-    axios
-      .get(process.env.REACT_APP_API_BASE_URL + `/absen/${userData.username}`, {
+    setLoading(true);
+    try {
+      const response = await axios.get(process.env.REACT_APP_API_BASE_URL + `/absen/${userData.username}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      })
-      .then((response) => {
-        setHasClockedIn(response.data.content.hasClockedIn);
-        setHasClockedOut(response.data.content.hasClockedOut);
-      })
-      .catch((error) => {
-        console.error(error);
       });
+      setHasClockedIn(response.data.content.hasClockedIn);
+      setHasClockedOut(response.data.content.hasClockedOut);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClockIn = async (e) => {

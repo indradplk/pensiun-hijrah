@@ -68,7 +68,12 @@ exports.login = async (req, res) => {
     );
 
     // store the token in user browser cookie
-    res.cookie('token', token, { httpOnly: true, secure: true });
+    res.cookie('token', token, { 
+      httpOnly: true, 
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+      path: '/' 
+    });
     
     switch (user.role) {
       case 'admin':

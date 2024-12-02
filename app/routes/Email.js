@@ -4,6 +4,7 @@ const router = Router();
 const nodemailer = require('nodemailer');
 const TanyaDPLK = require('../models/TanyaDPLK');
 const User = require('../models/User');
+const RegistrasiPeserta = require('../models/RegistrasiPeserta');
 const RegistrasiPerusahaan = require('../models/RegistrasiPerusahaan');
 const ActivityAdmin = require('../models/ActivityAdmin');
 const { sanitizeInput } = require('../helpers/sanitizeInput');

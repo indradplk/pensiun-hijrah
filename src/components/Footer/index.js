@@ -43,9 +43,9 @@ const Footer = () => {
             </FooterLinkItems>
             <FooterLinkItems>
               <FooterLinkTitle><b>Produk</b></FooterLinkTitle>
-              <FooterLink to="/product/individu/" onClick={toggleHome}>Pensiun Hijrah</FooterLink>
-              <FooterLink to="/product/perusahaan/" onClick={toggleHome}>Pensiun Hijrah Pasca Kerja</FooterLink>
-              <FooterLink to="/product/eksekutif/" onClick={toggleHome}>Pensiun Hijrah Eksekutif</FooterLink>
+              <FooterLink to="/product/pensiun-hijrah/" onClick={toggleHome}>Pensiun Hijrah</FooterLink>
+              <FooterLink to="/product/pensiun-hijrah-pasca-kerja/" onClick={toggleHome}>Pensiun Hijrah Pasca Kerja</FooterLink>
+              <FooterLink to="/product/pensiun-hijrah-eksekutif/" onClick={toggleHome}>Pensiun Hijrah Eksekutif</FooterLink>
               <FooterLink to="/product/zakat-dana-pensiun/" onClick={toggleHome}>Zakat Dana Pensiun</FooterLink>
             </FooterLinkItems>
           </FooterLinkWrapper>

@@ -26,7 +26,6 @@ import {
   FormH2Error,
   ResultDiv
 } from './SimulasiElements';
-import { dataServer } from '../../DataServer';
 
 const SimulasiSection = () => {
   const [formData, setFormData] = useState({
@@ -82,8 +81,8 @@ const SimulasiSection = () => {
     if (!formData.usia_pensiun || formData.usia_pensiun < 55 || formData.usia_pensiun > 70) {
       newErrors.usia_pensiun = 'Usia pensiun harus antara 55 dan 70 tahun.';
     }
-    if (!formData.iuran || formData.iuran < 100000) {
-      newErrors.iuran = 'Iuran per bulan minimum sebesar Rp 100.000.';
+    if (!formData.iuran || formData.iuran < 0) {
+      newErrors.iuran = 'Iuran per bulan tidak boleh kurang dari Rp 0.';
     }
     return newErrors;
   };

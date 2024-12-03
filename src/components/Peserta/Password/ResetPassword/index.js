@@ -79,7 +79,7 @@ const ResetPasswordPeserta = ({ userData }) => {
     }, 3000);
 
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         process.env.REACT_APP_API_BASE_URL + `/peserta/${userData.username}`,
         {
           email: email,

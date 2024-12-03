@@ -105,7 +105,7 @@ function App() {
         <Route path="/perusahaan/lupa-password/" component={PasswordPerusahaanPage} exact />
         <Route path="/perusahaan/registrasi/" component={RegistrasiPPUKP} exact />
 
-        <Route path="/about/pensiun-hijrah/" component={About} exact />
+        <Route path="/about/dplk/" component={About} exact />
         <Route path="/about/manajemen/" component={Management} exact />
         <Route path="/about/lokasi/" component={Lokasi} exact />
         <Route path="/about/penghargaan/" component={Award} exact />

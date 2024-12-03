@@ -58,7 +58,7 @@ const Navbar = ({ toggle }) => {
             <NavMenu>
               <NavItems>
                 <NavDropdown title="Tentang Kami">
-                  <NavLinks to="/about/pensiun-hijrah/" onClick={toggleHome}>Tentang Pensiun Hijrah</NavLinks>
+                  <NavLinks to="/about/dplk/" onClick={toggleHome}>Tentang DPLK</NavLinks>
                   <NavLinks to="/about/manajemen/" onClick={toggleHome}>Manajemen</NavLinks>
                   <NavLinks to="/about/lokasi/" onClick={toggleHome}>Lokasi Kantor</NavLinks>
                   <NavLinks to="/about/penghargaan/" onClick={toggleHome}>Penghargaan</NavLinks>

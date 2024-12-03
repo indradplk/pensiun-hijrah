@@ -14,7 +14,7 @@ import {
 const Benefit = () => {
   return (
     <BenefitContainer id="services">
-      <BenefitH1><b>Kelebihan Pensiun Hijrah</b></BenefitH1>
+      <BenefitH1><b>Kelebihan DPLK Syariah Muamalat</b></BenefitH1>
       <BenefitWrapper>
         <BenefitCard>
           <BenefitIcon src={Image1} />

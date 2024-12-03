@@ -36,7 +36,7 @@ const Footer = () => {
           <FooterLinkWrapper>
             <FooterLinkItems>
               <FooterLinkTitle><b>Tentang Kami</b></FooterLinkTitle>
-              <FooterLink to="/about/pensiun-hijrah/" onClick={toggleHome}>Tentang Pensiun Hijrah</FooterLink>
+              <FooterLink to="/about/dplk/" onClick={toggleHome}>Tentang DPLK</FooterLink>
               <FooterLink to="/about/manajemen/" onClick={toggleHome}>Manajemen</FooterLink>
               <FooterLink to="/about/lokasi/" onClick={toggleHome}>Lokasi Pensiun Hijrah</FooterLink>
               <FooterLink to="/about/penghargaan/" onClick={toggleHome}>Penghargaan</FooterLink>

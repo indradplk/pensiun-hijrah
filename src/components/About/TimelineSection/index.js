@@ -28,7 +28,7 @@ const TimelineSection = () => {
     <>
       <TimelineContainer>
         <TimelineWrapper>
-          <Heading>Perjalanan Pensiun Hijrah</Heading>
+          <Heading>Perjalanan DPLK Syariah Muamalat</Heading>
           <TimelineRow>
             <VerticalTimeline
               lineColor= '#61298A'

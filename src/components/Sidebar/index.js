@@ -26,8 +26,8 @@ const Sidebar = ({ isOpen, toggle }) => {
         <SidebarMenu>
           <Heading><b>Tentang Kami</b></Heading>
           <SidebarSubMenu>
-            <SidebarLink to="/about/pensiun-hijrah/" onClick={toggleHome}>
-              Tentang Pensiun Hijrah
+            <SidebarLink to="/about/dplk/" onClick={toggleHome}>
+              Tentang DPLK
             </SidebarLink>
             <SidebarLink to="/about/manajemen/" onClick={toggleHome}>
               Manajemen

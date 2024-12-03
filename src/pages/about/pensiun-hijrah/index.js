@@ -19,7 +19,7 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>Tentang Pensiun Hijrah | DPLK Syariah Muamalat</title>
+        <title>Tentang DPLK | DPLK Syariah Muamalat</title>
       </Helmet>
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />

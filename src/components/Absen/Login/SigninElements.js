@@ -44,12 +44,12 @@ export const Form = styled.form`
   width: 100%;
   display: grid;
   margin: 0 auto;
-  padding: 60px 32px;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  padding: 60px 48px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
   @media screen and (max-width: 480px) {
-    padding: 32px 18px;
+    padding: 32px 16px;
   }
 `;
 export const FormH1 = styled.h1`

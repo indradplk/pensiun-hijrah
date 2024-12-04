@@ -134,7 +134,7 @@ const SimulasiSection = () => {
         pengembangan_sebelum_fee = totalDana * monthlyRate;
         pengembangan_setelah_fee = totalDana * monthlyRate;
         const managementFeeRate = totalDana >= 100000000 ? managementFeeRate1 : managementFeeRate2;
-        pengembangan_setelah_fee -= managementFeeRate; // Potongan biaya pengelolaan bulanan
+        pengembangan_setelah_fee = pengembangan_setelah_fee - (pengembangan_setelah_fee * managementFeeRate); // Potongan biaya pengelolaan bulanan
         pengembangan_setelah_fee -= adminFee; // Potongan biaya administrasi bulanan
         hasilPengembangan += pengembangan_setelah_fee;
         hasilPengembanganSebelumFee += pengembangan_sebelum_fee;
@@ -239,8 +239,9 @@ const SimulasiSection = () => {
                 <FormDiv>
                   <FormLabel htmlFor="paket_investasi">Paket Investasi</FormLabel>
                   <FormSelect id="paket_investasi" name="paket_investasi" value={formData.paket_investasi} onChange={handleChange}>
+                    <FormOption value="">Pilih Paket Investasi</FormOption>
                     {paketInvestasi.map((paket) => (
-                      <FormOption key={paket.id} value={paket.code}>{paket.name} ({paket.code}%)</FormOption>
+                      <FormOption key={paket.id} value={paket.code}>{paket.name} ({paket.code}%)*</FormOption>
                     ))}
                   </FormSelect>
                   <FormH2><i>Tiap paket memiliki tingkat investasi yang berbeda. Tingkat investasi dapat berubah sewaktu-waktu.</i></FormH2>

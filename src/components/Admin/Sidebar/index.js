@@ -88,9 +88,9 @@ const Sidebar = ({ isOpen, toggle, userData }) => {
             <SidebarLink to="/admin/perusahaan/reset-password/" onClick={toggleHome}>
               Reset Password Perusahaan
             </SidebarLink>
-            {/* <SidebarLink to="/admin/peserta/block/" onClick={toggleHome}>
-              Buka Blokir Peserta
-            </SidebarLink> */}
+            <SidebarLink to="/admin/peserta/pengkinian-data/" onClick={toggleHome}>
+              Pengkinian Data Peserta
+            </SidebarLink>
             {/* <SidebarLink to="/admin/perusahaan/block/" onClick={toggleHome}>
               Buka Blokir Perusahaan
             </SidebarLink> */}

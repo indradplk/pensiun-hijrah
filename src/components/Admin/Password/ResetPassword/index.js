@@ -61,7 +61,7 @@ const ResetPasswordAdmin = ({ userData }) => {
     }, 3000);
 
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         process.env.REACT_APP_API_BASE_URL + `/admin/${userData.username}`,
         {
           name: nama,

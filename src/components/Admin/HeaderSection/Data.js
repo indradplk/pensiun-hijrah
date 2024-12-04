@@ -40,6 +40,9 @@ export const BantuanHeader = {
 export const RegistrasiHeader = {
     headline: 'Registrasi Peserta',
 };
+export const PengkinianDataHeader = {
+    headline: 'Pengkinian Data Peserta',
+};
 export const RegisPerusahaanHeader = {
     headline: 'Registrasi Perusahaan',
 };

@@ -130,6 +130,60 @@ exports.getPengkinianData = async (req, res) => {
   }
 };
 
+exports.getPengkinianDataPeserta = async (req, res) => {
+  try {
+    const { status } = req.query;
+    const role = req.user.role;
+    
+    if (role !== 'admin') { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
+    
+    let query = `
+        SELECT * FROM pengkinian_data
+        WHERE no_peserta = ?
+    `;
+
+    if (status === 'false') {
+      query += `AND flag = 'F'`;
+    } else if (status === 'true') {
+      query += `AND flag = 'T'`;
+    }    
+
+    const pool = await connectToDatabaseMDPLK();
+    const [result] = await pool.execute(query);
+
+    if (result.length > 0) {
+      return response(res, {
+        code: 200,
+        success: true,
+        message: `Successfully retrieved latest data!`,
+        content: result,
+      });
+    } else {
+        throw new NotFoundError(`Latest data not found!`);
+    }
+  } catch (error) {
+    if (error.name === 'NotFoundError') {
+      return response(res, {
+        code: 404,
+        success: false,
+        message: error.message,
+      });
+    }
+  
+    return response(res, {
+      code: 500,
+      success: false,
+      message: error.message || 'Something went wrong!',
+    });
+  }
+};
+
 exports.getPaketInvestasi = async (req, res) => {
   try {
     const { status } = req.query;

@@ -108,7 +108,7 @@ const Navbar = ({ toggle, userData }) => {
                 <NavDropdown title="Peserta">
                   <NavLinks to="/admin/peserta/reset-password/" onClick={toggleHome}>Reset Password Peserta</NavLinks>
                   <NavLinks to="/admin/perusahaan/reset-password/" onClick={toggleHome}>Reset Password Perusahaan</NavLinks>
-                  {/* <NavLinks to="/admin/peserta/block/" onClick={toggleHome}>Buka Blokir Peserta</NavLinks> */}
+                  <NavLinks to="/admin/peserta/pengkinian-data/" onClick={toggleHome}>Pengkinian Data Peserta</NavLinks>
                   {/* <NavLinks to="/admin/perusahaan/block/" onClick={toggleHome}>Buka Blokir Perusahaan</NavLinks> */}
                   <NavLinks to="/admin/peserta/registrasi/" onClick={toggleHome}>Registrasi Peserta</NavLinks>
                   <NavLinks to="/admin/perusahaan/registrasi/" onClick={toggleHome}>Registrasi Perusahaan</NavLinks>

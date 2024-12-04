@@ -63,6 +63,7 @@ import BantuanAdmin from './pages/admin/dokumen/bantuan';
 import BlockPeserta from './pages/admin/peserta/block';
 import TanyaDPLKAdmin from './pages/admin/tanya-dplk';
 import RegistrasiPesertaAdmin from './pages/admin/peserta/registrasi';
+import PengkinianPesertaAdmin from './pages/admin/peserta/pengkinian-data';
 import PaketInvestasiAdmin from './pages/admin/peserta/paket-investasi';
 import ParameterPaketAdmin from './pages/admin/parameter/investasi';
 import BlockPerusahaan from './pages/admin/perusahaan/block';
@@ -74,6 +75,8 @@ import AdminResetPassword from './pages/admin/user/reset-password';
 import SignInPageAbsen from './pages/absen';
 import DashboardAbsen from './pages/absen/dashboard';
 import VisitAbsen from './pages/absen/visit';
+
+import NotFound from './pages/not-found';
 
 function App() {
   return (
@@ -144,6 +147,8 @@ function App() {
         <Route path="/admin/peserta/paket-investasi/" component={PaketInvestasiAdmin} exact />
         <Route path="/admin/peserta/registrasi/" component={() => <RegistrasiPesertaAdmin isSingleItem={false} />} exact />
         <Route path="/admin/peserta/registrasi/:id" component={() => <RegistrasiPesertaAdmin isSingleItem={true} />} exact />
+        <Route path="/admin/peserta/pengkinian-data/" component={() => <PengkinianPesertaAdmin isSingleItem={false} />} exact />
+        <Route path="/admin/peserta/pengkinian-data/:id" component={() => <PengkinianPesertaAdmin isSingleItem={true} />} exact />
         <Route path="/admin/perusahaan/reset-password/" component={BlockPerusahaan} exact />
         {/* <Route path="/admin/perusahaan/block/" component={BlockPerusahaan} exact /> */}
         <Route path="/admin/perusahaan/registrasi/" component={RegisPerusahaan} exact />
@@ -156,6 +161,9 @@ function App() {
         <Route path="/absen" component={SignInPageAbsen} exact />
         <Route path="/absen/dashboard" component={DashboardAbsen} exact />
         <Route path="/absen/visit" component={VisitAbsen} exact />
+
+        {/* Not found page */}
+        <Route path="*" component={NotFound} />
       </Switch>
     </Router>
   );

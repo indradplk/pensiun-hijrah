@@ -145,14 +145,15 @@ exports.getPengkinianDataPeserta = async (req, res) => {
     
     let query = `
         SELECT * FROM pengkinian_data
-        WHERE no_peserta = ?
     `;
 
     if (status === 'false') {
-      query += `AND flag = 'F'`;
+      query += `WHERE flag = 'F'`;
     } else if (status === 'true') {
-      query += `AND flag = 'T'`;
+      query += `WHERE flag = 'T'`;
     }    
+
+    query += `ORDER BY dateadd DESC LIMIT 20`;
 
     const pool = await connectToDatabaseMDPLK();
     const [result] = await pool.execute(query);
@@ -184,6 +185,68 @@ exports.getPengkinianDataPeserta = async (req, res) => {
   }
 };
 
+exports.getPengkinianDataPesertaById = async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const role = req.user.role;
+   
+    // Validasi role
+    if (role !== 'admin') {
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'Access denied!',
+      });
+    }
+
+    // Validasi ID sebagai angka
+    if (isNaN(id)) {
+      return response(res, {
+        code: 400,
+        success: false,
+        message: 'Invalid ID format!',
+      });
+    }
+
+    // Query untuk mendapatkan data
+    const query = `
+        SELECT *
+        FROM pengkinian_data
+        WHERE id_pengkinian = ?
+    `;
+
+    const pool = await connectToDatabaseMDPLK();
+    const [result] = await pool.execute(query, [id]);
+
+    if (result.length > 0) {
+      const data = result[0];
+
+      return response(res, {
+        code: 200,
+        success: true,
+        message: `Successfully retrieved data for ID: ${id}`,
+        content: data,
+      });
+    } else {
+      throw new NotFoundError(`Data with ID: ${id} not found!`);
+    }
+  } catch (error) {
+    if (error.name === 'NotFoundError') {
+      return response(res, {
+        code: 404,
+        success: false,
+        message: error.message,
+      });
+    }
+    
+    return response(res, {
+      code: 500,
+      success: false,
+      message: error.message || 'Something went wrong!',
+    });
+  }
+};
+
 exports.getPaketInvestasi = async (req, res) => {
   try {
     const { status } = req.query;
@@ -206,6 +269,8 @@ exports.getPaketInvestasi = async (req, res) => {
     } else if (status === 'true') {
       query += `AND flag = 'T'`;
     }    
+
+    query += `ORDER BY dateadd DESC`;
 
     const pool = await connectToDatabaseMDPLK();
     const [result] = await pool.execute(query);
@@ -358,6 +423,14 @@ exports.pengkinianData = async (req, res) => {
         });
     }
 
+    if (!tgl_lahir || tgl_lahir === '00-00-0000' || tgl_lahir === '0000-00-00') {
+        return response(res, {
+        code: 400,
+        success: false,
+        message: 'Tanggal lahir wajib diisi!',
+        });
+    }
+
     // Sanitize inputs
     const inputs = [
       nama, tgl_lahir, tmp_lahir, noktp, npwp, jenis_kelamin, ibu_kandung, hp, alamat_jalan, 
@@ -389,6 +462,7 @@ exports.pengkinianData = async (req, res) => {
 
     const file = req.file;
     let content = '';
+    const gambar_ktp = `${file.filename}`;
 
     if (file) {
         const fileType = file.mimetype.split('/')[1];
@@ -411,8 +485,8 @@ exports.pengkinianData = async (req, res) => {
             userid, no_peserta, nama_lengkap, tanggal_lahir, tempat_lahir, no_identitas_diri, npwp, jenis_kelamin, ibu_kandung, nohp, 
             alamat_jalan, alamat_rtrw, alamat_kelurahan, alamat_kecamatan, alamat_kota, alamat_propinsi, alamat_kode_pos, email, 
             pekerjaan, pemilikan, nama_perusahaan, bidang_pekerjaan, penghasilan_tetap, penghasilan_tidak_tetap, flag, dateadd, 
-            useradd, dateupd, document
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'F', NOW(), ?, NOW(), ?)
+            useradd, dateupd, document, nama_dokumen
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'F', NOW(), ?, NOW(), ?, ?)
     `;
 
     const values = [
@@ -420,7 +494,8 @@ exports.pengkinianData = async (req, res) => {
       no_peserta,
       ...sanitizedValues,
       no_peserta,
-      content
+      content,
+      gambar_ktp
     ];
 
     const pool = await connectToDatabaseMDPLK();

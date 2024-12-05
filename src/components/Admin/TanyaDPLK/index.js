@@ -16,6 +16,8 @@ import {
 import ApproveForm from './Form/Approved';
 
 const TanyaDPLK = ({userData}) => {
+  const cookies = new Cookies();
+  const token = cookies.get('token');
   const [dataUser, setUser] = useState({});
   const [state, setState] = useState({
     data: [],
@@ -68,7 +70,12 @@ const TanyaDPLK = ({userData}) => {
 
   const fetchData = () => {
     axios
-      .get(process.env.REACT_APP_API_BASE_URL + '/tanya-dplk')
+      .get(process.env.REACT_APP_API_BASE_URL + '/tanya-dplk', {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         const modifiedData = res.data.content.map((item) => {
           let statusText;

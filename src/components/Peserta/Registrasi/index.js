@@ -709,7 +709,7 @@ const Registrasi = () => {
                   <FormLabel htmlFor="kota">Kabupaten/Kota</FormLabel>
                   <FormSelect id="kota" name="kota" onChange={handleKotaChange} value={formData.kota}>
                     {districts.map(city => (
-                      <FormOption key={city.id} value={`${city.name}`}>{`${city.type} ${city.name}`}</FormOption>
+                      <FormOption key={city.id} value={`${city.name}`}>{`${city.name}`}</FormOption>
                     ))}
                   </FormSelect>
                   <FormLabel htmlFor="kecamatan">Kecamatan</FormLabel>
@@ -794,7 +794,7 @@ const Registrasi = () => {
                   <FormLabel htmlFor="kota_rumah">Kabupaten/Kota</FormLabel>
                   <FormSelect id="kota_rumah" name="kota_rumah" onChange={handleKotaRumahChange} value={formData.kota_rumah}>
                     {districtsRumah.map(city => (
-                      <FormOption key={city.id} value={`${city.name}`}>{`${city.type} ${city.name}`}</FormOption>
+                      <FormOption key={city.id} value={`${city.name}`}>{`${city.name}`}</FormOption>
                     ))}
                   </FormSelect>
                   <FormLabel htmlFor="kecamatan_rumah">Kecamatan</FormLabel>
@@ -891,7 +891,7 @@ const Registrasi = () => {
                   <FormLabel htmlFor="kota_kantor">Kabupaten/Kota</FormLabel>
                   <FormSelect id="kota_kantor" name="kota_kantor" onChange={handleKotaKantorChange} value={formData.kota_kantor}>
                     {districtsKantor.map(city => (
-                      <FormOption key={city.id} value={`${city.name}`}>{`${city.type} ${city.name}`}</FormOption>
+                      <FormOption key={city.id} value={`${city.name}`}>{`${city.name}`}</FormOption>
                     ))}
                   </FormSelect>
                   <FormLabel htmlFor="kecamatan_kantor">Kecamatan</FormLabel>

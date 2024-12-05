@@ -13,6 +13,7 @@ router.get('/life-cycle-fund/:no_peserta', authenticateToken, verifyRole('pesert
 router.get('/paket-investasi/:no_peserta', authenticateToken, verifyRole('peserta'), mdplkController.lastPackage);
 router.get('/ubah-paket-investasi', authenticateToken, verifyRole('admin'), mdplkController.getPaketInvestasi);
 router.get('/pengkinian-data', authenticateToken, verifyRole('admin'), mdplkController.getPengkinianDataPeserta);
+router.get('/pengkinian-data-by-id/:id', authenticateToken, verifyRole('admin'), mdplkController.getPengkinianDataPesertaById);
 router.post('/pengkinian-data/:no_peserta', authenticateToken, verifyRole('peserta'), upload.single('gambar_ktp'), mdplkController.pengkinianData);
 router.post('/usia-pensiun/:no_peserta', authenticateToken, verifyRole('peserta'),  mdplkController.ubahUsia);
 router.post('/paket-investasi/:no_peserta', authenticateToken, verifyRole('peserta'),  mdplkController.ubahPaket);

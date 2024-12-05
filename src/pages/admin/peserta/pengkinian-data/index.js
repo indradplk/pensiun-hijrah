@@ -6,8 +6,8 @@ import Navbar from '../../../../components/Admin/Navbar';
 import Sidebar from '../../../../components/Admin/Sidebar';
 import HeaderSection from '../../../../components/Admin/HeaderSection';
 import { PengkinianDataHeader } from '../../../../components/Admin/HeaderSection/Data';
-import Registrasi from '../../../../components/Admin/Registrasi';
-import RegistrasiItemSection from '../../../../components/Admin/RegistrasiItem';
+import Pengkinian from '../../../../components/Admin/Pengkinian';
+import PengkinianItemSection from '../../../../components/Admin/PengkinianItem';
 import Footer from '../../../../components/Admin/Footer';
 import SessionModal from '../../../../components/Admin/Modal/Session';
 
@@ -47,7 +47,7 @@ const PengkinianPesertaAdmin = ({ isSingleItem }) => {
       <Sidebar isOpen={isOpen} toggle={toggle} userData={userData} />
       <Navbar toggle={toggle} userData={userData} />
       <HeaderSection {...PengkinianDataHeader} />
-      {isSingleItem ? <RegistrasiItemSection /> : <Registrasi userData={userData} />}
+      {isSingleItem ? <PengkinianItemSection /> : <Pengkinian userData={userData} />}
       <SessionModal show={showModal} onLogin={() => history.push('/admin')} />
       <Footer />
     </>

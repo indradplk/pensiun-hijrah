@@ -250,7 +250,7 @@ const Pengkinian = ({ userData }) => {
     if (!data.nama) {
       newErrors.nama = 'Nama harus diisi.';
     }
-    if (!data.tgl_lahir) {
+    if (!data.tgl_lahir || data.tgl_lahir === '0000-00-00') {
       newErrors.tgl_lahir = 'Tanggal lahir harus diisi.';
     }
     if (!data.tmp_lahir) {
@@ -406,7 +406,7 @@ const Pengkinian = ({ userData }) => {
                 <FormLabel htmlFor="alamat_kota">Kabupaten/Kota</FormLabel>
                 <FormSelect id="alamat_kota" name="alamat_kota" onChange={handleKotaChange} value={data.alamat_kota}>
                   {districts.map(city => (
-                    <FormOption key={city.id} value={`${city.name}`}>{`${city.type} ${city.name}`}</FormOption>
+                    <FormOption key={city.id} value={`${city.name}`}>{`${city.name}`}</FormOption>
                   ))}
                 </FormSelect>
                 {errors.alamat_kota && <FormH2Error>{errors.alamat_kota}</FormH2Error>}

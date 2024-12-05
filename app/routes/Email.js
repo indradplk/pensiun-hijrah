@@ -21,7 +21,9 @@ const transporter = nodemailer.createTransport({
     auth: {
       user: 'no-reply@dplksyariahmuamalat.co.id',
       pass: 'Bismillah123!'
-    }
+    },
+    debug: true,
+    logger: true
     // host: "sandbox.smtp.mailtrap.io",
     // port: 2525,
     // auth: {

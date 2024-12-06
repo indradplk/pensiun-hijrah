@@ -24,18 +24,42 @@ exports.getOne = async (req, res) => {
     }
 
     const query = `
-      SELECT n.no_peserta , n.NO_IDENTITAS_DIRI , n.NPWP , n.nama_lengkap , n.ALAMAT_EMAIL , n.JENIS_KELAMIN , n.alamat_jalan , n.alamat_rtrw , n.alamat_kelurahan , n.ALAMAT_KECAMATAN , n.alamat_kota , n.ALAMAT_PROPINSI , n.alamat_kode_pos , n.tempat_lahir , n.alamat_telepon ,
-      CONVERT(VARCHAR, n.tanggal_lahir, 103) AS tanggal_lahir ,
-      CONVERT(VARCHAR, n.tgl_registrasi, 103) AS tgl_registrasi ,
-      CONVERT(VARCHAR, r.tgl_pensiun, 103) AS tgl_pensiun ,
-      CONVERT(VARCHAR, r.tgl_pensiun_dipercepat, 103) AS tgl_pensiun_dipercepat ,
-      r.kode_paket_investasi , n.ibu_kandung , r.usia_pensiun , n.pekerjaan , n.kode_pemilikan , r.penghasilan_tetap , n.nama_perusahaan , n.kode_jenis_usaha , r.penghasilan_tidak_tetap , r.STATUS_DPLK 
-      FROM TRANSAKSIDPLK t
-      INNER JOIN NASABAHDPLK n ON n.no_peserta = t.NO_PESERTA
-      INNER JOIN REKENINGDPLK r ON r.no_peserta = t.NO_PESERTA
-      WHERE n.no_peserta = '${noPeserta}' AND t.ISCOMMITTED = 'T'
-      GROUP BY n.no_peserta , n.NO_IDENTITAS_DIRI , n.NPWP , n.nama_lengkap , n.ALAMAT_EMAIL , n.JENIS_KELAMIN , n.alamat_jalan , n.alamat_rtrw , n.alamat_kelurahan , n.ALAMAT_KECAMATAN , n.alamat_kota , n.ALAMAT_PROPINSI , n.alamat_kode_pos, n.alamat_telepon , n.tempat_lahir , n.tanggal_lahir , n.tgl_registrasi ,
-      r.tgl_pensiun , r.tgl_pensiun_dipercepat , r.kode_paket_investasi , n.ibu_kandung , r.usia_pensiun , n.pekerjaan , n.kode_pemilikan , r.penghasilan_tetap , n.nama_perusahaan , n.kode_jenis_usaha , r.penghasilan_tidak_tetap , r.STATUS_DPLK
+      SELECT
+          n.no_peserta,
+          n.NO_IDENTITAS_DIRI,
+          n.NPWP,
+          n.nama_lengkap,
+          n.ALAMAT_EMAIL,
+          n.JENIS_KELAMIN,
+          n.alamat_jalan,
+          n.alamat_rtrw,
+          n.alamat_kelurahan,
+          n.ALAMAT_KECAMATAN,
+          n.alamat_kota,
+          n.ALAMAT_PROPINSI,
+          n.alamat_kode_pos,
+          n.tempat_lahir,
+          n.alamat_telepon,
+          CONVERT(VARCHAR, n.tanggal_lahir, 103) AS tanggal_lahir,
+          CONVERT(VARCHAR, n.tgl_registrasi, 103) AS tgl_registrasi,
+          CONVERT(VARCHAR, r.tgl_pensiun, 103) AS tgl_pensiun,
+          CONVERT(VARCHAR, r.tgl_pensiun_dipercepat, 103) AS tgl_pensiun_dipercepat,
+          r.kode_paket_investasi,
+          n.ibu_kandung,
+          r.usia_pensiun,
+          n.pekerjaan,
+          n.kode_pemilikan,
+          r.penghasilan_tetap,
+          n.nama_perusahaan,
+          n.kode_jenis_usaha,
+          r.penghasilan_tidak_tetap,
+          r.STATUS_DPLK
+      FROM
+          NASABAHDPLK n
+      JOIN
+          REKENINGDPLK r ON n.no_peserta = r.no_peserta
+      WHERE
+          n.no_peserta = '${noPeserta}'
     `;
 
     const pool = await connectToDatabasePPIP();

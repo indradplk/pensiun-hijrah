@@ -135,6 +135,7 @@ const LifeCycleFund = ({ userData }) => {
       if (pindah === 'T') {
         await axios
           .post(process.env.REACT_APP_API_BASE_URL + `/ppip/life-cycle-fund/${userData.username}`,
+          {},
           {
             headers: {
               "Content-Type": "application/json",

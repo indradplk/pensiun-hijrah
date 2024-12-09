@@ -106,9 +106,9 @@ const Dashboard = ({
         });
 
         if (response.data.content.stabsen === 'T') {
-          setModalMessage('Absensi berhasil! Anda datang terlambat!');
+          setModalMessage('Absensi berhasil! Astagfirullah, Anda datang terlambat!');
         } else if (response.data.content.stabsen === 'H') {
-          setModalMessage('Absensi berhasil! Anda datang tepat waktu!');
+          setModalMessage('Absensi berhasil! Alhamdulillah, Anda datang tepat waktu!');
         } else {
           setModalMessage('Absensi berhasil!');
         }
@@ -117,8 +117,8 @@ const Dashboard = ({
         setHasClockedIn(true);
       } catch (error) {
         setModalMessage(error.response?.data?.message || 'Terjadi kesalahan saat absen.');
-      } finally {
         setIsErrorModalOpen(true);
+      } finally {
         setLoading(false);
       }
     }
@@ -147,13 +147,13 @@ const Dashboard = ({
           },
         });
 
-        setModalMessage('Anda telah absen keluar!');
+        setModalMessage('Anda telah absen keluar! Hati-hati di jalan ya!');
         setIsModalOpen(true);
         setHasClockedOut(true);
       } catch (error) {
         setModalMessage(error.response?.data?.message || 'Terjadi kesalahan saat absen.');
-      } finally {
         setIsErrorModalOpen(true);
+      } finally {
         setLoading(false);
       }
     }
@@ -180,13 +180,13 @@ const Dashboard = ({
                     </DashboardTextWrapper>
                     {!hasClockedIn ? (
                       <BtnWrap>
-                        <BtnLink onClick={handleClockIn} disabled={loading}>
+                        <BtnLink onClick={handleClockIn} disabled={loading || hasClockedIn}>
                           {loading ? 'Loading...' : 'Clock In'}
                         </BtnLink>
                       </BtnWrap>
                     ) : !hasClockedOut ? (
                       <BtnWrap>
-                        <BtnLink onClick={handleClockOut} disabled={loading}>
+                        <BtnLink onClick={handleClockOut} disabled={loading || hasClockedOut}>
                           {loading ? 'Loading...' : 'Clock Out'}
                         </BtnLink>
                       </BtnWrap>

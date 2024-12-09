@@ -148,7 +148,7 @@ exports.clockInWithLocation = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Lokasi Anda berada di luar area yang diizinkan.',
+                message: 'Astagfirullah! Lokasi Anda berada di luar area yang ditentukan.',
             });
         }
 

@@ -47,7 +47,7 @@ const EditReportForm = ({ show, handleClose, editData, handleEditInputChange }) 
       formData.append('kategori', editData.kategori);
       formData.append('path_report', editData.path_report);
 
-      const response = await axios.put(process.env.REACT_APP_API_BASE_URL + `/report/${editData.id}`, formData, {
+      const response = await axios.post(process.env.REACT_APP_API_BASE_URL + `/report/edit/${editData.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

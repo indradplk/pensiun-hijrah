@@ -41,7 +41,7 @@ const EditVideoForm = ({ show, handleClose, editData, handleEditInputChange }) =
       formData.append('title', editData.title);
       formData.append('link', editData.link);
 
-      const response = await axios.put(process.env.REACT_APP_API_BASE_URL + `/video/${editData.id}`, formData, {
+      const response = await axios.post(process.env.REACT_APP_API_BASE_URL + `/video/edit/${editData.id}`, formData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,

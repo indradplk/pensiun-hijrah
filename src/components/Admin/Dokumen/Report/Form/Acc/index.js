@@ -33,7 +33,7 @@ const AccReportForm = ({ show, handleClose, accData }) => {
   const handleAcceptSubmit = async () => {
     setLoading(true);
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}/report/approve/${accData.id}`, 
         {},
         {

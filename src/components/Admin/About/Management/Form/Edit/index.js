@@ -50,7 +50,7 @@ const EditManagementForm = ({ show, handleClose, editData, handleEditInputChange
       formData.append('kategori', editData.kategori);
       formData.append('path_management', editData.path_management);
 
-      const response = await axios.put(process.env.REACT_APP_API_BASE_URL + `/management/${editData.id}`, formData, {
+      const response = await axios.post(process.env.REACT_APP_API_BASE_URL + `/management/edit/${editData.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

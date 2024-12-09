@@ -29,7 +29,7 @@ const ApproveForm = ({ show, handleClose, editData, userData }) => {
     setLoading(true);
     try {
       const response = await axios
-        .put(process.env.REACT_APP_API_BASE_URL + `/tanya-dplk/${editData.id}`, {}, {
+        .post(process.env.REACT_APP_API_BASE_URL + `/tanya-dplk/approve/${editData.id}`, {}, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

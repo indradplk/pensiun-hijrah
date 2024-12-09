@@ -7,6 +7,6 @@ const router = Router();
 
 router.get('/', parameterController.getAll);
 router.get('/:KEY_PARAMETER', parameterController.getOne);
-router.put('/:id', authenticateToken, verifyRole('admin'), parameterController.update);
+router.post('/:id', authenticateToken, verifyRole('admin'), parameterController.update);
 
 module.exports = router;

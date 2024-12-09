@@ -44,7 +44,7 @@ const EditSliderForm = ({ show, handleClose, editData, handleEditInputChange }) 
       formData.append('path_web', editData.path_web);
       formData.append('path_mobile', editData.path_mobile);
 
-      const response = await axios.put(process.env.REACT_APP_API_BASE_URL + `/slider/${editData.id}`, formData, {
+      const response = await axios.post(process.env.REACT_APP_API_BASE_URL + `/slider/edit/${editData.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

@@ -10,8 +10,8 @@ const router = Router();
 router.get('/', panduanController.getAll);
 router.get('/:id', panduanController.getOne);
 router.post('/', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_panduan' }]), panduanController.create);
-router.put('/:id', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_panduan' }]), panduanController.update);
-router.put('/approve/:id', authenticateToken, verifyRole('admin'), panduanController.accept);
-router.delete('/:id', authenticateToken, verifyRole('admin'), panduanController.delete);
+router.post('/edit/:id', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_panduan' }]), panduanController.update);
+router.post('/approve/:id', authenticateToken, verifyRole('admin'), panduanController.accept);
+router.post('/delete/:id', authenticateToken, verifyRole('admin'), panduanController.delete);
 
 module.exports = router;

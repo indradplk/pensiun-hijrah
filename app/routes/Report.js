@@ -10,8 +10,8 @@ const router = Router();
 router.get('/', reportController.getAll);
 router.get('/:id', reportController.getOne);
 router.post('/', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_report' }]), reportController.create);
-router.put('/:id', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_report' }]), reportController.update);
-router.put('/approve/:id', authenticateToken, verifyRole('admin'), reportController.accept);
-router.delete('/:id', authenticateToken, verifyRole('admin'), reportController.delete);
+router.post('/edit/:id', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_report' }]), reportController.update);
+router.post('/approve/:id', authenticateToken, verifyRole('admin'), reportController.accept);
+router.post('/delete/:id', authenticateToken, verifyRole('admin'), reportController.delete);
 
 module.exports = router;

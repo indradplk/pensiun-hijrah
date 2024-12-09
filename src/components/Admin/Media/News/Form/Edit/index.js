@@ -48,7 +48,7 @@ const EditNewsForm = ({ show, handleClose, editData, handleEditInputChange }) =>
       formData.append('kategori', editData.kategori);
       formData.append('path_news', editData.path_news);
 
-      const response = await axios.put(process.env.REACT_APP_API_BASE_URL + `/news/${editData.id}`, formData, {
+      const response = await axios.post(process.env.REACT_APP_API_BASE_URL + `/news/edit/${editData.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

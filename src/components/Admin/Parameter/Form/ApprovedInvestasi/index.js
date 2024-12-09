@@ -41,7 +41,7 @@ const ApproveForm = ({ show, handleClose, editData, handleEditInputChange, userD
         endpoint = `${process.env.REACT_APP_API_BASE_URL}/parameter/3`;
       }
 
-      const response = await axios.put(endpoint, {
+      const response = await axios.post(endpoint, {
         NUMERIC_VALUE: editData.code
       }, {
         headers: {

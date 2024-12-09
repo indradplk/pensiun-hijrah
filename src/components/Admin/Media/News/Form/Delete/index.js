@@ -31,7 +31,7 @@ const DeleteNewsForm = ({ show, handleClose, deleteData }) => {
 
     try {
       const response = await axios
-      .delete(process.env.REACT_APP_API_BASE_URL + `/news/${deleteData.id}`,
+      .post(process.env.REACT_APP_API_BASE_URL + `/news/delete/${deleteData.id}`, {},
         {
           headers: {
             'Content-Type': 'multipart/form-data',

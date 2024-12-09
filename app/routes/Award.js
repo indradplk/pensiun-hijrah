@@ -10,8 +10,8 @@ const router = Router();
 router.get('/', awardController.getAll);
 router.get('/:id', awardController.getOne);
 router.post('/', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_award' }]), awardController.create);
-router.put('/:id', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_award' }]), awardController.update);
-router.put('/approve/:id', authenticateToken, verifyRole('admin'), awardController.accept);
-router.delete('/:id', authenticateToken, verifyRole('admin'), awardController.delete);
+router.post('/edit/:id', authenticateToken, verifyRole('admin'), upload.fields([{ name: 'path_award' }]), awardController.update);
+router.post('/approve/:id', authenticateToken, verifyRole('admin'), awardController.accept);
+router.post('/delete/:id', authenticateToken, verifyRole('admin'), awardController.delete);
 
 module.exports = router;

@@ -41,7 +41,7 @@ const EditAwardForm = ({ show, handleClose, editData, handleEditInputChange }) =
       formData.append('description', editData.description);
       formData.append('path_award', editData.path_award);
 
-      const response = await axios.put(process.env.REACT_APP_API_BASE_URL + `/award/${editData.id}`, formData, {
+      const response = await axios.post(process.env.REACT_APP_API_BASE_URL + `/award/edit/${editData.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

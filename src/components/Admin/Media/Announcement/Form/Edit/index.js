@@ -7,8 +7,6 @@ import {
   FormH1,
   FormInput,
   FormLabel,
-  FormSelect,
-  FormOption,
   FormButton,
   FormButtonCancel,
   FormText
@@ -48,7 +46,7 @@ const EditAnnouncementForm = ({ show, handleClose, editData, handleEditInputChan
       formData.append('document', editData.document);
       formData.append('path_announcement', editData.path_announcement);
 
-      const response = await axios.put(process.env.REACT_APP_API_BASE_URL + `/announcement/${editData.id}`, formData, {
+      const response = await axios.post(process.env.REACT_APP_API_BASE_URL + `/announcement/edit/${editData.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Carousel, CarouselItem } from 'react-bootstrap';
-import { CarouselImg } from './CarouselElements';
+import { CarouselImg, Link } from './CarouselElements';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const CarouselSection = () => {
@@ -27,7 +27,13 @@ const CarouselSection = () => {
     <Carousel>
       {sliderItems.map((item) => (
         <CarouselItem key={item.id}>
-          <CarouselImg src={isMobile ? `/slider/${item.path_mobile}` : `/slider/${item.path_web}`} />
+          {item.link ? (
+            <Link href={item.link} target="_blank">
+              <CarouselImg src={isMobile ? `/slider/${item.path_mobile}` : `/slider/${item.path_web}`} />
+            </Link>
+          ) : (
+            <CarouselImg src={isMobile ? `/slider/${item.path_mobile}` : `/slider/${item.path_web}`} />
+          )}
         </CarouselItem>
       ))}
     </Carousel>

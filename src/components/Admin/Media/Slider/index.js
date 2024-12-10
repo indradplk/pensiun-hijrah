@@ -34,12 +34,14 @@ const Slider = ({ userData }) => {
     editData: {
       id: null,
       judul: '',
+      link: '',
       path_web: '',
       path_mobile: '',
       status: ''
     },
     addData: {
       judul: '',
+      link: '',
       path_web: '',
       path_mobile: ''
     },
@@ -282,6 +284,7 @@ const Slider = ({ userData }) => {
               <thead>
                 <tr>
                   <th>Judul</th>
+                  <th>Hyperlink (Jika Ada)</th>
                   <th>Gambar Website</th>
                   <th>Gambar Mobile</th>
                   <th>Status</th>
@@ -292,6 +295,7 @@ const Slider = ({ userData }) => {
                 {state.data.map((item) => (
                   <tr key={item.id}>
                     <td>{item.judul}</td>
+                    <td>{item.link}</td>
                     <td>
                       <Text to="#" onClick={() => handleDownload(item.path_web)}>
                         <FaFileImage/>  

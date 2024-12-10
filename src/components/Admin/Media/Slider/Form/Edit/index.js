@@ -20,6 +20,7 @@ import {
 const EditSliderForm = ({ show, handleClose, editData, handleEditInputChange }) => {
   const [formData, setFormData] = useState({
     judul: '',
+    link: '',
     path_web: '',
     path_mobile: '',
     status: '',
@@ -41,6 +42,7 @@ const EditSliderForm = ({ show, handleClose, editData, handleEditInputChange }) 
     try {
       const formData = new FormData();
       formData.append('judul', editData.judul);
+      formData.append('link', editData.link);
       formData.append('path_web', editData.path_web);
       formData.append('path_mobile', editData.path_mobile);
 
@@ -80,6 +82,7 @@ const EditSliderForm = ({ show, handleClose, editData, handleEditInputChange }) 
   useEffect(() => {
     setFormData({
       judul: editData.judul,
+      link: editData.link,
       path_web: editData.path_web,
       path_mobile: editData.path_mobile,
     });
@@ -94,6 +97,8 @@ const EditSliderForm = ({ show, handleClose, editData, handleEditInputChange }) 
         <Form>
           <FormLabel htmlFor="judul">Judul</FormLabel>
           <FormInput id="judul" name="judul" value={formData.judul} onChange={handleEditInputChange} />
+          <FormLabel htmlFor="link">Hyperlink (Jika Ada)</FormLabel>
+          <FormInput id="link" name="link" value={formData.link} onChange={handleEditInputChange} />
           <FormLabel htmlFor="path_web">Gambar Website</FormLabel>
           <FormInput id="path_web" type="file" name="path_web" onChange={handleEditInputChange} />
           <FormLabel htmlFor="path_mobile">Gambar Mobile</FormLabel>

@@ -85,7 +85,7 @@ exports.getOne = async (req, res) => {
 
 exports.create = async (req, res) => {
     try {
-        const { judul } = req.body;
+        const { judul, link } = req.body;
         const userUpdate = req.user.username;    
         const role = req.user.role;
 
@@ -142,7 +142,7 @@ exports.create = async (req, res) => {
 
         // Validate form
         const newSlider = await Slider.create({
-            judul: sanitizedTitle, path_web, path_mobile, userUpdate
+            judul: sanitizedTitle, path_web, path_mobile, link, userUpdate
         });
 
         await ActivityAdmin.create({
@@ -174,7 +174,7 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        const { judul } = req.body;
+        const { judul, link } = req.body;
         const { id } = req.params;
         const userUpdate = req.user.username;  
         const role = req.user.role;  
@@ -246,7 +246,7 @@ exports.update = async (req, res) => {
 
         // Update slider data
         const updatedSlider = await existingSlider.update({
-            judul: sanitizedTitle, path_web, path_mobile, status: false, userUpdate
+            judul: sanitizedTitle, path_web, path_mobile, link, status: false, userUpdate
         });
 
         await ActivityAdmin.create({

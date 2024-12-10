@@ -553,7 +553,8 @@ exports.lifeCycleFund = async (req, res) => {
         '${noPeserta}', GETDATE(), GETDATE(), GETDATE(), '${noPeserta}', '10.55.61.11', '10.55.61.11',
         'Transaksi Online penyeimbangan pindah paket investasi LCF dari ' + kode_paket_investasi,
         (akum_dana_pk * -1), (akum_dana_pst * -1), (akum_dana_pengembangan * -1), (akum_dana_peralihan * -1),
-        no_peserta, kode_paket_investasi, 'F', 393666, 'T', NULL, NULL, NULL, NULL, NULL, NULL, '000', NULL, NULL,
+        no_peserta, kode_paket_investasi, 'F', (SELECT TOP 1 ID_TRANSACTIONBATCH FROM TRANSACTIONBATCH WHERE description LIKE '%lcf%'
+	      ORDER BY TGL_CREATE DESC), 'T', NULL, NULL, NULL, NULL, NULL, NULL, '000', NULL, NULL,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
       FROM ubah_paket_investasi
       WHERE NO_PESERTA = '${noPeserta}';
@@ -580,7 +581,8 @@ exports.lifeCycleFund = async (req, res) => {
           '${noPeserta}', GETDATE(), GETDATE(), GETDATE(), '${noPeserta}', '10.55.61.11', '10.55.61.11',
           'Transaksi Online penyeimbangan pindah paket investasi LCF ke A',
           akum_dana_pk, akum_dana_pst, akum_dana_pengembangan, akum_dana_peralihan,
-          no_peserta, 'A', 'F', 393666, 'T', NULL, NULL, NULL, NULL, NULL, NULL, '000', NULL, NULL,
+          no_peserta, 'A', 'F', (SELECT TOP 1 ID_TRANSACTIONBATCH FROM TRANSACTIONBATCH WHERE description LIKE '%lcf%'
+	        ORDER BY TGL_CREATE DESC), 'T', NULL, NULL, NULL, NULL, NULL, NULL, '000', NULL, NULL,
           NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
       FROM ubah_paket_investasi
       WHERE no_peserta = '${noPeserta}'
@@ -689,7 +691,8 @@ exports.paketInvestasi = async (req, res) => {
         '${noPeserta}', GETDATE(), GETDATE(), GETDATE(), '${noPeserta}', '10.55.61.11', '10.55.61.11',
         'Transaksi Online penyeimbangan pindah paket investasi dari ' + kode_paket_investasi,
         (akum_dana_pk * -1), (akum_dana_pst * -1), (akum_dana_pengembangan * -1), (akum_dana_peralihan * -1),
-        no_peserta, kode_paket_investasi, 'F', 393666, 'T', NULL, NULL, NULL, NULL, NULL, NULL, '000', NULL, NULL,
+        no_peserta, kode_paket_investasi, 'F', (SELECT TOP 1 ID_TRANSACTIONBATCH FROM TRANSACTIONBATCH WHERE description LIKE '%rubah investasi%'
+	      ORDER BY TGL_CREATE DESC), 'T', NULL, NULL, NULL, NULL, NULL, NULL, '000', NULL, NULL,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
       FROM ubah_paket_investasi
       WHERE NO_PESERTA = '${noPeserta}';
@@ -716,7 +719,8 @@ exports.paketInvestasi = async (req, res) => {
           '${noPeserta}', GETDATE(), GETDATE(), GETDATE(), '${noPeserta}', '10.55.61.11', '10.55.61.11',
           'Transaksi Online penyeimbangan pindah paket investasi ke ${paket_investasi}',
           akum_dana_pk, akum_dana_pst, akum_dana_pengembangan, akum_dana_peralihan,
-          no_peserta, '${paket_investasi}', 'F', 393666, 'T', NULL, NULL, NULL, NULL, NULL, NULL, '000', NULL, NULL,
+          no_peserta, '${paket_investasi}', 'F', (SELECT TOP 1 ID_TRANSACTIONBATCH FROM TRANSACTIONBATCH WHERE description LIKE '%rubah investasi%'
+	        ORDER BY TGL_CREATE DESC), 'T', NULL, NULL, NULL, NULL, NULL, NULL, '000', NULL, NULL,
           NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
       FROM ubah_paket_investasi
       WHERE no_peserta = '${noPeserta}'

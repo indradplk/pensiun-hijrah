@@ -10,3 +10,7 @@ export const CarouselImg = styled.img`
     height: 400px;
   }
 `;
+export const Link = styled.a`
+  align-items: center;
+  text-decoration: none;
+`;

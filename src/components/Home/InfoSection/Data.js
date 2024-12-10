@@ -14,7 +14,7 @@ export const homeObjOne = {
   dark: true,
   primary: true,
   darkText: false,
-  link: '/about/pensiun-hijrah/',
+  link: '/about/dplk/',
 };
 
 export const homeObjThree = {

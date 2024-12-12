@@ -1,8 +1,7 @@
 const { connectToDatabaseHRIS } = require('../../config/db_hris');
 const { response } = require('../../helpers/bcrypt');
-const { NotFoundError } = require('../../errors');
-const { sanitizeInput } = require('../../helpers/sanitizeInput');
 const moment = require('moment');
+const moments = require('moment-timezone');
 
 exports.show = async (req, res) => {
     try {
@@ -75,9 +74,9 @@ exports.clockInWithLocation = async (req, res) => {
         }
 
         // Mendapatkan tanggal dan jam saat ini
-        const now = new Date();
-        const tanggal_absen = now.toISOString().split('T')[0]; // YYYY-MM-DD
-        const jam_masuk = now.toTimeString().split(' ')[0]; // HH:MM:SS
+        const now = moments.tz("Asia/Jakarta");
+        const tanggal_absen = now.format('YYYY-MM-DD'); // YYYY-MM-DD
+        const jam_masuk = now.format('HH:mm:ss'); // HH:MM:SS
 
         // Cek apakah ada cuti setengah hari untuk hari ini
         const leaveSql = `
@@ -219,9 +218,10 @@ exports.clockOutWithLocation = async (req, res) => {
         }
 
         // Mendapatkan tanggal dan jam saat ini
-        const now = new Date();
-        const tanggal_absen = now.toISOString().split('T')[0]; // YYYY-MM-DD
-        const jam_keluar = now.toTimeString().split(' ')[0]; // HH:MM:SS
+        // Mendapatkan tanggal dan jam saat ini
+        const now = moments.tz("Asia/Jakarta");
+        const tanggal_absen = now.format('YYYY-MM-DD'); // YYYY-MM-DD
+        const jam_keluar = now.format('HH:mm:ss'); // HH:MM:SS
 
         // Ambil informasi region dari database
         const regionSql = `
@@ -324,7 +324,7 @@ exports.clockOutWithLocation = async (req, res) => {
 exports.clockInVisit = async (req, res) => {
     try {
         const { latitude, longitude, keterangan } = req.body;
-        const { username, nama, lokasi } = req.user;
+        const { username, nama } = req.user;
 
         // Validasi input
         if (!latitude || !longitude) {
@@ -344,9 +344,9 @@ exports.clockInVisit = async (req, res) => {
         }
 
         // Mendapatkan tanggal dan jam saat ini
-        const now = new Date();
-        const tanggal_absen = now.toISOString().split('T')[0]; // YYYY-MM-DD
-        const jam_masuk = now.toTimeString().split(' ')[0]; // HH:MM:SS
+        const now = moments.tz("Asia/Jakarta");
+        const tanggal_absen = now.format('YYYY-MM-DD'); // YYYY-MM-DD
+        const jam_masuk = now.format('HH:mm:ss'); // HH:MM:SS
 
         // Cek apakah ada cuti setengah hari untuk hari ini
         const leaveSql = `

@@ -12,6 +12,8 @@ import {
   officeObjOne,
 } from '../../../components/About/OfficeSection/Data';
 import Branch from '../../../components/About/BranchSection';
+import Floating from '../../../components/Floating';
+
 const Lokasi = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -28,6 +30,7 @@ const Lokasi = () => {
       <Office {...officeObjOne} />
       <Branch />
       <Footer />
+      <Floating />
     </>
   );
 };

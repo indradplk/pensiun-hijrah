@@ -8,6 +8,8 @@ import Footer from '../../../components/Footer';
 import {
   PenghargaanHeader,
 } from '../../../components/About/HeaderSection/Data';
+import Floating from '../../../components/Floating';
+
 const Award = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -23,6 +25,7 @@ const Award = () => {
       <HeaderSection {...PenghargaanHeader} />
       <AwardSection />
       <Footer />
+      <Floating />
     </>
   );
 };

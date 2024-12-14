@@ -8,6 +8,8 @@ import Footer from '../../../components/Footer';
 import {
   PanduanHeader,
 } from '../../../components/Bantuan/HeaderSection/Data';
+import Floating from '../../../components/Floating';
+
 const Panduan = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -23,6 +25,7 @@ const Panduan = () => {
       <HeaderSection {...PanduanHeader} />
       <PanduanSection />
       <Footer />
+      <Floating />
     </>
   );
 };

@@ -8,6 +8,7 @@ import Footer from '../../../components/Footer';
 import {
   DPHeader,
 } from '../../../components/Media/HeaderSection/Data';
+import Floating from '../../../components/Floating';
 
 const Pengawas = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,7 @@ const Pengawas = () => {
       <HeaderSection {...DPHeader} />
       <PengawasSection />
       <Footer />
+      <Floating />
     </>
   );
 };

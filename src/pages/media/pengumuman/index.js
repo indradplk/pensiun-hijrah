@@ -9,6 +9,7 @@ import Footer from '../../../components/Footer';
 import {
   AnnouncementHeader,
 } from '../../../components/Media/HeaderSection/Data';
+import Floating from '../../../components/Floating';
 
 const Announcement = ({ isSingleItem }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +27,7 @@ const Announcement = ({ isSingleItem }) => {
       <HeaderSection {...AnnouncementHeader} />
       {isSingleItem ? <AnnouncementItemSection /> : <AnnouncementSection />}
       <Footer />
+      <Floating />
     </>
   );
 };

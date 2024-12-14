@@ -17,6 +17,7 @@ import {
   productPerusahaan,
 } from '../../../components/Product/InfoSection/Data';
 import { perusahaanProduct } from '../../../components/Product/BenefitSection/Data';
+import Floating from '../../../components/Floating';
 
 const Perusahaan = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,7 @@ const Perusahaan = () => {
       <Product />
       <BantuanProduct />
       <Footer />
+      <Floating />
     </>
   );
 };

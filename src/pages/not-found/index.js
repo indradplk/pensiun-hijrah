@@ -5,6 +5,8 @@ import Navbar from '../../components/Navbar';
 import NotFoundSection from '../../components/NotFound';
 import { notFoundObj } from '../../components/NotFound/Data';
 import Footer from '../../components/Footer';
+import Floating from '../../components/Floating';
+
 const NotFound = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -19,6 +21,7 @@ const NotFound = () => {
       <Navbar toggle={toggle} />
       <NotFoundSection {...notFoundObj} />
       <Footer />
+      <Floating />
     </>
   );
 };

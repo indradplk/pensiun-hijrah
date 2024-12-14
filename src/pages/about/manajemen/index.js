@@ -8,6 +8,8 @@ import Footer from '../../../components/Footer';
 import {
   ManajemenHeader,
 } from '../../../components/About/HeaderSection/Data';
+import Floating from '../../../components/Floating';
+
 const Management = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -23,6 +25,7 @@ const Management = () => {
       <HeaderSection {...ManajemenHeader} />
       <ManagementSection />
       <Footer />
+      <Floating />
     </>
   );
 };

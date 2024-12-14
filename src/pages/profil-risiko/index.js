@@ -8,6 +8,8 @@ import Footer from '../../components/Footer';
 import {
   ProfilRisikoHeader,
 } from '../../components/Simulasi/HeaderSection/Data';
+import Floating from '../../components/Floating';
+
 const ProfilRisiko = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -23,6 +25,7 @@ const ProfilRisiko = () => {
       <HeaderSection {...ProfilRisikoHeader} />
       <Questionnaire />
       <Footer />
+      <Floating />
     </>
   );
 };

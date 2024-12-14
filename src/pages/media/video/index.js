@@ -8,6 +8,7 @@ import {
   VideoHeader,
 } from '../../../components/Media/HeaderSection/Data';
 import VideoSection from '../../../components/Media/VideoSection';
+import Floating from '../../../components/Floating';
 
 const Video = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,7 @@ const Video = () => {
       <HeaderSection {...VideoHeader} />
       <VideoSection />
       <Footer />
+      <Floating />
     </>
   );
 };

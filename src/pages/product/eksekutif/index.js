@@ -17,6 +17,7 @@ import {
   productEksekutif,
 } from '../../../components/Product/InfoSection/Data';
 import { individuProduct } from '../../../components/Product/BenefitSection/Data';
+import Floating from '../../../components/Floating';
 
 const Eksekutif = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,7 @@ const Eksekutif = () => {
       <Product />
       <BantuanProduct />
       <Footer />
+      <Floating />
     </>
   );
 };

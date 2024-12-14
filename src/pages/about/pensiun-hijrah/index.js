@@ -10,6 +10,7 @@ import {
 import Misi from '../../../components/About/MisiSection';
 import Benefit from '../../../components/About/BenefitSection';
 import TimelineSection from '../../../components/About/TimelineSection';
+import Floating from '../../../components/Floating';
 import Footer from '../../../components/Footer';
 const About = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +30,7 @@ const About = () => {
       <Benefit />
       <TimelineSection />
       <Footer />
+      <Floating />
     </>
   );
 };

@@ -1,16 +1,8 @@
 import React from 'react';
 import Logo from '../../../../assets/images/LogoPensiunHijrah.png';
 import {
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-  FaWhatsapp
-} from 'react-icons/fa';
-import {
   FooterContainer,
   FooterWrap,
-  SocialIconLink,
-  SocialIcons,
   SocialLogo,
   SocialMedia,
   SocialMediaWrap,

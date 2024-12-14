@@ -6,6 +6,7 @@ import HeaderSection from '../../../components/Peserta/HeaderSection';
 import { RegistrasiHeader } from '../../../components/Peserta/HeaderSection/Data';
 import Registrasi from '../../../components/Peserta/Registrasi';
 import Footer from '../../../components/Footer';
+import Floating from '../../../components/Floating';
 
 const RegistrasiPPIP = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ const RegistrasiPPIP = () => {
       <HeaderSection {...RegistrasiHeader} />
       <Registrasi />
       <Footer />
+      <Floating />
     </>
   );
 };

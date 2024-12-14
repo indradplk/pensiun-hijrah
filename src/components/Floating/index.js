@@ -3,6 +3,7 @@ import {
   FaWhatsapp,
   FaYoutube,
   FaFacebook,
+  FaInstagram,
   FaEnvelope,
   FaBars,
   FaTimes,
@@ -16,7 +17,8 @@ import {
   FacebookButton,
   FloatingContainer,
   FloatingMainButton,
-  FloatingBackButton
+  FloatingBackButton,
+  InstagramButton
 } from './FloatingElements';
 
 const Floating = () => {
@@ -41,6 +43,13 @@ const Floating = () => {
           >
             <FaWhatsapp size={24} />
           </IconButton>
+          <InstagramButton
+            href="https://instagram.com/dplksyariahmuamalat"
+            target="_blank"
+            arial-label="Instagram"
+          >
+            <FaInstagram size={24} />
+          </InstagramButton>
           <YtbButton
             href="https://youtube.com/@dplksyariahmuamalat3802?si=um9rfefCu_6gvJYI"
             target="_blank"

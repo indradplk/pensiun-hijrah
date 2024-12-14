@@ -10,6 +10,7 @@ import {
 import Info from '../../../components/Product/InfoSection';
 import Perbedaan from '../../../components/Product/PerbedaanSection';
 import { aboutSyariah, aboutInvestasi } from '../../../components/Product/InfoSection/Data';
+import Floating from '../../../components/Floating';
 
 const PensiunSyariah = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +29,7 @@ const PensiunSyariah = () => {
       <Info {...aboutInvestasi} />
       <Perbedaan />
       <Footer />
+      <Floating />
     </>
   );
 };

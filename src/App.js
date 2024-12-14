@@ -77,7 +77,7 @@ import DashboardAbsen from './pages/absen/dashboard';
 import VisitAbsen from './pages/absen/visit';
 
 import NotFound from './pages/not-found';
-import Telkomsel from './pages/telkomsel';
+import Telkomsel from './pages/program/telkomsel';
 
 function App() {
   return (
@@ -163,7 +163,7 @@ function App() {
         <Route path="/absen/dashboard" component={DashboardAbsen} exact />
         <Route path="/absen/visit" component={VisitAbsen} exact />
 
-        <Route path="/telkomsel" component={Telkomsel} exact />
+        <Route path="/program/telkomsel" component={Telkomsel} exact />
 
         {/* Not found page */}
         <Route path="*" component={NotFound} />

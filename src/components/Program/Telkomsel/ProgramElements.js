@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link as LinkR } from 'react-router-dom';
 
-export const NewsItemContainer = styled.div`
+export const ProgramContainer = styled.div`
   height: auto;
   color: #212121;
   padding: 50px 0;
@@ -16,11 +16,11 @@ export const NewsItemContainer = styled.div`
     padding: 10px 15px;
   }
 `;
-export const NewsItemWrapper = styled.div`
+export const ProgramWrapper = styled.div`
   width: 900px;
   margin: 0 auto;
   display: column;
-  align-items: start;
+  text-align: center;
   grid-gap: 32px;
   padding: 0 50px;
 
@@ -31,17 +31,18 @@ export const NewsItemWrapper = styled.div`
 
   @media screen and (max-width: 820px) {
     width: auto;
-    text-align: center;
   }
   @media screen and (max-width: 480px) {
     width: auto;
+    padding: 0 5px;
   }
 `;
-export const NewsItemCardWrapper = styled.div`
+export const ProgramCardWrapper = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: start;
+  align-items: center;
+  justify-items: center;
   grid-gap: auto;
   width: auto;
 
@@ -59,7 +60,7 @@ export const NewsItemCardWrapper = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-export const NewsItemCardTextWrapper = styled.div`
+export const ProgramCardTextWrapper = styled.div`
   margin: 0 auto;
   display: column;
   grid-template-columns: 1fr;
@@ -92,10 +93,11 @@ export const Heading = styled.h1`
     font-size: 32px;
   }
 `;
-export const NewsItemH2 = styled.h2`
-  font-size: 10px;
+export const ProgramH2 = styled.h2`
+  font-size: 11px;
   margin-top: 10px;
   color: '#f7f8fa';
+  text-align: center;
 `;
 export const Subtitle = styled.p`
   font-size: 18px;
@@ -108,13 +110,13 @@ export const BtnWrap = styled.div`
   display: flex;
   justify-content: flex-start;
 `;
-export const BtnLink = styled.a`
+export const BtnLinks = styled(LinkR)`
   border-radius: 50px;
-  background: #F7941E;
+  background: #9652C8;
   white-space: nowrap;
-  padding: 10px 22px;
+  padding: 7px 20px;
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
   border: none;
   cursor: pointer;
@@ -122,7 +124,61 @@ export const BtnLink = styled.a`
   text-decoration: none;
   &:hover {
     transition: all 0.2 ease-in-out;
-    background: #61298A;
+    background: #008FD0;
+    color: #fff;
+  }
+`;
+export const BtnLink1 = styled.a`
+  border-radius: 50px;
+  background: #61298A;
+  white-space: nowrap;
+  padding: 7px 20px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2 ease-ease-in-out;
+  text-decoration: none;
+  &:hover {
+    transition: all 0.2 ease-in-out;
+    background: #008FD0;
+    color: #fff;
+  }
+`;
+export const BtnLink2 = styled.a`
+  border-radius: 50px;
+  background: #7C3CAA;
+  white-space: nowrap;
+  padding: 7px 20px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2 ease-ease-in-out;
+  text-decoration: none;
+  &:hover {
+    transition: all 0.2 ease-in-out;
+    background: #008FD0;
+    color: #fff;
+  }
+`;
+export const BtnLink3 = styled.a`
+  border-radius: 50px;
+  background: #AF66E3;
+  white-space: nowrap;
+  padding: 7px 20px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2 ease-ease-in-out;
+  text-decoration: none;
+  &:hover {
+    transition: all 0.2 ease-in-out;
+    background: #008FD0;
     color: #fff;
   }
 `;
@@ -139,17 +195,14 @@ export const NavItems = styled.div`
   width: 250px;
   height: 50px;
 `;
-export const NewsItemCard = styled.div`
-  background: #e9e9e9;
+export const ProgramCard = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  border-radius: 10px;
-  padding: 10px;
-  width: 150px;
+  justify-content: center;
+  padding: 15px;
+  grid-gap: 10px;
 `;
-export const NewsItemIcon = styled.img`
+export const ProgramIcon = styled.img`
   width: 100%;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -158,6 +211,7 @@ export const NewsItemIcon = styled.img`
   }
   @media screen and (max-width: 820px) {
     width: 100%;
+    margin-bottom: 10px;
   }
   @media screen and (max-width: 480px) {
     width: 100%;
@@ -171,27 +225,54 @@ export const SocialLogoIcon = styled.img`
     width: 70%;
   }
 `;
-export const InvestasiCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-center;
-  width: auto;
-  padding: 15px;
-`;
-export const InvestasiCardWrapper = styled.div`
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-  @media screen and (max-width: 480px) {
-    grid-template-columns: 1fr 1fr;
-  }
-`;
 export const Text = styled(LinkR)`
   margin-top: 24px;
   color: #212121;
   font-size: 14px;
   text-align: center;
+`;
+export const PopupOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+`;
+export const PopupContent = styled.div`
+  position: relative;
+  background: white;
+  padding: 3px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  text-align: center;
+`;
+export const PopupImage = styled.img`
+  max-width: 100%;
+  max-height: 80vh;
+`;
+export const PopupCloseButton = styled.div`
+  position: absolute;
+  margin: 480px auto 0;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s;
+  &:hover {
+    background: #ff1a1a;
 `;

@@ -8,6 +8,7 @@ import Footer from '../../../components/Footer';
 import {
   KeuanganHeader,
 } from '../../../components/Media/HeaderSection/Data';
+import Floating from '../../../components/Floating';
 
 const Keuangan = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,7 @@ const Keuangan = () => {
       <HeaderSection {...KeuanganHeader} />
       <KeuanganSection />
       <Footer />
+      <Floating />
     </>
   );
 };

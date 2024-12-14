@@ -17,6 +17,7 @@ import {
 } from '../../../components/Product/InfoSection/Data';
 import { individuProduct } from '../../../components/Product/BenefitSection/Data';
 import BantuanProduct from '../../../components/Product/BantuanSection';
+import Floating from '../../../components/Floating';
 
 const Individu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,7 @@ const Individu = () => {
       <Product />
       <BantuanProduct />
       <Footer />
+      <Floating />
     </>
   );
 };

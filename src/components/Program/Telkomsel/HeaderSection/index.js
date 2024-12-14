@@ -1,4 +1,4 @@
-import TopBackground from '../../../assets/images/top-background.svg';
+import TopBackground from '../../../../assets/images/top-background.svg';
 import { HeaderImg, HeaderWrapper, Heading } from './HeaderElements';
 import 'bootstrap/dist/css/bootstrap.css';
 

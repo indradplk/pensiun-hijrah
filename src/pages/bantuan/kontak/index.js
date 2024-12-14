@@ -10,6 +10,8 @@ import {
 import KontakSection from '../../../components/Bantuan/KontakSection';
 import { bantuanKontak } from '../../../components/Bantuan/KontakSection/Data';
 import Mail from '../../../components/Bantuan/MailSection';
+import Floating from '../../../components/Floating';
+
 const Kontak = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -26,6 +28,7 @@ const Kontak = () => {
       <KontakSection {...bantuanKontak} />
       <Mail />
       <Footer />
+      <Floating />
     </>
   );
 };

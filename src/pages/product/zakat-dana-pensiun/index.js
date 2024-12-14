@@ -10,6 +10,7 @@ import {
   ZakatHeader,
 } from '../../../components/Product/HeaderSection/Data';
 import { productZakat } from '../../../components/Product/ZakatSection/Data';
+import Floating from '../../../components/Floating';
 
 const Zakat = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +28,7 @@ const Zakat = () => {
       <ZakatSection {...productZakat} />
       <Syariah />
       <Footer />
+      <Floating />
     </>
   );
 };

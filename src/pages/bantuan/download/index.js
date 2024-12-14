@@ -8,6 +8,8 @@ import Footer from '../../../components/Footer';
 import {
   FormulirHeader,
 } from '../../../components/Bantuan/HeaderSection/Data';
+import Floating from '../../../components/Floating';
+
 const Formulir = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -23,6 +25,7 @@ const Formulir = () => {
       <HeaderSection {...FormulirHeader} />
       <FormulirSection />
       <Footer />
+      <Floating />
     </>
   );
 };

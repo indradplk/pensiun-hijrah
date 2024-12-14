@@ -8,6 +8,8 @@ import Footer from '../../../components/Footer';
 import {
   FAQHeader,
 } from '../../../components/Bantuan/HeaderSection/Data';
+import Floating from '../../../components/Floating';
+
 const FAQ = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
@@ -23,6 +25,7 @@ const FAQ = () => {
       <HeaderSection {...FAQHeader} />
       <FAQSection />
       <Footer />
+      <Floating />
     </>
   );
 };

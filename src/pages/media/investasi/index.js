@@ -8,6 +8,7 @@ import Footer from '../../../components/Footer';
 import {
   FunFactHeader,
 } from '../../../components/Media/HeaderSection/Data';
+import Floating from '../../../components/Floating';
 
 const Investasi = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,7 @@ const Investasi = () => {
       <HeaderSection {...FunFactHeader} />
       <InvestasiSection />
       <Footer />
+      <Floating />
     </>
   );
 };

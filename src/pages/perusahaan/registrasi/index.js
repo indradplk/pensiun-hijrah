@@ -6,6 +6,7 @@ import HeaderSection from '../../../components/Perusahaan/HeaderSection';
 import { RegistrasiHeader } from '../../../components/Perusahaan/HeaderSection/Data';
 import Registrasi from '../../../components/Perusahaan/Registrasi';
 import Footer from '../../../components/Footer';
+import Floating from '../../../components/Floating';
 
 const RegistrasiPPUKP = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ const RegistrasiPPUKP = () => {
       <HeaderSection {...RegistrasiHeader} />
       <Registrasi />
       <Footer />
+      <Floating />
     </>
   );
 };

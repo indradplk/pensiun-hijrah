@@ -81,3 +81,7 @@ export const FacebookButton = styled(IconButton)`
 export const YtbButton = styled(IconButton)` 
   background-color: #FF0000;
 `;
+
+export const InstagramButton = styled(IconButton)` 
+  background-color: #E4405F;
+`;

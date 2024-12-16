@@ -84,6 +84,16 @@ export const SocialMediaWrap = styled.div`
   }
 `;
 
+export const SocialMediaColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SocialIconsColumn = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const SocialLogo = styled(Link)`
   color: #1E1E1E;
   justify-self: start;
@@ -104,14 +114,12 @@ export const SocialLogo = styled(Link)`
 export const SocialLogoIcon = styled.img`
   width: 80%;
   margin-bottom: 16px;
-
-  @media screen and (max-width: 820px) {
-    width: 90%;
-  }
 `;
 export const WebsiteRights = styled.small`
   color: #1E1E1E;
   margin-bottom: 16px;
+  font-size: 11px;
+  text-align: center;
 `;
 export const SocialIcons = styled.div`
   display: flex;

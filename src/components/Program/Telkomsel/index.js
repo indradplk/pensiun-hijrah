@@ -32,10 +32,14 @@ const TelkomselSection = () => {
   return (
     <ProgramContainer>
       <ProgramWrapper>
-        <ProgramIcon src={`/telkomsel/Mengapa DPLK Syariah Muamalat.png`} />
+        <ProgramIcon src={`/telkomsel/Mengapa DPLK Syariah Muamalat PNG.png`} />
         <ProgramCard>
           <BtnLink1 href="https://www.dplksyariahmuamalat.co.id/peserta/registrasi/">Daftar Sekarang</BtnLink1>
-          <ProgramH2>*Masukkan kode <strong>TELKOMSEL</strong> pada kolom <br/> Nomor Referensi saat pendaftaran online</ProgramH2>
+          <ProgramH2>
+            *Masukkan kode <strong>TSEL-[NIK/Nomor Induk Karyawan]</strong><br/>
+            pada kolom <strong>Nomor Referensi</strong> saat melakukan pendaftaran<br/>
+            Contoh: TSEL-12345
+          </ProgramH2>
           <BtnLink2 href="https://linktr.ee/muamalatXtelkomsel" target="_blank">Panduan Informasi</BtnLink2>
           <BtnLinks to="#" onClick={handlePopupOpen}>Biaya Spesial</BtnLinks>
           <BtnLink3 href="https://linktr.ee/PICTelkomsel" target="_blank">Contact Person</BtnLink3>
@@ -45,7 +49,7 @@ const TelkomselSection = () => {
         <PopupOverlay onClick={handlePopupClose}>
           <PopupContent onClick={(e) => e.stopPropagation()}>
             <PopupImage
-              src={`/telkomsel/Biaya Spesial DPLK Syariah Muamalat.png`}
+              src={`/telkomsel/Biaya Spesial.png`}
               alt="Biaya Spesial"
             />
           </PopupContent>

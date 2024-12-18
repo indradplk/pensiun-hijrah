@@ -122,6 +122,7 @@ export const BtnLinks = styled(LinkR)`
   cursor: pointer;
   transition: all 0.2 ease-ease-in-out;
   text-decoration: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   &:hover {
     transition: all 0.2 ease-in-out;
     background: #008FD0;
@@ -140,6 +141,7 @@ export const BtnLink1 = styled.a`
   cursor: pointer;
   transition: all 0.2 ease-ease-in-out;
   text-decoration: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   &:hover {
     transition: all 0.2 ease-in-out;
     background: #008FD0;
@@ -158,6 +160,7 @@ export const BtnLink2 = styled.a`
   cursor: pointer;
   transition: all 0.2 ease-ease-in-out;
   text-decoration: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   &:hover {
     transition: all 0.2 ease-in-out;
     background: #008FD0;
@@ -176,6 +179,7 @@ export const BtnLink3 = styled.a`
   cursor: pointer;
   transition: all 0.2 ease-ease-in-out;
   text-decoration: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   &:hover {
     transition: all 0.2 ease-in-out;
     background: #008FD0;
@@ -199,7 +203,7 @@ export const ProgramCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 15px;
+  padding: 10px;
   grid-gap: 10px;
 `;
 export const ProgramIcon = styled.img`

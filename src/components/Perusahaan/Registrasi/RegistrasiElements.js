@@ -121,6 +121,13 @@ export const FormInput = styled.input`
   margin-bottom: 12px;
   border-radius: 4px;
   font-size: 14px;
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+    width: 100%
+  }
 `;
 export const FormInputCustomLeft = styled.input`
   padding: 8px 8px;
@@ -130,6 +137,13 @@ export const FormInputCustomLeft = styled.input`
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   font-size: 14px;
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+    width: 100%
+  }
 `;
 export const FormInputCustomRight = styled.input`
   padding: 8px 8px;
@@ -139,6 +153,13 @@ export const FormInputCustomRight = styled.input`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   font-size: 14px;
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+    width: 100%
+  }
 `;
 export const FormSpanLeft = styled.span`
   padding: 8px 8px;

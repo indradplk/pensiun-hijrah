@@ -114,20 +114,11 @@ exports.create = async (req, res) => {
             nama_ahli_waris_3, tanggal_lahir_ahli_waris_3, jenis_kelamin_ahli_waris_3, hubungan_ahli_waris_3, no_referensi, kode_cab_daftar
         } = req.body;
 
-        // Check uploaded document
-        if (!req.files || !req.files.foto_ktp || req.files.foto_ktp.length === 0 || !req.files.foto_npwp || req.files.foto_npwp.length === 0 || !req.files.foto_kk || req.files.foto_kk.length === 0) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'Please upload the document!',
-            });
-        }
-
         if (!nama || !nama_ahli_waris_1 || !ibu_kandung) {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Name must be filled in!',
+                message: 'Nama/nama ahli waris/nama ibu kandung wajib diisi!',
             });
         }
 
@@ -135,7 +126,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Place and date of birth must be filled in!',
+                message: 'Tempat lahir/tanggal lahir/tanggal lahir ahli waris wajib diisi!',
             });
         }
 
@@ -143,7 +134,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Identity Type/Number must be filled in!',
+                message: 'Jenis/Nomor identitas wajib diisi!',
             });
         }
 
@@ -153,7 +144,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Address must be filled in!',
+                message: 'Alamat/alamat rumah/alamat kantor wajib diisi!',
             });
         }
 
@@ -161,7 +152,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Gender must be filled in!',
+                message: 'Jenis kelamin/jenis kelamin ahli waris wajib diisi!',
             });
         }
 
@@ -169,7 +160,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Citizenship must be filled in!',
+                message: 'Kewarganegaraan wajib diisi!',
             });
         }
 
@@ -177,7 +168,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Mobile number must be filled in!',
+                message: 'Nomor HP wajib diisi!',
             });
         }
 
@@ -185,7 +176,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'NPWP must be filled in!',
+                message: 'NPWP wajib diisi!',
             });
         }
 
@@ -193,7 +184,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Funding sources must be filled in!',
+                message: 'Sumber dana rekening/iuran wajib diisi!',
             });
         }
 
@@ -201,7 +192,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Email must be filled in and valid!',
+                message: 'Email wajib diisi dan valid!',
             });
         }
 
@@ -209,7 +200,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Income must be filled in!',
+                message: 'Penghasilan tetap/tidak tetap/tambahan wajib diisi!',
             });
         }
 
@@ -217,7 +208,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Contribution Amount/System must be filled in!',
+                message: 'Iuran/Sistem pembayaran iuran wajib diisi!',
             });
         }
 
@@ -225,7 +216,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Investment package must be filled in!',
+                message: 'Paket investasi wajib diisi!',
             });
         }
 
@@ -233,7 +224,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Other pension fund participants must be filled in!',
+                message: 'Peserta pengalihan/Dapen lain wajib diisi!',
             });
         }
 
@@ -241,7 +232,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Religion must be filled in!',
+                message: 'Agama wajib diisi!',
             });
         }
 
@@ -249,7 +240,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Last education must be filled in!',
+                message: 'Pendidikan terakhir wajib diisi!',
             });
         }
 
@@ -257,7 +248,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Status/Relationship must be filled in!',
+                message: 'Status perkawinan/hubungan ahli waris wajib diisi!',
             });
         }
 
@@ -265,7 +256,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Jobs must be filled in!',
+                message: 'Pekerjaan/perusahaan/pemilikan wajib diisi!',
             });
         }
 
@@ -273,7 +264,7 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Retirement age must be filled in!',
+                message: 'Usia pensiun wajib diisi!',
             });
         }
 
@@ -281,7 +272,16 @@ exports.create = async (req, res) => {
             return response(res, {
                 code: 400,
                 success: false,
-                message: 'Branch offices must be filled in!',
+                message: 'Kode cabang daftar wajib diisi!',
+            });
+        }
+
+        // Check uploaded document
+        if (!req.files || !req.files.foto_ktp || req.files.foto_ktp.length === 0 || !req.files.foto_npwp || req.files.foto_npwp.length === 0 || !req.files.foto_kk || req.files.foto_kk.length === 0) {
+            return response(res, {
+                code: 400,
+                success: false,
+                message: 'Silakan upload dokumen KTP/NPWP/Kartu Keluarga!',
             });
         }
 

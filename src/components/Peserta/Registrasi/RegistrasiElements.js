@@ -133,8 +133,12 @@ export const FormInput = styled.input`
   margin-bottom: 12px;
   border-radius: 4px;
   font-size: 14px;
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
   @media screen and (max-width: 480px) {
-    font-size: 6px;
+    font-size: 10px;
+    width: 100%
   }
 `;
 export const FormInputCustomLeft = styled.input`
@@ -145,8 +149,12 @@ export const FormInputCustomLeft = styled.input`
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   font-size: 14px;
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
   @media screen and (max-width: 480px) {
-    font-size: 6px;
+    font-size: 10px;
+    width: 100%
   }
 `;
 export const FormInputCustomRight = styled.input`
@@ -157,8 +165,12 @@ export const FormInputCustomRight = styled.input`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   font-size: 14px;
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
   @media screen and (max-width: 480px) {
-    font-size: 6px;
+    font-size: 10px;
+    width: 100%
   }
 `;
 export const FormSpanLeft = styled.span`
@@ -173,7 +185,7 @@ export const FormSpanLeft = styled.span`
   border-bottom-right-radius: 0;
   font-size: 14px;
   @media screen and (max-width: 480px) {
-    font-size: 6px;
+    font-size: 10px;
   }
 `;
 export const FormSpanRight = styled.span`
@@ -188,7 +200,7 @@ export const FormSpanRight = styled.span`
   border-bottom-right-radius: 4px;
   font-size: 14px;
   @media screen and (max-width: 480px) {
-    font-size: 6px;
+    font-size: 10px;
   }
 `;
 export const FormSpanDisabled = styled.span`
@@ -203,7 +215,7 @@ export const FormSpanDisabled = styled.span`
   border-bottom-right-radius: 0;
   font-size: 14px;
   @media screen and (max-width: 480px) {
-    font-size: 6px;
+    font-size: 10px;
   }
 `;
 export const FormRupiahLeft = styled.div`
@@ -213,6 +225,7 @@ export const FormRupiahLeft = styled.div`
 export const FormAgreeLeft = styled.div`
   display: grid;
   grid-template-columns: 0.05fr 1fr;
+  grid-gap: 10px;
 `;
 export const FormRupiahRight = styled.div`
   display: grid;
@@ -225,8 +238,12 @@ export const FormSelect = styled.select`
   border-width: 2px;
   border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
   font-size: 14px;
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
   @media screen and (max-width: 480px) {
-    font-size: 6px;
+    font-size: 10px;
+    width: 100%
   }
 `;
 export const FormOption = styled.option`
@@ -245,6 +262,13 @@ export const FormText = styled.textarea`
   border-radius: 4px;
   border-width: 2px;
   border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 10px;
+    width: 100%
+  }
 `;
 export const FormButton = styled.button`
   background: linear-gradient(
@@ -303,7 +327,11 @@ export const Text = styled(Link)`
   margin-bottom: 20px;
   color: #212121;
   font-size: 12px;
+  @media screen and (max-width: 1024px) {
+    width: 100%
+  }
   @media screen and (max-width: 480px) {
     font-size: 10px;
+    width: 100%
   }
 `;

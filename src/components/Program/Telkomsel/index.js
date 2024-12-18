@@ -34,7 +34,7 @@ const TelkomselSection = () => {
       <ProgramWrapper>
         <ProgramIcon src={`/telkomsel/Mengapa DPLK Syariah Muamalat PNG.png`} />
         <ProgramCard>
-          <BtnLink1 href="https://www.dplksyariahmuamalat.co.id/peserta/registrasi/">Daftar Sekarang</BtnLink1>
+          <BtnLink1 href="https://www.dplksyariahmuamalat.co.id/peserta/registrasi/"><strong>Daftar Sekarang*</strong></BtnLink1>
           <ProgramH2>
             *Masukkan kode <strong>TSEL-[NIK/Nomor Induk Karyawan]</strong><br/>
             pada kolom <strong>Nomor Referensi</strong> saat melakukan pendaftaran<br/>

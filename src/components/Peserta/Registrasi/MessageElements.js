@@ -26,8 +26,10 @@ export const SuccessCard = styled.div`
 export const MessageH1 = styled.h1`
   font-size: 18px;
   color: #fff;
+  text-align: center;
 `;
 export const MessageH2 = styled.h2`
   font-size: 14px;
   color: #fff;
+  text-align: center;
 `;

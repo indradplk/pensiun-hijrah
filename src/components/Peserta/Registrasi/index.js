@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Select from 'react-select';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -16,6 +16,7 @@ import {
   FormDiv,
   FormH3,
   FormH2,
+  FormH2Error,
   FormH1,
   FormInputWrapper,
   FormInputDiv,
@@ -109,7 +110,8 @@ const Registrasi = () => {
     tanggal_lahir_ahli_waris_3: '',
     jenis_kelamin_ahli_waris_3: '',
     hubungan_ahli_waris_3: '',
-    kode_cab_daftar: ''
+    kode_cab_daftar: '',
+    samaDenganKTP: false
   });
   const history = useHistory();
   const [success, setSuccess] = useState('');
@@ -140,6 +142,69 @@ const Registrasi = () => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const fieldRefs = {
+    nama: useRef(null),
+    tempat_lahir: useRef(null),
+    tanggal_lahir: useRef(null),
+    jenis_identitas: useRef(null),
+    no_identitas: useRef(null),
+    kodepos: useRef(null),
+    warganegara: useRef(null),
+    jenis_kelamin: useRef(null),
+    agama: useRef(null),
+    ibu_kandung: useRef(null),
+    alamat: useRef(null),
+    rtrw: useRef(null),
+    kelurahan: useRef(null),
+    kecamatan: useRef(null),
+    kota: useRef(null),
+    provinsi: useRef(null),
+    foto_ktp: useRef(null),
+    foto_kk: useRef(null),
+    fot_npwp: useRef(null),
+    no_referensi: useRef(null),
+    npwp: useRef(null),
+    alamat_rumah: useRef(null),
+    rtrw_rumah: useRef(null),
+    kelurahan_rumah: useRef(null),
+    kecamatan_rumah: useRef(null),
+    kota_rumah: useRef(null),
+    provinsi_rumah: useRef(null),
+    kodepos_rumah: useRef(null),
+    pendidikan: useRef(null),
+    perkawinan: useRef(null),
+    email: useRef(null),
+    no_hp: useRef(null),
+    pekerjaan: useRef(null),
+    perusahaan: useRef(null),
+    pemilikan: useRef(null),
+    bidang_pekerjaan: useRef(null),
+    alamat_kantor: useRef(null),
+    rtrw_kantor: useRef(null),
+    kelurahan_kantor: useRef(null),
+    kecamatan_kantor: useRef(null),
+    kota_kantor: useRef(null),
+    provinsi_kantor: useRef(null),
+    kodepos_kantor: useRef(null),
+    penghasilan_tetap: useRef(null),
+    penghasilan_tidak_tetap: useRef(null),
+    penghasilan_tambahan: useRef(null),
+    usia_pensiun: useRef(null),
+    iuran: useRef(null),
+    pembayaran_iuran: useRef(null),
+    paket_investasi: useRef(null),
+    peserta_pengalihan: useRef(null),
+    peserta_dapen: useRef(null),
+    dana_rekening: useRef(null),
+    dana_iuran: useRef(null),
+    nama_ahli_waris_1: useRef(null),
+    tanggal_lahir_ahli_waris_1: useRef(null),
+    jenis_kelamin_ahli_waris_1: useRef(null),
+    hubungan_ahli_waris_1: useRef(null),
+    kode_cab_daftar: useRef(null)
+  };
 
   useEffect(() => {
     axios
@@ -484,11 +549,36 @@ const Registrasi = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type, checked } = e.target;
+    
+    if (type === 'checkbox') {
+      setFormData((prevData) => ({
+        ...prevData,
+        samaDenganKTP: checked,
+        alamat_rumah: checked ? prevData.alamat : '',
+        rtrw_rumah: checked ? prevData.rtrw : '',
+        kodepos_rumah: checked ? prevData.kodepos : '',
+        provinsi_rumah: checked ? prevData.provinsi : '',
+        kota_rumah: checked ? prevData.kota : '',
+        kecamatan_rumah: checked ? prevData.kecamatan : '',
+        kelurahan_rumah: checked ? prevData.kelurahan : '',
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+        ...(prevData.samaDenganKTP && {
+          alamat_rumah: name === 'alamat' ? value : prevData.alamat_rumah,
+          rtrw_rumah: name === 'rtrw' ? value : prevData.rtrw_rumah,
+          kodepos_rumah: name === 'kodepos' ? value : prevData.kodepos_rumah,
+          provinsi_rumah: name === 'provinsi' ? value : prevData.provinsi_rumah,
+          kota_rumah: name === 'kota' ? value : prevData.kota_rumah,
+          kecamatan_rumah: name === 'kecamatan' ? value : prevData.kecamatan_rumah,
+          kelurahan_rumah: name === 'kelurahan' ? value : prevData.kelurahan_rumah,
+        }),
+      }));
+    }
+    setErrors({ ...errors, [name]: '' });
   };
 
   const handleFileChange = (e) => {
@@ -521,8 +611,191 @@ const Registrasi = () => {
     setShowButton(checked);
   };
 
+  const validateForm = () => { 
+    const newErrors = {};
+    if (!formData.nama) {
+      newErrors.nama = 'Nama harus diisi.';
+    }
+    if (!formData.nama_ahli_waris_1) {
+      newErrors.nama_ahli_waris_1 = 'Nama ahli waris harus diisi.';
+    }
+    if (!formData.agama) {
+      newErrors.agama = 'Agama harus diisi.';
+    }
+    if (!formData.pendidikan) {
+      newErrors.pendidikan = 'Pendidikan terakhir harus diisi.';
+    }
+    if (!formData.perkawinan) {
+      newErrors.perkawinan = 'Status perkawinan harus diisi.';
+    }
+    if (!formData.usia_pensiun) {
+      newErrors.usia_pensiun = 'Usia pensiun harus diisi.';
+    }
+    if (!formData.paket_investasi) {
+      newErrors.paket_investasi = 'Paket investasi harus diisi.';
+    }
+    if (!formData.tanggal_lahir || formData.tanggal_lahir === '0000-00-00') {
+      newErrors.tanggal_lahir = 'Tanggal lahir harus diisi.';
+    }
+    if (!formData.tanggal_lahir_ahli_waris_1 || formData.tanggal_lahir_ahli_waris_1 === '0000-00-00') {
+      newErrors.tanggal_lahir_ahli_waris_1 = 'Tanggal lahir ahli waris harus diisi.';
+    }
+    if (!formData.jenis_identitas) {
+      newErrors.jenis_identitas = 'Jenis identitas harus diisi.';
+    }
+    if (!formData.warganegara) {
+      newErrors.warganegara = 'Kewarganegaraan harus diisi.';
+    }
+    if (!formData.tempat_lahir) {
+      newErrors.tempat_lahir = 'Tempat lahir harus diisi.';
+    }
+    if (!formData.no_identitas) {
+      newErrors.no_identitas = 'Nomor Kartu Identitas harus diisi.';
+    }
+    if (!formData.npwp) {
+      newErrors.npwp = 'NPWP harus diisi.';
+    }
+    if (!formData.jenis_kelamin) {
+      newErrors.jenis_kelamin = 'Jenis kelamin harus diisi.';
+    }
+    if (!formData.jenis_kelamin_ahli_waris_1) {
+      newErrors.jenis_kelamin_ahli_waris_1 = 'Jenis kelamin harus diisi.';
+    }
+    if (!formData.hubungan_ahli_waris_1) {
+      newErrors.hubungan_ahli_waris_1 = 'Hubungan ahli waris harus diisi.';
+    }
+    if (!formData.ibu_kandung) {
+      newErrors.ibu_kandung = 'Nama ibu kandung harus diisi.';
+    }
+    if (!formData.no_hp) {
+      newErrors.no_hp = 'Nomor Telepon Genggam harus diisi.';
+    }
+    if (!formData.alamat) {
+      newErrors.alamat = 'Alamat harus diisi.';
+    }
+    if (!formData.alamat_rumah) {
+      newErrors.alamat_rumah = 'Alamat rumah harus diisi.';
+    }
+    if (!formData.alamat_kantor) {
+      newErrors.alamat_kantor = 'Alamat kantor harus diisi.';
+    }
+    if (!formData.rtrw) {
+      newErrors.rtrw = 'RT/RW harus diisi.';
+    }
+    if (!formData.rtrw_rumah) {
+      newErrors.rtrw_rumah = 'RT/RW rumah harus diisi.';
+    }
+    if (!formData.rtrw_kantor) {
+      newErrors.rtrw_kantor = 'RT/RW kantor harus diisi.';
+    }
+    if (!formData.kelurahan) {
+      newErrors.kelurahan = 'Desa/Kelurahan harus diisi.';
+    }
+    if (!formData.kelurahan_rumah) {
+      newErrors.kelurahan_rumah = 'Desa/Kelurahan rumah harus diisi.';
+    }
+    if (!formData.kelurahan_kantor) {
+      newErrors.kelurahan_kantor = 'Desa/Kelurahan kantor harus diisi.';
+    }
+    if (!formData.kecamatan) {
+      newErrors.kecamatan = 'Kecamatan harus diisi.';
+    }
+    if (!formData.kecamatan_rumah) {
+      newErrors.kecamatan_rumah = 'Kecamatan rumah harus diisi.';
+    }
+    if (!formData.kecamatan_kantor) {
+      newErrors.kecamatan_kantor = 'Kecamatan kantor harus diisi.';
+    }
+    if (!formData.kota) {
+      newErrors.kota = 'Kota/Kabupaten harus diisi.';
+    }
+    if (!formData.kota_rumah) {
+      newErrors.kota_rumah = 'Kota/Kabupaten rumah harus diisi.';
+    }
+    if (!formData.kota_kantor) {
+      newErrors.kota_kantor = 'Kota/Kabupaten kantor harus diisi.';
+    }
+    if (!formData.provinsi) {
+      newErrors.provinsi = 'Provinsi harus diisi.';
+    }
+    if (!formData.provinsi_rumah) {
+      newErrors.provinsi_rumah = 'Provinsi rumah harus diisi.';
+    }
+    if (!formData.provinsi_kantor) {
+      newErrors.provinsi_kantor = 'Provinsi kantor harus diisi.';
+    }
+    if (!formData.kodepos) {
+      newErrors.kodepos = 'Kode Pos harus diisi.';
+    }
+    if (!formData.kodepos_kantor) {
+      newErrors.kodepos_kantor = 'Kode Pos kantor harus diisi.';
+    }
+    if (!formData.kodepos_rumah) {
+      newErrors.kodepos_rumah = 'Kode Pos rumah harus diisi.';
+    }
+    if (!formData.email) {
+      newErrors.email = 'Email harus diisi.';
+    }
+    if (!formData.pekerjaan) {
+      newErrors.pekerjaan = 'Pekerjaan harus diisi.';
+    }
+    if (!formData.pemilikan) {
+      newErrors.pemilikan = 'Pemilikan harus diisi.';
+    }
+    if (!formData.perusahaan) {
+      newErrors.perusahaan = 'Nama perusahaan harus diisi.';
+    }
+    if (!formData.bidang_pekerjaan) {
+      newErrors.bidang_pekerjaan = 'Bidang pekerjaan harus diisi.';
+    }
+    if (!formData.penghasilan_tetap) {
+      newErrors.penghasilan_tetap = 'Penghasilan tetap harus diisi.';
+    }
+    if (!formData.penghasilan_tidak_tetap) {
+      newErrors.penghasilan_tidak_tetap = 'Penghasilan tidak tetap harus diisi.';
+    }
+    if (!formData.penghasilan_tambahan) {
+      newErrors.penghasilan_tambahan = 'Penghasilan tambahan tetap harus diisi.';
+    }
+    if (!formData.kode_cab_daftar) {
+      newErrors.kode_cab_daftar = 'Kode cabang daftar harus diisi.';
+    }
+    if (!formData.peserta_pengalihan) {
+      newErrors.peserta_pengalihan = 'Peserta pengalihan harus diisi.';
+    }
+    if (!formData.peserta_dapen) {
+      newErrors.peserta_dapen = 'Peserta Dapen lain harus diisi.';
+    }
+    if (!formData.iuran) {
+      newErrors.iuran = 'Jumlah iuran harus diisi.';
+    }
+    if (!formData.pembayaran_iuran) {
+      newErrors.pembayaran_iuran = 'Sistem pembayaran iuran harus diisi.';
+    }
+    if (!formData.dana_iuran) {
+      newErrors.dana_iuran = 'Sumber dana iuran harus diisi.';
+    }
+    if (!formData.dana_rekening) {
+      newErrors.dana_rekening = 'Sumber dana rekening harus diisi.';
+    }
+    return newErrors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      const firstErrorField = Object.keys(newErrors)[0];
+      if (fieldRefs[firstErrorField] && fieldRefs[firstErrorField].current) {
+        fieldRefs[firstErrorField].current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+        fieldRefs[firstErrorField].current.focus();
+      }
+    }
+    
     setLoading(true);
 
     try {
@@ -669,96 +942,115 @@ const Registrasi = () => {
               <FormCardWrapper>
                 <FormDiv>
                   <FormLabel htmlFor="nama">Nama</FormLabel>
-                  <FormInput id="nama" type="text" name="nama" value={formData.nama} onChange={handleChange} />
+                  <FormInput id="nama" type="text" name="nama" ref={fieldRefs.nama} value={formData.nama} onChange={handleChange} />
+                  {errors.nama && <FormH2Error>{errors.nama}</FormH2Error>}
                   <FormH2><i>Nama sesuai yang tertera di kartu identitas.</i></FormH2>
                   <FormInputWrapper>
                     <FormInputDiv>
                       <FormLabel htmlFor="jenis_identitas">Jenis Identitas</FormLabel>
-                      <FormSelect id="jenis_identitas" name="jenis_identitas" value={formData.jenis_identitas} onChange={handleChange}>
+                      <FormSelect id="jenis_identitas" name="jenis_identitas" ref={fieldRefs.jenis_identitas} value={formData.jenis_identitas} onChange={handleChange}>
                         <FormOption value="">Jenis Identitas</FormOption>
                         <FormOption value="ktp">KTP</FormOption>
                         <FormOption value="sim">SIM</FormOption>
                         <FormOption value="paspor">Paspor</FormOption>
                         <FormOption value="kitas">KIM/KITAS</FormOption>
                       </FormSelect>
+                      {errors.jenis_identitas && <FormH2Error>{errors.jenis_identitas}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="no_identitas">Nomor Identitas</FormLabel>
-                      <FormInput id="no_identitas" type="text" name="no_identitas" value={formData.no_identitas} onChange={handleChange} />
+                      <FormInput id="no_identitas" type="text" name="no_identitas" ref={fieldRefs.no_identitas} value={formData.no_identitas} onChange={handleChange} />
+                      {errors.no_identitas && <FormH2Error>{errors.no_identitas}</FormH2Error>}
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormLabel htmlFor="alamat">Alamat</FormLabel>
-                  <FormText id="alamat" name="alamat" value={formData.alamat} onChange={handleChange} />
+                  <FormText id="alamat" name="alamat" value={formData.alamat} ref={fieldRefs.alamat} onChange={handleChange} />
                   <FormH2><i>Alamat sesuai yang tertera di kartu identitas.</i></FormH2>
+                  {errors.alamat && <FormH2Error>{errors.alamat}</FormH2Error>}
                   <FormInputWrapper>
                     <FormInputDiv>
                       <FormLabel htmlFor="rtrw">RT/RW</FormLabel>
-                      <FormInput id="rtrw" type="text" name="rtrw" value={formData.rtrw} onChange={handleChange} />
+                      <FormInput id="rtrw" type="text" name="rtrw" value={formData.rtrw} ref={fieldRefs.rtrw} onChange={handleChange} />
+                      {errors.rtrw && <FormH2Error>{errors.rtrw}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="kodepos">Kode Pos</FormLabel>
-                      <FormInput id="kodepos" type="text" name="kodepos" value={formData.kodepos} onChange={handleChange} />
+                      <FormInput id="kodepos" type="text" name="kodepos" value={formData.kodepos} ref={fieldRefs.kodepos} onChange={handleChange} />
+                      {errors.kodepos && <FormH2Error>{errors.kodepos}</FormH2Error>}
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormLabel htmlFor="provinsi">Provinsi</FormLabel>
-                  <FormSelect id="provinsi" name="provinsi" onChange={handleProvinsiChange} value={formData.provinsi}>
+                  <FormSelect id="provinsi" name="provinsi" onChange={handleProvinsiChange} value={formData.provinsi} ref={fieldRefs.provinsi}>
                     {provinces.map(province => (
                       <FormOption key={province.id} value={province.name}>{province.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.provinsi && <FormH2Error>{errors.provinsi}</FormH2Error>}
                   <FormLabel htmlFor="kota">Kabupaten/Kota</FormLabel>
-                  <FormSelect id="kota" name="kota" onChange={handleKotaChange} value={formData.kota}>
+                  <FormSelect id="kota" name="kota" onChange={handleKotaChange} value={formData.kota} ref={fieldRefs.kota}>
+                    <FormOption value=''>Kabupaten/Kota</FormOption>
                     {districts.map(city => (
-                      <FormOption key={city.id} value={`${city.name}`}>{`${city.name}`}</FormOption>
+                      <FormOption key={city.id} value={city.name}>{city.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.kota && <FormH2Error>{errors.kota}</FormH2Error>}
                   <FormLabel htmlFor="kecamatan">Kecamatan</FormLabel>
-                  <FormSelect id="kecamatan" name="kecamatan" onChange={handleKecamatanChange} value={formData.kecamatan}>
+                  <FormSelect id="kecamatan" name="kecamatan" onChange={handleKecamatanChange} value={formData.kecamatan} ref={fieldRefs.kecamatan}>
+                    <FormOption value=''>Kecamatan</FormOption>
                     {subdistricts.map(kecamatan => (
                       <FormOption key={kecamatan.id} value={kecamatan.name}>{kecamatan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.kecamatan && <FormH2Error>{errors.kecamatan}</FormH2Error>}
                   <FormLabel htmlFor="kelurahan">Desa/Kelurahan</FormLabel>
-                  <FormSelect id="kelurahan" name="kelurahan" onChange={handleKelurahanChange} value={formData.kelurahan}>
+                  <FormSelect id="kelurahan" name="kelurahan" onChange={handleKelurahanChange} value={formData.kelurahan} ref={fieldRefs.kelurahan}>
+                    <FormOption value=''>Desa/Kelurahan</FormOption>
                     {villages.map(kelurahan => (
                       <FormOption key={kelurahan.id} value={kelurahan.name}>{kelurahan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.kelurahan && <FormH2Error>{errors.kelurahan}</FormH2Error>}
                 </FormDiv>
                 <FormDiv>
                   <FormInputWrapper>
                     <FormInputDiv>
                       <FormLabel htmlFor="tempat_lahir">Tempat Lahir</FormLabel>
-                      <FormInput id="tempat_lahir" type="text" name="tempat_lahir" value={formData.tempat_lahir} onChange={handleChange} />
+                      <FormInput id="tempat_lahir" type="text" name="tempat_lahir" value={formData.tempat_lahir} ref={fieldRefs.tempat_lahir} onChange={handleChange} />
+                      {errors.tempat_lahir && <FormH2Error>{errors.tempat_lahir}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="tanggal_lahir">Tanggal Lahir</FormLabel>
-                      <FormInput id="tanggal_lahir" type="date" name="tanggal_lahir" value={formData.tanggal_lahir} onChange={handleChange} />
+                      <FormInput id="tanggal_lahir" type="date" name="tanggal_lahir" value={formData.tanggal_lahir} ref={fieldRefs.tanggal_lahir} onChange={handleChange} />
+                      {errors.tanggal_lahir && <FormH2Error>{errors.tanggal_lahir}</FormH2Error>}
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormLabel htmlFor="warganegara">Kewarganegaraan</FormLabel>
-                  <FormSelect id="warganegara" name="warganegara" value={formData.warganegara} onChange={handleChange}>
-                    <FormOption value="0">Kewarganegaraan</FormOption>
+                  <FormSelect id="warganegara" name="warganegara" value={formData.warganegara} ref={fieldRefs.warganegara} onChange={handleChange}>
+                    <FormOption value="">Kewarganegaraan</FormOption>
                     <FormOption value="1">Warga Negara Indonesia</FormOption>
                     <FormOption value="2">Warga Negara Asing</FormOption>
                   </FormSelect>
+                  {errors.warganegara && <FormH2Error>{errors.warganegara}</FormH2Error>}
                   <FormLabel htmlFor="jenis_kelamin">Jenis Kelamin</FormLabel>
-                  <FormSelect id="jenis_kelamin" name="jenis_kelamin" value={formData.jenis_kelamin} onChange={handleChange}>
+                  <FormSelect id="jenis_kelamin" name="jenis_kelamin" value={formData.jenis_kelamin} ref={fieldRefs.jenis_kelamin} onChange={handleChange}>
                     <FormOption value="">Jenis Kelamin</FormOption>
                     <FormOption value="P">Pria</FormOption>
                     <FormOption value="W">Wanita</FormOption>
                   </FormSelect>
+                  {errors.jenis_kelamin && <FormH2Error>{errors.jenis_kelamin}</FormH2Error>}
                   <FormLabel htmlFor="agama">Agama</FormLabel>
-                  <FormSelect id="agama" name="agama" value={formData.agama} onChange={handleChange}>
+                  <FormSelect id="agama" name="agama" value={formData.agama} ref={fieldRefs.agama} onChange={handleChange}>
                     {agamaData && agamaData.map((agama) => (
                       <FormOption key={agama.id} value={agama.code}>{agama.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.agama && <FormH2Error>{errors.agama}</FormH2Error>}
                   <FormLabel htmlFor="ibu_kandung">Nama Gadis Ibu Kandung</FormLabel>
-                  <FormInput id="ibu_kandung" type="text" name="ibu_kandung" value={formData.ibu_kandung} onChange={handleChange} />
+                  <FormInput id="ibu_kandung" type="text" name="ibu_kandung" value={formData.ibu_kandung} ref={fieldRefs.ibu_kandung} onChange={handleChange} />
+                  {errors.ibu_kandung && <FormH2Error>{errors.ibu_kandung}</FormH2Error>}
                   <FormH2><i>Nama sesuai yang tertera di kartu keluarga.</i></FormH2>
                   <FormLabel htmlFor="no_referensi">Nomor Referensi</FormLabel>
-                  <FormInput id="no_referensi" type="text" name="no_referensi" value={formData.no_referensi} onChange={handleChange} />
+                  <FormInput id="no_referensi" type="text" name="no_referensi" value={formData.no_referensi} ref={fieldRefs.no_referensi} onChange={handleChange} />
                   <FormH2><i>Kosongkan jika tidak ada.</i></FormH2>
                   <FormLabel htmlFor="foto_ktp">Upload Foto Kartu Identitas</FormLabel>
                   <FormInput id="foto_ktp" type="file" name="foto_ktp" onChange={handleFileChange} />
@@ -773,63 +1065,97 @@ const Registrasi = () => {
               <FormCardWrapper>
                 <FormDiv>
                   <FormLabel htmlFor="alamat_rumah">Alamat Rumah</FormLabel>
-                  <FormText id="alamat_rumah" name="alamat_rumah" value={formData.alamat_rumah} onChange={handleChange} />
+                  <FormAgreeLeft>
+                    <FormInput type='checkbox' id='samaDenganKTP' name='samaDenganKTP' checked={formData.samaDenganKTP} onChange={handleChange}/>
+                    <FormLabel htmlFor='samaDenganKTP'><i>Alamat domisili tempat tinggal sama dengan alamat yang tertera di kartu identitas.</i></FormLabel>
+                  </FormAgreeLeft>
+                  <FormText id="alamat_rumah" name="alamat_rumah" value={formData.alamat_rumah} ref={fieldRefs.alamat_rumah} onChange={handleChange} disabled={formData.samaDenganKTP}/>
+                  {errors.alamat_rumah && <FormH2Error>{errors.alamat_rumah}</FormH2Error>}
                   <FormH2><i>Alamat sesuai dengan domisili tempat tinggal saat ini.</i></FormH2>
                   <FormInputWrapper>
                     <FormInputDiv>
                       <FormLabel htmlFor="rtrw_rumah">RT/RW</FormLabel>
-                      <FormInput id="rtrw_rumah" type="text" name="rtrw_rumah" value={formData.rtrw_rumah} onChange={handleChange} />
+                      <FormInput id="rtrw_rumah" type="text" name="rtrw_rumah" value={formData.rtrw_rumah} ref={fieldRefs.rtrw_rumah} onChange={handleChange} disabled={formData.samaDenganKTP}/>
+                      {errors.rtrw_rumah && <FormH2Error>{errors.rtrw_rumah}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="kodepos_rumah">Kode Pos</FormLabel>
-                      <FormInput id="kodepos_rumah" type="text" name="kodepos_rumah" value={formData.kodepos_rumah} onChange={handleChange} />
+                      <FormInput id="kodepos_rumah" type="text" name="kodepos_rumah" value={formData.kodepos_rumah} ref={fieldRefs.kodepos_rumah} onChange={handleChange} disabled={formData.samaDenganKTP}/>
+                      {errors.kodepos_rumah && <FormH2Error>{errors.kodepos_rumah}</FormH2Error>}
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormLabel htmlFor="provinsi_rumah">Provinsi</FormLabel>
-                  <FormSelect id="provinsi_rumah" name="provinsi_rumah" onChange={handleProvinsiRumahChange} value={formData.provinsi_rumah}>
+                  {formData.samaDenganKTP ? (
+                  <FormInput id="provinsi_rumah" name="provinsi_rumah" onChange={handleChange} value={formData.provinsi_rumah} disabled={formData.samaDenganKTP} />
+                  ) : (
+                  <FormSelect id="provinsi_rumah" name="provinsi_rumah" onChange={handleProvinsiRumahChange} ref={fieldRefs.provinsi_rumah} value={formData.provinsi_rumah}>
                     {provinces.map(province => (
                       <FormOption key={province.id} value={province.name}>{province.name}</FormOption>
                     ))}
                   </FormSelect>
+                  )}
+                  {errors.provinsi_rumah && <FormH2Error>{errors.provinsi_rumah}</FormH2Error>}
                   <FormLabel htmlFor="kota_rumah">Kabupaten/Kota</FormLabel>
-                  <FormSelect id="kota_rumah" name="kota_rumah" onChange={handleKotaRumahChange} value={formData.kota_rumah}>
+                  {formData.samaDenganKTP ? (
+                  <FormInput id="kota_rumah" name="kota_rumah" onChange={handleChange} value={formData.kota_rumah} disabled={formData.samaDenganKTP} />
+                  ) : (
+                  <FormSelect id="kota_rumah" name="kota_rumah" onChange={handleKotaRumahChange} value={formData.kota_rumah} ref={fieldRefs.kota_rumah}>
+                    <FormOption value="">Kabupaten/Kota</FormOption>
                     {districtsRumah.map(city => (
-                      <FormOption key={city.id} value={`${city.name}`}>{`${city.name}`}</FormOption>
+                      <FormOption key={city.id} value={city.name}>{city.name}</FormOption>
                     ))}
                   </FormSelect>
+                  )}
+                  {errors.kota_rumah && <FormH2Error>{errors.kota_rumah}</FormH2Error>}
                   <FormLabel htmlFor="kecamatan_rumah">Kecamatan</FormLabel>
-                  <FormSelect id="kecamatan_rumah" name="kecamatan_rumah" onChange={handleKecamatanRumahChange} value={formData.kecamatan_rumah}>
+                  {formData.samaDenganKTP ? (
+                  <FormInput id="kecamatan_rumah" name="kecamatan_rumah" onChange={handleChange} value={formData.kecamatan_rumah} disabled={formData.samaDenganKTP} />
+                  ) : (
+                  <FormSelect id="kecamatan_rumah" name="kecamatan_rumah" onChange={handleKecamatanRumahChange} value={formData.kecamatan_rumah} ref={fieldRefs.kecamatan_rumah}>
+                    <FormOption value="">Kecamatan</FormOption>
                     {subdistrictsRumah.map(kecamatan => (
                       <FormOption key={kecamatan.id} value={kecamatan.name}>{kecamatan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  )}
+                  {errors.kecamatan_rumah && <FormH2Error>{errors.kecamatan_rumah}</FormH2Error>}
                   <FormLabel htmlFor="kelurahan_rumah">Desa/Kelurahan</FormLabel>
-                  <FormSelect id="kelurahan_rumah" name="kelurahan_rumah" onChange={handleKelurahanRumahChange} value={formData.kelurahan_rumah}>
+                  {formData.samaDenganKTP ? (
+                  <FormInput id="kelurahan_rumah" name="kelurahan_rumah" onChange={handleChange} value={formData.kelurahan_rumah} disabled={formData.samaDenganKTP} />
+                  ) : (
+                  <FormSelect id="kelurahan_rumah" name="kelurahan_rumah" onChange={handleKelurahanRumahChange} value={formData.kelurahan_rumah} ref={fieldRefs.kelurahan_rumah}>
+                    <FormOption value="">Desa/Kelurahan</FormOption>
                     {villagesRumah.map(kelurahan => (
                       <FormOption key={kelurahan.id} value={kelurahan.name}>{kelurahan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  )}
+                  {errors.kelurahan_rumah && <FormH2Error>{errors.kelurahan_rumah}</FormH2Error>}
                 </FormDiv>
                 <FormDiv>
                   <FormLabel htmlFor="pendidikan">Pendidikan Terakhir</FormLabel>
-                  <FormSelect id="pendidikan" name="pendidikan" value={formData.pendidikan} onChange={handleChange}>
+                  <FormSelect id="pendidikan" name="pendidikan" value={formData.pendidikan} onChange={handleChange} ref={fieldRefs.pendidikan}>
                     {pendidikanData && pendidikanData.map((pendidikan) => (
                       <FormOption key={pendidikan.id} value={pendidikan.code}>{pendidikan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.pendidikan && <FormH2Error>{errors.pendidikan}</FormH2Error>}
                   <FormLabel htmlFor="perkawinan">Status Perkawinan</FormLabel>
-                  <FormSelect id="perkawinan" name="perkawinan" value={formData.perkawinan} onChange={handleChange}>
+                  <FormSelect id="perkawinan" name="perkawinan" value={formData.perkawinan} onChange={handleChange} ref={fieldRefs.perkawinan}>
                     <FormOption value="">Status Perkawinan</FormOption>
                     <FormOption value="1">Belum Menikah</FormOption>
                     <FormOption value="2">Menikah</FormOption>
                     <FormOption value="3">Janda/Duda</FormOption>
                   </FormSelect>
+                  {errors.perkawinan && <FormH2Error>{errors.perkawinan}</FormH2Error>}
                   <FormLabel htmlFor="email">Email</FormLabel>
-                  <FormInput id="email" type="text" name="email" value={formData.email} onChange={handleChange} />
+                  <FormInput id="email" type="text" name="email" value={formData.email} onChange={handleChange} ref={fieldRefs.email}/>
+                  {errors.email && <FormH2Error>{errors.email}</FormH2Error>}
                   <FormInputWrapper>
                     <FormInputDiv>
                       <FormLabel htmlFor="no_hp">Nomor Telepon Genggam</FormLabel>
-                      <FormInput id="no_hp" type="text" name="no_hp" value={formData.no_hp} onChange={handleChange} />
+                      <FormInput id="no_hp" type="text" name="no_hp" value={formData.no_hp} onChange={handleChange} ref={fieldRefs.no_hp}/>
+                      {errors.no_hp && <FormH2Error>{errors.no_hp}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="no_telp">Nomor Telepon Rumah</FormLabel>
@@ -837,7 +1163,8 @@ const Registrasi = () => {
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormLabel htmlFor="npwp">NPWP</FormLabel>
-                  <FormInput id="npwp" type="text" name="npwp" value={formData.npwp} onChange={handleChange} />
+                  <FormInput id="npwp" type="text" name="npwp" value={formData.npwp} onChange={handleChange} ref={fieldRefs.npwp}/>
+                  {errors.npwp && <FormH2Error>{errors.npwp}</FormH2Error>}
                   <FormLabel htmlFor="foto_npwp">Upload Foto NPWP</FormLabel>
                   <FormInput id="foto_npwp" type="file" name="foto_npwp" onChange={handleFileChange} />
                   <FormH2><i>Unggah dalam format JPG, JPEG, PNG atau PDF.</i></FormH2>
@@ -848,82 +1175,99 @@ const Registrasi = () => {
               <FormCardWrapper>
                 <FormDiv>
                   <FormLabel htmlFor="pekerjaan">Pekerjaan</FormLabel>
-                  <FormSelect id="pekerjaan" name="pekerjaan" value={formData.pekerjaan} onChange={handleChange}>
+                  <FormSelect id="pekerjaan" name="pekerjaan" value={formData.pekerjaan} onChange={handleChange} ref={fieldRefs.pekerjaan}>
                     {pekerjaanData && pekerjaanData.map((pekerjaan) => (
                       <FormOption key={pekerjaan.id} value={pekerjaan.code}>{pekerjaan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.pekerjaan && <FormH2Error>{errors.pekerjaan}</FormH2Error>}
                   <FormLabel htmlFor="perusahaan">Nama Perusahaan</FormLabel>
-                  <FormInput id="perusahaan" type="text" name="perusahaan" value={formData.perusahaan} onChange={handleChange} />
+                  <FormInput id="perusahaan" type="text" name="perusahaan" value={formData.perusahaan} onChange={handleChange} ref={fieldRefs.perusahaan}/>
+                  {errors.perusahaan && <FormH2Error>{errors.perusahaan}</FormH2Error>}
                   <FormLabel htmlFor="pemilikan">Kepemilikan</FormLabel>
-                  <FormSelect id="pemilikan" name="pemilikan" value={formData.pemilikan} onChange={handleChange}>
+                  <FormSelect id="pemilikan" name="pemilikan" value={formData.pemilikan} onChange={handleChange} ref={fieldRefs.pemilikan}>
                     {pemilikanData && pemilikanData.map((pemilikan) => (
                       <FormOption key={pemilikan.id} value={pemilikan.code}>{pemilikan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.pemilikan && <FormH2Error>{errors.pemilikan}</FormH2Error>}
                   <FormLabel htmlFor="bidang_pekerjaan">Bidang Pekerjaan</FormLabel>
-                  <FormSelect id="bidang_pekerjaan" name="bidang_pekerjaan" value={formData.bidang_pekerjaan} onChange={handleChange}>
+                  <FormSelect id="bidang_pekerjaan" name="bidang_pekerjaan" value={formData.bidang_pekerjaan} onChange={handleChange} ref={fieldRefs.bidang_pekerjaan}>
                     {usahaData && usahaData.map((usaha) => (
                       <FormOption key={usaha.id} value={usaha.code}>{usaha.nama}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.bidang_pekerjaan && <FormH2Error>{errors.bidang_pekerjaan}</FormH2Error>}
                   <FormLabel htmlFor="alamat_kantor">Alamat Perusahaan</FormLabel>
-                  <FormText id="alamat_kantor" name="alamat_kantor" value={formData.alamat_kantor} onChange={handleChange} />
+                  <FormText id="alamat_kantor" name="alamat_kantor" value={formData.alamat_kantor} ref={fieldRefs.alamat_kantor} onChange={handleChange} />
+                  {errors.alamat_kantor && <FormH2Error>{errors.alamat_kantor}</FormH2Error>}
                   <FormH2><i>Alamat sesuai dengan domisili kantor saat ini.</i></FormH2>
                   <FormInputWrapper>
                     <FormInputDiv>
                       <FormLabel htmlFor="rtrw_kantor">RT/RW</FormLabel>
-                      <FormInput id="rtrw_kantor" type="text" name="rtrw_kantor" value={formData.rtrw_kantor} onChange={handleChange} />
+                      <FormInput id="rtrw_kantor" type="text" name="rtrw_kantor" value={formData.rtrw_kantor} ref={fieldRefs.rtrw_kantor} onChange={handleChange} />
+                      {errors.rtrw_kantor && <FormH2Error>{errors.rtrw_kantor}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="kodepos_kantor">Kode Pos</FormLabel>
-                      <FormInput id="kodepos_kantor" type="text" name="kodepos_kantor" value={formData.kodepos_kantor} onChange={handleChange} />
+                      <FormInput id="kodepos_kantor" type="text" name="kodepos_kantor" value={formData.kodepos_kantor} ref={fieldRefs.kodepos_kantor} onChange={handleChange} />
+                      {errors.kodepos_kantor && <FormH2Error>{errors.kodepos_kantor}</FormH2Error>}
                     </FormInputDiv>
                   </FormInputWrapper>
                 </FormDiv>
                 <FormDiv>
                 <FormLabel htmlFor="provinsi_kantor">Provinsi</FormLabel>
-                  <FormSelect id="provinsi_kantor" name="provinsi_kantor" onChange={handleProvinsiKantorChange} value={formData.provinsi_kantor}>
+                  <FormSelect id="provinsi_kantor" name="provinsi_kantor" onChange={handleProvinsiKantorChange} value={formData.provinsi_kantor} ref={fieldRefs.provinsi_kantor}>
                     {provinces.map(province => (
                       <FormOption key={province.id} value={province.name}>{province.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.provinsi_kantor && <FormH2Error>{errors.provinsi_kantor}</FormH2Error>}
                   <FormLabel htmlFor="kota_kantor">Kabupaten/Kota</FormLabel>
-                  <FormSelect id="kota_kantor" name="kota_kantor" onChange={handleKotaKantorChange} value={formData.kota_kantor}>
+                  <FormSelect id="kota_kantor" name="kota_kantor" onChange={handleKotaKantorChange} value={formData.kota_kantor} ref={fieldRefs.kota_kantor}>
+                    <FormOption value="">Kabupaten/Kota</FormOption>
                     {districtsKantor.map(city => (
                       <FormOption key={city.id} value={`${city.name}`}>{`${city.name}`}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.kota_kantor && <FormH2Error>{errors.kota_kantor}</FormH2Error>}
                   <FormLabel htmlFor="kecamatan_kantor">Kecamatan</FormLabel>
-                  <FormSelect id="kecamatan_kantor" name="kecamatan_kantor" onChange={handleKecamatanKantorChange} value={formData.kecamatan_kantor}>
+                  <FormSelect id="kecamatan_kantor" name="kecamatan_kantor" onChange={handleKecamatanKantorChange} value={formData.kecamatan_kantor} ref={fieldRefs.kecamatan_kantor}>
+                    <FormOption value="">Kecamatan</FormOption>
                     {subdistrictsKantor.map(kecamatan => (
                       <FormOption key={kecamatan.id} value={kecamatan.name}>{kecamatan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.kecamatan_kantor && <FormH2Error>{errors.kecamatan_kantor}</FormH2Error>}
                   <FormLabel htmlFor="kelurahan_kantor">Desa/Kelurahan</FormLabel>
-                  <FormSelect id="kelurahan_kantor" name="kelurahan_kantor" onChange={handleKelurahanKantorChange} value={formData.kelurahan_kantor}>
+                  <FormSelect id="kelurahan_kantor" name="kelurahan_kantor" onChange={handleKelurahanKantorChange} value={formData.kelurahan_kantor} ref={fieldRefs.kelurahan_kantor}>
+                    <FormOption value="">Desa/Kelurahan</FormOption>
                     {villagesKantor.map(kelurahan => (
                       <FormOption key={kelurahan.id} value={kelurahan.name}>{kelurahan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.kelurahan_kantor && <FormH2Error>{errors.kelurahan_kantor}</FormH2Error>}
                   <FormLabel htmlFor="penghasilan_tetap">Penghasilan Tetap (Bulan)</FormLabel>
-                  <FormSelect id="penghasilan_tetap" name="penghasilan_tetap" value={formData.penghasilan_tetap} onChange={handleChange}>
+                  <FormSelect id="penghasilan_tetap" name="penghasilan_tetap" value={formData.penghasilan_tetap} onChange={handleChange} ref={fieldRefs.penghasilan_tetap}>
                     {penghasilanData && penghasilanData.map((penghasilan) => (
                       <FormOption key={penghasilan.id} value={penghasilan.code}>{penghasilan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.penghasilan_tetap && <FormH2Error>{errors.penghasilan_tetap}</FormH2Error>}
                   <FormLabel htmlFor="penghasilan_tidak_tetap">Penghasilan Tidak Tetap (Bulan)</FormLabel>
-                  <FormSelect id="penghasilan_tidak_tetap" name="penghasilan_tidak_tetap" value={formData.penghasilan_tidak_tetap} onChange={handleChange}>
+                  <FormSelect id="penghasilan_tidak_tetap" name="penghasilan_tidak_tetap" value={formData.penghasilan_tidak_tetap} onChange={handleChange} ref={fieldRefs.penghasilan_tidak_tetap}>
                     {penghasilanTidakTetapData && penghasilanTidakTetapData.map((penghasilan) => (
                       <FormOption key={penghasilan.id} value={penghasilan.code}>{penghasilan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.penghasilan_tidak_tetap && <FormH2Error>{errors.penghasilan_tidak_tetap}</FormH2Error>}
                   <FormLabel htmlFor="penghasilan_tambahan">Penghasilan Tambahan</FormLabel>
-                  <FormSelect id="penghasilan_tambahan" name="penghasilan_tambahan" value={formData.penghasilan_tambahan} onChange={handleChange}>
+                  <FormSelect id="penghasilan_tambahan" name="penghasilan_tambahan" value={formData.penghasilan_tambahan} onChange={handleChange} ref={fieldRefs.penghasilan_tambahan}>
                     {penghasilanTambahan && penghasilanTambahan.map((penghasilan) => (
                       <FormOption key={penghasilan.id} value={penghasilan.code}>{penghasilan.name}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.penghasilan_tambahan && <FormH2Error>{errors.penghasilan_tambahan}</FormH2Error>}
                 </FormDiv>
               </FormCardWrapper>
 
@@ -934,31 +1278,36 @@ const Registrasi = () => {
                   <Select
                     id="kode_cab_daftar"
                     name="kode_cab_daftar"
+                    ref={fieldRefs.kode_cab_daftar}
                     options={options}
                     onChange={handleOfficeChange}
                     placeholder="Pilih cabang terdekat..."
                     styles={customStyles}
                   />
+                  {errors.kode_cab_daftar && <FormH2Error>{errors.kode_cab_daftar}</FormH2Error>}
                   <FormLabel htmlFor="usia_pensiun">Usia Pensiun</FormLabel>
-                  <FormInput id="usia_pensiun" type="number" name="usia_pensiun" value={formData.usia_pensiun} onChange={handleChange} />
+                  <FormInput id="usia_pensiun" type="number" name="usia_pensiun" value={formData.usia_pensiun} onChange={handleChange} ref={fieldRefs.usia_pensiun}/>
+                  {errors.usia_pensiun && <FormH2Error>{errors.usia_pensiun}</FormH2Error>}
                   <FormH2><i>Usia pensiun minimal 55 tahun.</i></FormH2>
                   <FormLabel htmlFor="iuran">Iuran</FormLabel>
                   <FormRupiahLeft>
                     <FormSpanLeft>Rp</FormSpanLeft>
-                    <FormInputCustomLeft id="iuran" type="number" name="iuran" value={formData.iuran} onChange={handleChange} />
+                    <FormInputCustomLeft id="iuran" type="number" name="iuran" value={formData.iuran} onChange={handleChange} ref={fieldRefs.iuran}/>
                   </FormRupiahLeft>
+                  {errors.iuran && <FormH2Error>{errors.iuran}</FormH2Error>}
                   <FormH2><i>Iuran pensiun per bulan.</i></FormH2>
                   <FormLabel htmlFor="pembayaran_iuran">Sistem Pembayaran Iuran</FormLabel>
-                  <FormSelect id="pembayaran_iuran" name="pembayaran_iuran" value={formData.pembayaran_iuran} onChange={handleChange}>
+                  <FormSelect id="pembayaran_iuran" name="pembayaran_iuran" value={formData.pembayaran_iuran} onChange={handleChange} ref={fieldRefs.pembayaran_iuran}>
                     <FormOption value="">Pilih</FormOption>
                     <FormOption value="1">Tunai</FormOption>
                     <FormOption value="2">Transfer</FormOption>
                     <FormOption value="3">Autodebet rekening Bank Muamalat</FormOption>
                   </FormSelect>
+                  {errors.pembayaran_iuran && <FormH2Error>{errors.pembayaran_iuran}</FormH2Error>}
                   <FormH2><i>Jika memilih autodebet, maka harus mengisi terlebih dahulu formulir pengajuan SI di CS.</i></FormH2>
                   
                   <FormLabel htmlFor="paket_investasi">Paket Investasi</FormLabel>
-                  <FormSelect id="paket_investasi" name="paket_investasi" value={formData.paket_investasi} onChange={handleChange} >
+                  <FormSelect id="paket_investasi" name="paket_investasi" value={formData.paket_investasi} onChange={handleChange} ref={fieldRefs.paket_investasi}>
                     {paketInvestasi.map((paket) => (
                       <FormOption key={paket.id} value={paket.value}>{paket.name}</FormOption>
                     ))}
@@ -969,16 +1318,18 @@ const Registrasi = () => {
                     }
                     return null;
                   })}
+                  {errors.paket_investasi && <FormH2Error>{errors.paket_investasi}</FormH2Error>}
                 </FormDiv>
                 <FormDiv>
                   <FormInputWrapper>
                     <FormInputDiv>
                       <FormLabel htmlFor="peserta_pengalihan">Peserta Pengalihan</FormLabel>
-                      <FormSelect id="peserta_pengalihan" name="peserta_pengalihan" value={formData.peserta_pengalihan} onChange={handleChange}>
+                      <FormSelect id="peserta_pengalihan" name="peserta_pengalihan" value={formData.peserta_pengalihan} onChange={handleChange} ref={fieldRefs.peserta_pengalihan}>
                       <FormOption value="">Pilih</FormOption>
                       <FormOption value={true}>Ya</FormOption>
                       <FormOption value={false}>Tidak</FormOption>
                       </FormSelect>
+                      {errors.peserta_pengalihan && <FormH2Error>{errors.peserta_pengalihan}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="nama_pengalihan">Nama Dana Pensiun</FormLabel>
@@ -989,11 +1340,12 @@ const Registrasi = () => {
                   <FormInputWrapper>
                     <FormInputDiv>
                       <FormLabel htmlFor="peserta_dapen">Peserta Dana Pensiun Lain</FormLabel>
-                      <FormSelect id="peserta_dapen" name="peserta_dapen" value={formData.peserta_dapen} onChange={handleChange}>
+                      <FormSelect id="peserta_dapen" name="peserta_dapen" value={formData.peserta_dapen} onChange={handleChange} ref={fieldRefs.peserta_dapen}>
                       <FormOption value="">Pilih</FormOption>
                       <FormOption value={true}>Ya</FormOption>
                       <FormOption value={false}>Tidak</FormOption>
                       </FormSelect>
+                      {errors.peserta_dapen && <FormH2Error>{errors.peserta_dapen}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="nama_dapen">Nama Dana Pensiun</FormLabel>
@@ -1002,17 +1354,19 @@ const Registrasi = () => {
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormLabel htmlFor="dana_rekening">Sumber Dana Rekening</FormLabel>
-                  <FormSelect id="dana_rekening" name="dana_rekening" value={formData.dana_rekening} onChange={handleChange}>
+                  <FormSelect id="dana_rekening" name="dana_rekening" value={formData.dana_rekening} ref={fieldRefs.dana_rekening} onChange={handleChange}>
                     {danaRekening && danaRekening.map((dana) => (
                       <FormOption key={dana.id} value={dana.code}>{dana.keterangan}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.dana_rekening && <FormH2Error>{errors.dana_rekening}</FormH2Error>}
                   <FormLabel htmlFor="dana_iuran">Sumber Dana Iuran</FormLabel>
-                  <FormSelect id="dana_iuran" name="dana_iuran" value={formData.dana_iuran} onChange={handleChange}>
+                  <FormSelect id="dana_iuran" name="dana_iuran" value={formData.dana_iuran} ref={fieldRefs.dana_iuran} onChange={handleChange}>
                     {danaIuran && danaIuran.map((dana) => (
                       <FormOption key={dana.id} value={dana.code}>{dana.keterangan}</FormOption>
                     ))}
                   </FormSelect>
+                  {errors.dana_iuran && <FormH2Error>{errors.dana_iuran}</FormH2Error>}
                 </FormDiv>
               </FormCardWrapper>
 
@@ -1041,31 +1395,33 @@ const Registrasi = () => {
                 <FormDiv>
                   <FormInputWrapper>
                     <FormInputDiv>
-                      <FormLabel htmlFor="nama_ahli_waris_1">Nama Lengkap</FormLabel>
-                      <FormInput id="nama_ahli_waris_1" type="text" name="nama_ahli_waris_1" value={formData.nama_ahli_waris_1} onChange={handleChange} />
+                      <FormLabel htmlFor="nama_ahli_waris_1">Nama Lengkap Ahli Waris 1</FormLabel>
+                      <FormInput id="nama_ahli_waris_1" type="text" name="nama_ahli_waris_1" value={formData.nama_ahli_waris_1} ref={fieldRefs.nama_ahli_waris_1} onChange={handleChange} />
+                      {errors.nama_ahli_waris_1 && <FormH2Error>{errors.nama_ahli_waris_1}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
-                      <FormLabel htmlFor="tanggal_lahir_ahli_waris_1">Tanggal Lahir</FormLabel>
-                      <FormInput id="tanggal_lahir_ahli_waris_1" type="date" name="tanggal_lahir_ahli_waris_1" value={formData.tanggal_lahir_ahli_waris_1} onChange={handleChange} />
+                      <FormLabel htmlFor="tanggal_lahir_ahli_waris_1">Tanggal Lahir Ahli Waris 1</FormLabel>
+                      <FormInput id="tanggal_lahir_ahli_waris_1" type="date" name="tanggal_lahir_ahli_waris_1" value={formData.tanggal_lahir_ahli_waris_1} ref={fieldRefs.tanggal_lahir_ahli_waris_1} onChange={handleChange} />
+                      {errors.tanggal_lahir_ahli_waris_1 && <FormH2Error>{errors.tanggal_lahir_ahli_waris_1}</FormH2Error>}
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormInputWrapper>
                     <FormInputDiv>
-                      <FormLabel htmlFor="nama_ahli_waris_2">Nama Lengkap</FormLabel>
+                      <FormLabel htmlFor="nama_ahli_waris_2">Nama Lengkap Ahli Waris 2</FormLabel>
                       <FormInput id="nama_ahli_waris_2" type="text" name="nama_ahli_waris_2" value={formData.nama_ahli_waris_2} onChange={handleChange} />
                     </FormInputDiv>
                     <FormInputDiv>
-                      <FormLabel htmlFor="tanggal_lahir_ahli_waris_2">Tanggal Lahir</FormLabel>
+                      <FormLabel htmlFor="tanggal_lahir_ahli_waris_2">Tanggal Lahir Ahli Waris 2</FormLabel>
                       <FormInput id="tanggal_lahir_ahli_waris_2" type="date" name="tanggal_lahir_ahli_waris_2" value={formData.tanggal_lahir_ahli_waris_2} onChange={handleChange} />
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormInputWrapper>
                     <FormInputDiv>
-                      <FormLabel htmlFor="nama_ahli_waris_3">Nama Lengkap</FormLabel>
+                      <FormLabel htmlFor="nama_ahli_waris_3">Nama Lengkap Ahli Waris 3</FormLabel>
                       <FormInput id="nama_ahli_waris_3" type="text" name="nama_ahli_waris_3" value={formData.nama_ahli_waris_3} onChange={handleChange} />
                     </FormInputDiv>
                     <FormInputDiv>
-                      <FormLabel htmlFor="tanggal_lahir_ahli_waris_3">Tanggal Lahir</FormLabel>
+                      <FormLabel htmlFor="tanggal_lahir_ahli_waris_3">Tanggal Lahir Ahli Waris 3</FormLabel>
                       <FormInput id="tanggal_lahir_ahli_waris_3" type="date" name="tanggal_lahir_ahli_waris_3" value={formData.tanggal_lahir_ahli_waris_3} onChange={handleChange} />
                     </FormInputDiv>
                   </FormInputWrapper>
@@ -1073,21 +1429,23 @@ const Registrasi = () => {
                 <FormDiv>
                   <FormInputWrapper>
                     <FormInputDiv>
-                      <FormLabel htmlFor="jenis_kelamin_ahli_waris_1">Jenis Kelamin</FormLabel>
-                      <FormSelect id="jenis_kelamin_ahli_waris_1" name="jenis_kelamin_ahli_waris_1" value={formData.jenis_kelamin_ahli_waris_1} onChange={handleChange}>
+                      <FormLabel htmlFor="jenis_kelamin_ahli_waris_1">Jenis Kelamin Ahli Waris 1</FormLabel>
+                      <FormSelect id="jenis_kelamin_ahli_waris_1" name="jenis_kelamin_ahli_waris_1" value={formData.jenis_kelamin_ahli_waris_1} ref={fieldRefs.jenis_kelamin_ahli_waris_1} onChange={handleChange}>
                         <FormOption value="">Jenis Kelamin</FormOption>
                         <FormOption value="P">Pria</FormOption>
                         <FormOption value="W">Wanita</FormOption>
                       </FormSelect>
+                      {errors.jenis_kelamin_ahli_waris_1 && <FormH2Error>{errors.jenis_kelamin_ahli_waris_1}</FormH2Error>}
                     </FormInputDiv>
                     <FormInputDiv>
                       <FormLabel htmlFor="hubungan_ahli_waris_1">Hubungan Keluarga</FormLabel>
-                      <FormInput id="hubungan_ahli_waris_1" type="text" name="hubungan_ahli_waris_1" value={formData.hubungan_ahli_waris_1} onChange={handleChange} />
+                      <FormInput id="hubungan_ahli_waris_1" type="text" name="hubungan_ahli_waris_1" value={formData.hubungan_ahli_waris_1} ref={fieldRefs.hubungan_ahli_waris_1} onChange={handleChange} />
+                      {errors.hubungan_ahli_waris_1 && <FormH2Error>{errors.hubungan_ahli_waris_1}</FormH2Error>}
                     </FormInputDiv>
                   </FormInputWrapper>
                   <FormInputWrapper>
                     <FormInputDiv>
-                      <FormLabel htmlFor="jenis_kelamin_ahli_waris_2">Jenis Kelamin</FormLabel>
+                      <FormLabel htmlFor="jenis_kelamin_ahli_waris_2">Jenis Kelamin Ahli Waris 2</FormLabel>
                       <FormSelect id="jenis_kelamin_ahli_waris_2" name="jenis_kelamin_ahli_waris_2" value={formData.jenis_kelamin_ahli_waris_2} onChange={handleChange}>
                         <FormOption value="">Jenis Kelamin</FormOption>
                         <FormOption value="P">Pria</FormOption>
@@ -1101,7 +1459,7 @@ const Registrasi = () => {
                   </FormInputWrapper>
                   <FormInputWrapper>
                     <FormInputDiv>
-                      <FormLabel htmlFor="jenis_kelamin_ahli_waris_3">Jenis Kelamin</FormLabel>
+                      <FormLabel htmlFor="jenis_kelamin_ahli_waris_3">Jenis Kelamin Ahli Waris 3</FormLabel>
                       <FormSelect id="jenis_kelamin_ahli_waris_3" name="jenis_kelamin_ahli_waris_3" value={formData.jenis_kelamin_ahli_waris_3} onChange={handleChange}>
                         <FormOption value="">Jenis Kelamin</FormOption>
                         <FormOption value="P">Pria</FormOption>

@@ -53,7 +53,7 @@ export const InvestCard = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   border-radius: 10px;
-  height: 200px;
+  height: auto;
   padding: 30px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;

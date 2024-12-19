@@ -115,6 +115,7 @@ const Registrasi = () => {
     jenis_kelamin_ahli_waris_3: '',
     hubungan_ahli_waris_3: '',
     kode_cab_daftar: '',
+    channel_pendaftaran: '',
     samaDenganKTP: false
   });
   const history = useHistory();
@@ -205,7 +206,8 @@ const Registrasi = () => {
     tanggal_lahir_ahli_waris_1: useRef(null),
     jenis_kelamin_ahli_waris_1: useRef(null),
     hubungan_ahli_waris_1: useRef(null),
-    kode_cab_daftar: useRef(null)
+    kode_cab_daftar: useRef(null),
+    channel_pendaftaran: useRef(null),
   };
 
   useEffect(() => {
@@ -777,6 +779,9 @@ const Registrasi = () => {
     if (!formData.dana_rekening) {
       newErrors.dana_rekening = 'Sumber dana rekening harus diisi.';
     }
+    if (!formData.channel_pendaftaran) {
+      newErrors.channel_pendaftaran = 'Channel pendaftaran harus diisi.';
+    }
     return newErrors;
   };
 
@@ -1276,7 +1281,29 @@ const Registrasi = () => {
               <FormH1Error>(*) Data wajib diisi</FormH1Error>
               <FormCardWrapper>
                 <FormDiv>
-                  <FormLabel htmlFor="kode_cab_daftar"><strong>Cabang Pendaftaran</strong><span style={{ color: 'red' }}>*</span></FormLabel>
+                  <FormLabel htmlFor="channel_pendaftaran"><strong>Channel Pendaftaran</strong><span style={{ color: 'red' }}>*</span></FormLabel>
+                  <FormSelect 
+                    id="channel_pendaftaran" 
+                    name="channel_pendaftaran" 
+                    value={formData.channel_pendaftaran} 
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFormData(prevState => ({
+                        ...prevState,
+                        channel_pendaftaran: value,
+                        kode_cab_daftar: value === "Website" ? "000" : "",
+                      }));
+                    }}
+                    ref={fieldRefs.channel_pendaftaran}
+                  >
+                    <FormOption value="">Pilih</FormOption>
+                    <FormOption value="Website">Website</FormOption>
+                    <FormOption value="Kantor Cabang">Kantor Cabang</FormOption>
+                  </FormSelect>
+                  {errors.channel_pendaftaran && <FormH2Error>{errors.channel_pendaftaran}</FormH2Error>}
+                  {formData.channel_pendaftaran === "Kantor Cabang" && (
+                  <>
+                  <FormLabel htmlFor="kode_cab_daftar"><strong>Kantor Cabang</strong><span style={{ color: 'red' }}>*</span></FormLabel>
                   <Select
                     id="kode_cab_daftar"
                     name="kode_cab_daftar"
@@ -1287,6 +1314,8 @@ const Registrasi = () => {
                     styles={customStyles}
                   />
                   {errors.kode_cab_daftar && <FormH2Error>{errors.kode_cab_daftar}</FormH2Error>}
+                  </>
+                  )}
                   <FormLabel htmlFor="usia_pensiun"><strong>Usia Pensiun</strong><span style={{ color: 'red' }}>*</span></FormLabel>
                   <FormInput id="usia_pensiun" type="number" name="usia_pensiun" value={formData.usia_pensiun} onChange={handleChange} ref={fieldRefs.usia_pensiun}/>
                   {errors.usia_pensiun && <FormH2Error>{errors.usia_pensiun}</FormH2Error>}

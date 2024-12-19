@@ -34,8 +34,9 @@ export const BenefitWrapper = styled.div`
   }
 
   @media screen and (max-width: 786px) {
+    width: auto;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-bottom: 20px;
+    padding: 0 30px;
   }
 
   @media screen and (max-width: 480px) {

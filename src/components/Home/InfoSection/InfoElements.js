@@ -18,7 +18,7 @@ export const InfoWrapper = styled.div`
   max-width: 1100px;
   margin-right: auto;
   margin-left: auto;
-  padding: 80px 24px;
+  padding: 60px 24px;
   justify-content: center;
 
   @media screen and (max-width: 1024px) {
@@ -33,7 +33,7 @@ export const InfoWrapper = styled.div`
   @media screen and (max-width: 480px) {
     height: 650px;
     padding: 0 0;
-    margin-top: 20px;
+    margin-top: 0px;
   }
 `;
 export const InfoRow = styled.div`

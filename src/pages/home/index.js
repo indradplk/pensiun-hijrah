@@ -15,6 +15,7 @@ import {
 import Product from '../../components/Home/ProductSection';
 import Benefit from '../../components/Home/BenefitSection';
 import Invest from '../../components/Home/InvestSection';
+import FloatingSection from '../../components/Home/ButtonSection';
 import Footer from '../../components/Footer';
 import Floating from '../../components/Floating';
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />
       <CarouselSection />
+      <FloatingSection />
       <InfoSection {...homeObjOne} />
       <Product />
       <Benefit />

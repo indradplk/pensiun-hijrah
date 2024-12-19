@@ -30,13 +30,15 @@ export const ProductWrapper = styled.div`
   }
 
   @media screen and (max-width: 786px) {
+    width: auto;
     grid-template-columns: 1fr 1fr;
     padding: 0 60px;
   }
 
   @media screen and (max-width: 480px) {
+    width: auto;
     grid-template-columns: 1fr;
-    padding: 0 40px;
+    padding: 0 30px;
   }
 `;
 export const ProductCard = styled.div`

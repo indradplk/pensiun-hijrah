@@ -17,6 +17,10 @@ export const Nav = styled.nav`
   z-index: 10;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 
+  @media screen and (max-width: 1024px) {
+    font-size: 12px;
+  }
+
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
   }
@@ -81,6 +85,10 @@ export const NavMenu = styled.ul`
 export const NavItems = styled.li`
   height: 10px;
   margin-right: 40px;
+  @media screen and (max-width: 1024px) {
+    height: 0;
+    margin-right: 20px;
+  }
 `;
 export const NavLinks = styled(LinkR)`
   color: #212121;
@@ -133,9 +141,10 @@ export const SubMenuItem = styled(LinkR)`
   }
 `;
 export const NavBtn = styled.nav`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
   align-items: center;
-  margin-left: 40px;
   @media screen and (max-width: 1024px) {
     margin-left: auto;
   }
@@ -144,7 +153,7 @@ export const NavBtn = styled.nav`
   }
 `;
 export const NavBtnLink = styled(LinkR)`
-  border-radius: 50px;
+  border-radius: 8px;
   background: linear-gradient(
     157.81deg,
     #FFF2E2 -43.27%,

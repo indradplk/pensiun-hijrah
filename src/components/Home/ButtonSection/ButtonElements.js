@@ -16,16 +16,16 @@ export const FloatingContainer = styled.div`
   }
 `;
 export const FloatingWrapper = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  grid-gap: 20px;
-  padding: 20px;
+  display: none;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 786px) {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
     grid-template-columns: 1fr;
+    align-items: center;
+    grid-gap: 20px;
+    padding: 20px;
   }
 `;
 export const FloatingCard = styled.div`

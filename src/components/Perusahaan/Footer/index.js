@@ -52,6 +52,11 @@ const Footer = () => {
 
           <FooterLinkWrapper>
             <FooterLinkItems>
+              <FooterLinkTitle><b>Simulasi</b></FooterLinkTitle>
+              <FooterLink to="/simulasi/" onClick={toggleHome}>Berdasarkan Iuran</FooterLink>
+              <FooterLink to="/simulasi/based-on-needs/" onClick={toggleHome}>Berdasarkan Kebutuhan</FooterLink>
+            </FooterLinkItems>
+            <FooterLinkItems>
               <FooterLinkTitle><b>Pusat Media</b></FooterLinkTitle>
               <FooterLink to="/media/keuangan/" onClick={toggleHome}>Laporan Keuangan</FooterLink>
               <FooterLink to="/media/dewan-pengawas/" onClick={toggleHome}>Laporan Dewan Pengawas</FooterLink>

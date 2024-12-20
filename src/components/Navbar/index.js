@@ -97,6 +97,12 @@ const Navbar = ({ toggle }) => {
                 </NavDropdown>
               </NavItems>
               <NavItems>
+                <NavDropdown title="Simulasi">
+                  <NavLinks to="/simulasi/" onClick={toggleHome}>Berdasarkan Iuran</NavLinks>
+                  <NavLinks to="/simulasi/based-on-needs/" onClick={toggleHome}>Berdasarkan Kebutuhan</NavLinks>
+                </NavDropdown>
+              </NavItems>
+              <NavItems>
                 <NavDropdown title="Pusat Media">
                   <NavLinks to="/media/investasi/" onClick={toggleHome}>Fund Fact Sheet</NavLinks>
                   <NavLinks to="/media/keuangan/" onClick={toggleHome}>Laporan Keuangan</NavLinks>

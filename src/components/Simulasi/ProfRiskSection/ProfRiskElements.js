@@ -11,6 +11,7 @@ export const ProfRiskContainer = styled.div`
 
   @media screen and (max-width: 820px) {
     height: auto;
+    padding: 30px;
   }
 
   @media screen and (max-width: 480px) {
@@ -19,30 +20,25 @@ export const ProfRiskContainer = styled.div`
   }
 `;
 export const ProfRiskWrapper = styled.div`
-  width: 1100px;
+  width: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  grid-gap: 32px;
+  display: flex;
+  justify-content: center;
   padding: 0 50px;
 
   @media screen and (max-width: 1024px) {
-    max-width: 700px;
-    grid-template-columns: 1fr;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
   }
 
   @media screen and (max-width: 820px) {
-    grid-template-columns: 1fr;
     margin-bottom: 20px;
-    width: auto;
+    width: 100%;
+    padding: 0 10px;
   }
 
   @media screen and (max-width: 480px) {
     width: auto;
-    grid-template-columns: 1fr;
-    padding: 40px 20px;
+    padding: 20px 20px;
   }
 `;
 export const ProfRiskCard = styled.div`
@@ -57,6 +53,7 @@ export const ProfRiskCard = styled.div`
   padding: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;
+  max-width: 1000px;
 
   &:hover {
     transform: scale(1.02);
@@ -65,8 +62,9 @@ export const ProfRiskCard = styled.div`
   }
 
   @media screen and (max-width: 1024px) {
-    height: 210px;
-    padding: 30px;
+    height: auto;
+    padding: 20px;
+    width: 100%;
   }
 
   @media screen and (max-width: 480px) {
@@ -104,7 +102,6 @@ export const ProfRiskH2 = styled.h2`
   font-size: 1rem;
   margin-bottom: 20px;
   color: #212121;
-  width: 700px;
 
   @media screen and (max-width: 480px) {
     width: auto;

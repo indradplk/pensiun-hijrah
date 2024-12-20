@@ -6,7 +6,7 @@ export const InvestContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: #f9f9f9;
-  padding: 60px 0;
+  padding: 0 20px;
 
   @media screen and (max-width: 820px) {
     height: auto;
@@ -19,13 +19,12 @@ export const InvestContainer = styled.div`
   }
 `;
 export const InvestWrapper = styled.div`
-  width: auto;
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   grid-gap: 32px;
-  padding: 0 50px;
   margin-bottom: 40px;
   margin-top: 40px;
 
@@ -40,8 +39,36 @@ export const InvestWrapper = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: 20px;
   }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 480px) {;
+    grid-template-columns: 1fr;
+    padding: 0 0;
+    margin-bottom: 20px;
+  }
+`;
+export const InvestWrapper2Column = styled.div`
+  width: 100%;
+  padding: 0 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  grid-gap: 32px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+
+  @media screen and (max-width: 1024px) {
     width: auto;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 40px;
+  }
+
+  @media screen and (max-width: 820px) {
+    width: auto;
+    padding: 0 0;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 20px;
+    margin-top: 0px;
+  }
+  @media screen and (max-width: 480px) {;
     grid-template-columns: 1fr;
     padding: 0 0;
     margin-bottom: 20px;
@@ -65,14 +92,11 @@ export const InvestCard = styled.div`
   }
 
   @media screen and (max-width: 1024px) {
-    max-width: 1000px;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-bottom: 60px;
   }
 
   @media screen and (max-width: 820px) {
     grid-template-columns: 1fr 1fr 1fr;
-    margin-bottom: 20px;
     height: auto;
   }
 
@@ -87,13 +111,13 @@ export const InvestIcon = styled.img`
   margin-bottom: 20px;
 `;
 export const InvestH1 = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #f212121;
   margin-bottom: 16px;
 
   @media screen and (max-width: 480px) {
-    font-size: 2rem;
-    padding: 30px;
+    font-size: 1.5rem;
+    padding: 10px;
     margin-bottom: 16px;
   }
 `;
@@ -101,6 +125,10 @@ export const InvestH2 = styled.h2`
   font-size: 1rem;
   margin-bottom: 10px;
   color: #212121;
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
 `;
 export const InvestH3 = styled.h3`
   font-size: 1.8rem;
@@ -108,6 +136,7 @@ export const InvestH3 = styled.h3`
   margin-bottom: 20px;
   @media screen and (max-width: 480px) {
     font-size: 1.2rem;
+    margin-bottom: 5px;
   }
 `;
 export const InvestH4 = styled.h4`

@@ -292,7 +292,6 @@ export const FormReset = styled.button`
 export const NavIcon = styled.img`
   height: 50%;
 `;
-
 export const Text = styled(Link)`
   color: #61298A;
   font-size: 18px;

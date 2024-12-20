@@ -71,6 +71,17 @@ const Sidebar = ({ isOpen, toggle }) => {
           </SidebarSubMenu>
         </SidebarMenu>
         <SidebarMenu>
+          <Heading><b>Simulasi</b></Heading>
+          <SidebarSubMenu>
+            <SidebarLink to="/simulasi/" onClick={toggleHome}>
+              Berdasarkan Iuran
+            </SidebarLink>
+            <SidebarLink to="/simulasi/based-on-needs/" onClick={toggleHome}>
+              Berdasarkan Kebutuhan
+            </SidebarLink>
+          </SidebarSubMenu>
+        </SidebarMenu>
+        <SidebarMenu>
           <Heading><b>Pusat Media</b></Heading>
           <SidebarSubMenu>
             <SidebarLink to="/media/investasi/" onClick={toggleHome}>

@@ -8,7 +8,7 @@ export const FloatingContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: #f9f9f9;
-  padding: 20px;
+  padding: 0 60px;
 
   @media screen and (max-width: 768px) {
     height: auto;

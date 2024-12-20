@@ -18,7 +18,7 @@ const Simulasi = () => {
   return (
     <>
       <Helmet>
-        <title>Simulasi Investasi | DPLK Syariah Muamalat</title>
+        <title>Simulasi Investasi Berdasarkan Iuran | DPLK Syariah Muamalat</title>
       </Helmet>
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />

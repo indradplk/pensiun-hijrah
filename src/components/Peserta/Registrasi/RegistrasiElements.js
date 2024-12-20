@@ -45,6 +45,13 @@ export const FormCardWrapper = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+export const FormCardWrapperRow = styled.div`
+  margin: 0 auto;
+  display: row;
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+`;
 export const FormInputWrapper = styled.div`
   margin: 0 auto;
   display: grid;
@@ -54,10 +61,33 @@ export const FormInputWrapper = styled.div`
     grid-template-columns: 1fr 1fr;
   }
 `;
+export const FormInputWrapperGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+`;
+export const FormInputWrapper4Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+`;
 export const FormInputDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 0 0 0;
+`;
+export const FormInputDivGrid = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 export const FormDiv = styled.div`
   display: flex;
@@ -89,9 +119,17 @@ export const FormH1 = styled.h1`
   line-height: 1.1;
   font-weight: 600;
   color: #212121;
-  margin-bottom: 40px;
   @media screen and (max-width: 480px) {
     font-size: 24px;
+  }
+`;
+export const FormH1Error = styled.h1`
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: red;
+  @media screen and (max-width: 480px) {
+  font-size: 10px;
   }
 `;
 export const FormH2 = styled.h2`

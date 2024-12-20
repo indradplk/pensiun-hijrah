@@ -21,6 +21,10 @@ import {
   SocialMediaWrap,
   WebsiteRights,
   SocialLogoIcon,
+  FindUsContainer,
+  FindUsWrapper,
+  FindUsColumn,
+  Heading,
 } from './FooterElements';
 import { animateScroll as scroll } from 'react-scroll';
 
@@ -48,8 +52,12 @@ const Footer = () => {
               <FooterLink to="/product/pensiun-hijrah-eksekutif/" onClick={toggleHome}>Pensiun Hijrah Eksekutif</FooterLink>
               <FooterLink to="/product/zakat-dana-pensiun/" onClick={toggleHome}>Zakat Dana Pensiun</FooterLink>
             </FooterLinkItems>
+            <FooterLinkItems>
+              <FooterLinkTitle><b>Simulasi</b></FooterLinkTitle>
+              <FooterLink to="/simulasi/" onClick={toggleHome}>Berdasarkan Iuran</FooterLink>
+              <FooterLink to="/simulasi/based-on-needs/" onClick={toggleHome}>Berdasarkan Kebutuhan</FooterLink>
+            </FooterLinkItems>
           </FooterLinkWrapper>
-
           <FooterLinkWrapper>
             <FooterLinkItems>
               <FooterLinkTitle><b>Pusat Media</b></FooterLinkTitle>
@@ -69,43 +77,50 @@ const Footer = () => {
             </FooterLinkItems>
           </FooterLinkWrapper>
         </FooterLinkContainer>
-        <SocialMedia>
-          <SocialMediaWrap>
+        <FindUsContainer>
+          <FindUsWrapper>
             <SocialLogo to="/" onClick={toggleHome}>
               <SocialLogoIcon src={Logo} />
             </SocialLogo>
+            <FindUsColumn>
+              <SocialIcons>
+                <SocialIconLink
+                  href="https://www.facebook.com/dplksyariah.muamalat.5"
+                  target="_blank"
+                  arial-label="Facebook">
+                  <FaFacebook />
+                </SocialIconLink>
+                <SocialIconLink
+                  href="https://www.instagram.com/dplksyariahmuamalat/"
+                  target="_blank"
+                  arial-label="Instagram"
+                >
+                  <FaInstagram />
+                </SocialIconLink>
+                <SocialIconLink
+                  href="https://youtube.com/@dplksyariahmuamalat3802?si=um9rfefCu_6gvJYI"
+                  target="_blank"
+                  arial-label="Youtube"
+                >
+                  <FaYoutube />
+                </SocialIconLink>
+                <SocialIconLink
+                  href="https://wa.me/6281333393820"
+                  target="_blank"
+                  arial-label="WhatsApp"
+                >
+                  <FaWhatsapp />
+                </SocialIconLink>
+              </SocialIcons>
+            </FindUsColumn>
+          </FindUsWrapper>
+        </FindUsContainer>
+        <SocialMedia>
+          <SocialMediaWrap>
             <WebsiteRights>
+              DPLK Syariah Muamalat terdaftar dan diawasi oleh Otoritas Jasa Keuangan (OJK)<br/>
               Pensiun Hijrah © {new Date().getFullYear()} All rights reserved.
             </WebsiteRights>
-            <SocialIcons>
-              <SocialIconLink
-                href="https://www.facebook.com/dplksyariah.muamalat.5"
-                target="_blank"
-                arial-label="Facebook">
-                <FaFacebook />
-              </SocialIconLink>
-              <SocialIconLink
-                href="https://www.instagram.com/dplksyariahmuamalat/"
-                target="_blank"
-                arial-label="Instagram"
-              >
-                <FaInstagram />
-              </SocialIconLink>
-              <SocialIconLink
-                href="https://youtube.com/@dplksyariahmuamalat3802?si=um9rfefCu_6gvJYI"
-                target="_blank"
-                arial-label="Youtube"
-              >
-                <FaYoutube />
-              </SocialIconLink>
-              <SocialIconLink
-                href="https://wa.me/6281333393820"
-                target="_blank"
-                arial-label="WhatsApp"
-              >
-                <FaWhatsapp />
-              </SocialIconLink>
-            </SocialIcons>
           </SocialMediaWrap>
         </SocialMedia>
       </FooterWrap>

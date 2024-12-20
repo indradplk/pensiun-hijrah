@@ -24,10 +24,17 @@ import {
   FormSpanDisabled,
   FormH2,
   FormH2Error,
-  ResultDiv
+  ResultDiv,
+  FormH1,
+  Text
 } from './SimulasiElements';
+import { animateScroll as scroll } from 'react-scroll';
 
 const SimulasiSection = () => {
+  const toggleHome = () => {
+    scroll.scrollToTop();
+  };
+  
   const [formData, setFormData] = useState({
     usia: '',
     usia_pensiun: '',
@@ -71,6 +78,7 @@ const SimulasiSection = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: '' });
   };
 
   const validateForm = () => {
@@ -202,6 +210,8 @@ const SimulasiSection = () => {
       <Container>
         <FormWrap>
           <FormContent>
+            <FormH1>Simulasi Berdasarkan Iuran</FormH1>
+            <Text to="/simulasi/based-on-needs/" onClick={toggleHome}>Simulasi Berdasarkan Kebutuhan →</Text>
             <Form onSubmit={handleSubmit}>
               <FormCardWrapper>
                 <FormDiv>

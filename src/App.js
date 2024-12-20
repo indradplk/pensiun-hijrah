@@ -47,6 +47,7 @@ import Eksekutif from './pages/product/eksekutif';
 import Zakat from './pages/product/zakat-dana-pensiun';
 import PensiunSyariah from './pages/product/dana-pensiun-syariah';
 import Simulasi from './pages/simulasi';
+import SimulasiKebutuhan from './pages/simulasi/kebutuhan';
 import ProfilRisiko from './pages/profil-risiko';
 
 import SignInPageAdmin from './pages/admin';
@@ -131,6 +132,7 @@ function App() {
         <Route path="/product/zakat-dana-pensiun/" component={Zakat} exact />
         <Route path="/product/dana-pensiun-syariah/" component={PensiunSyariah} exact />
         <Route path="/simulasi/" component={Simulasi} exact />
+        <Route path="/simulasi/based-on-needs/" component={SimulasiKebutuhan} exact />
         <Route path="/profil-risiko/" component={ProfilRisiko} exact />
 
         <Route path="/admin" component={SignInPageAdmin} exact />
@@ -166,6 +168,7 @@ function App() {
         <Route path="/program/telkomsel" component={Telkomsel} exact />
 
         {/* Not found page */}
+        <Route path="/not-found" component={NotFound} />
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>

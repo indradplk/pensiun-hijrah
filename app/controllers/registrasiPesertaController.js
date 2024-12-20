@@ -172,13 +172,13 @@ exports.create = async (req, res) => {
             });
         }
 
-        if (!npwp) {
-            return response(res, {
-                code: 400,
-                success: false,
-                message: 'NPWP wajib diisi!',
-            });
-        }
+        // if (!npwp) {
+        //     return response(res, {
+        //         code: 400,
+        //         success: false,
+        //         message: 'NPWP wajib diisi!',
+        //     });
+        // }
 
         if (!dana_rekening || !dana_iuran) {
             return response(res, {
@@ -277,7 +277,7 @@ exports.create = async (req, res) => {
         }
 
         // Check uploaded document
-        if (!req.files || !req.files.foto_ktp || req.files.foto_ktp.length === 0 || !req.files.foto_npwp || req.files.foto_npwp.length === 0 || !req.files.foto_kk || req.files.foto_kk.length === 0) {
+        if (!req.files || !req.files.foto_ktp || req.files.foto_ktp.length === 0 || !req.files.foto_kk || req.files.foto_kk.length === 0) {
             return response(res, {
                 code: 400,
                 success: false,
@@ -286,8 +286,12 @@ exports.create = async (req, res) => {
         }
 
         const foto_ktp = `${path.relative('../public/registrasi-peserta', req.files.foto_ktp[0].path)}`;
-        const foto_npwp = `${path.relative('../public/registrasi-peserta', req.files.foto_npwp[0].path)}`;
         const foto_kk = `${path.relative('../public/registrasi-peserta', req.files.foto_kk[0].path)}`;
+
+        let foto_npwp = null;
+        if (req.files.foto_npwp) {
+            foto_npwp = `${path.relative('../public/registrasi-peserta', req.files.foto_npwp[0].path)}`;
+        }
 
         // Validasi form
         const newRegistrasi = await RegistrasiPeserta.create({

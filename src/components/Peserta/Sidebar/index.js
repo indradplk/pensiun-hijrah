@@ -118,6 +118,17 @@ const Sidebar = ({ isOpen, toggle, userData }) => {
           </SidebarSubMenu>
         </SidebarMenu>
         <SidebarMenu>
+          <Heading><b>Simulasi</b></Heading>
+          <SidebarSubMenu>
+            <SidebarLink to="/simulasi/" onClick={toggleHome}>
+              Berdasarkan Iuran
+            </SidebarLink>
+            <SidebarLink to="/simulasi/based-on-needs/" onClick={toggleHome}>
+              Berdasarkan Kebutuhan
+            </SidebarLink>
+          </SidebarSubMenu>
+        </SidebarMenu>
+        <SidebarMenu>
           <Heading><b>Pusat Media</b></Heading>
           <SidebarSubMenu>
             <SidebarLink to="/media/investasi/" onClick={toggleHome}>
@@ -131,6 +142,9 @@ const Sidebar = ({ isOpen, toggle, userData }) => {
             </SidebarLink>
             <SidebarLink to="/media/berita/" onClick={toggleHome}>
               Berita
+            </SidebarLink>
+            <SidebarLink to="/media/pengumuman/" onClick={toggleHome}>
+              Pengumuman
             </SidebarLink>
             <SidebarLink to="/media/video/" onClick={toggleHome}>
               Video

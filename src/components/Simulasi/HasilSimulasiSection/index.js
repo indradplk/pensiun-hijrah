@@ -56,8 +56,6 @@ const HasilInvestasi = ({ hasilInvestasi, data }) => {
           <InvestH3><b>{formatCurrency(hasilInvestasi.totalDana)}</b></InvestH3>
           <InvestH4><i>Total dana manfaat adalah dana yang bisa diklaim di akhir masa kepesertaan (sesuai usia pensiun).</i></InvestH4>
         </InvestCard>
-      </InvestWrapper>
-      <InvestWrapper>
         <InvestCard>
           <InvestH2>Total Pajak</InvestH2>
           <InvestH3><b>{formatCurrency(hasilInvestasi.pajak)}</b></InvestH3>

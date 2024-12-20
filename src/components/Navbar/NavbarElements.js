@@ -20,14 +20,17 @@ export const Nav = styled.nav`
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
   }
+
+  @media screen and (max-width: 480px) {
+  justify-content: flex-start;
+  }
 `;
 export const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   height: 80px;
   z-index: 0;
-  width: 100%;
-  padding: 0 120px;
+  width: auto;
 
   @media screen and (max-width: 480px) {
     padding: 0 5px;
@@ -40,9 +43,17 @@ export const Navlogo = styled(LinkR)`
   font-size: 1.5rem;
   display: flex;
   align-items: center;
-  margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
+  margin-right: 40px;
+
+  @media screen and (max-width: 1024px) {
+    margin-right: auto;
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-left: 20px;
+  }
 `;
 export const MobileIcons = styled.div`
   display: none;
@@ -124,6 +135,10 @@ export const SubMenuItem = styled(LinkR)`
 export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
+  margin-left: 40px;
+  @media screen and (max-width: 1024px) {
+    margin-left: auto;
+  }
   @media screen and (max-width: 853px) {
     display: none;
   }

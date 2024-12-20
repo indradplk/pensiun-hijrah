@@ -387,7 +387,9 @@ const RegistrasiItemSection = () => {
                   </FormInputWrapper>
                   <FormLabel htmlFor="npwp">NPWP</FormLabel>
                   <FormInput id="npwp" type="text" name="npwp" value={RegistrasiItem.npwp} readOnly />
-                  <FormButton to="#" onClick={() => handleDownload(RegistrasiItem.foto_npwp)}>Foto NPWP</FormButton>
+                  {RegistrasiItem.foto_npwp && (
+                    <FormButton to="#" onClick={() => handleDownload(RegistrasiItem.foto_npwp)}>Foto NPWP</FormButton>
+                  )}
                 </FormDiv>
                 )}
               </FormCardWrapper>
@@ -493,22 +495,14 @@ const RegistrasiItemSection = () => {
               <FormCardWrapper>
                 {RegistrasiItem && (
                 <FormDiv>
-                  <FormLabel htmlFor="rekening_muamalat">Nama Bank (Muamalat)</FormLabel>
+                  <FormLabel htmlFor="rekening_muamalat">Nama Bank</FormLabel>
                   <FormInput id="rekening_muamalat" type="text" name="rekening_muamalat" value={RegistrasiItem.rekening_muamalat} readOnly />
-                  <FormLabel htmlFor="rekening_1">Nama Bank</FormLabel>
-                  <FormInput id="rekening_1" type="text" name="rekening_1" value={RegistrasiItem.rekening_1} readOnly />
-                  <FormLabel htmlFor="rekening_2">Nama Bank</FormLabel>
-                  <FormInput id="rekening_2" type="text" name="rekening_2" value={RegistrasiItem.rekening_2} readOnly />
                 </FormDiv>
                 )}
                 {RegistrasiItem && (
                 <FormDiv>
-                  <FormLabel htmlFor="no_rekening_muamalat">Nomor Rekening (Muamalat)</FormLabel>
+                  <FormLabel htmlFor="no_rekening_muamalat">Nomor Rekening</FormLabel>
                   <FormInput id="no_rekening_muamalat" type="text" name="no_rekening_muamalat" value={RegistrasiItem.no_rekening_muamalat} readOnly />
-                  <FormLabel htmlFor="no_rekening_1">Nomor Rekening</FormLabel>
-                  <FormInput id="no_rekening_1" type="text" name="no_rekening_1" value={RegistrasiItem.no_rekening_1} readOnly />
-                  <FormLabel htmlFor="no_rekening_2">Nomor Rekening</FormLabel>
-                  <FormInput id="no_rekening_2" type="text" name="no_rekening_2" value={RegistrasiItem.no_rekening_2} readOnly />
                 </FormDiv>
                 )}
               </FormCardWrapper>

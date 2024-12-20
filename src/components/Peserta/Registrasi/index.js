@@ -1170,9 +1170,13 @@ const Registrasi = () => {
                   </FormInputWrapper>
                   <FormLabel htmlFor="npwp">NPWP</FormLabel>
                   <FormInput id="npwp" type="text" name="npwp" value={formData.npwp} onChange={handleChange} />
-                  <FormLabel htmlFor="foto_npwp">Upload Foto NPWP</FormLabel>
-                  <FormInput id="foto_npwp" type="file" name="foto_npwp" onChange={handleFileChange} />
-                  <FormH2><i>Unggah dalam format JPG, JPEG, PNG atau PDF.</i></FormH2>
+                  {formData.npwp && (
+                    <>
+                    <FormLabel htmlFor="foto_npwp">Upload Foto NPWP</FormLabel>
+                    <FormInput id="foto_npwp" type="file" name="foto_npwp" onChange={handleFileChange} />
+                    <FormH2><i>Unggah dalam format JPG, JPEG, PNG atau PDF.</i></FormH2>
+                    </>
+                  )}
                 </FormDiv>
               </FormCardWrapper>
 

@@ -122,7 +122,8 @@ const Navbar = ({ toggle }) => {
               </NavItems>
             </NavMenu>
             <NavBtn>
-              <NavBtnLink to="/peserta/" onClick={toggleHome}>Masuk</NavBtnLink>
+              <NavBtnLink to="/peserta/" onClick={toggleHome}>Cek Saldo</NavBtnLink>
+              <NavBtnLink to="/peserta/registrasi/" onClick={toggleHome}>Registrasi</NavBtnLink>
             </NavBtn>
           </NavbarContainer>
         </Nav>

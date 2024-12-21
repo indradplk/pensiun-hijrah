@@ -6,7 +6,8 @@ import {
   SidebarContainer,
   SidebarLink,
   SidebarMenu,
-  SidebarRoute,
+  SidebarRoute1,
+  SidebarRoute2,
   SidebarSubMenu,
   SidebarWrapper,
   SideBtnWrap,
@@ -122,7 +123,8 @@ const Sidebar = ({ isOpen, toggle }) => {
           </SidebarSubMenu>
         </SidebarMenu>
         <SideBtnWrap>
-          <SidebarRoute to="/peserta/">Masuk</SidebarRoute>
+          <SidebarRoute1 to="/peserta/">Cek Saldo</SidebarRoute1>
+          <SidebarRoute2 to="/peserta/">Registrasi</SidebarRoute2>
         </SideBtnWrap>
       </SidebarWrapper>
     </SidebarContainer>

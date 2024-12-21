@@ -13,6 +13,7 @@ const usahaData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 
 const penghasilanData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'penghasilan.json')));
 const sampinganData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'sampingan.json')));
 const danaData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'dana.json')));
+const bankData = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'json', 'master', 'bank.json')));
 
 const router = Router();
 
@@ -264,6 +265,34 @@ router.get('/dana/:id', (req, res) => {
             code: 404,
             success: false,
             message: "Sumber dana tambahan tidak ditemukan!",
+        });
+    }
+});
+
+router.get('/bank', (req, res) => {
+    return response(res, {
+        code: 200,
+        success: true,
+        message: 'Successfully retrieved bank data!',
+        content: bankData,
+    });
+});
+
+router.get('/bank/:id', (req, res) => {
+    const id = req.params.id;
+    const bank = bankData.find(item => item.id == id);
+    if (bank) {
+        return response(res, {
+            code: 200,
+            success: true,
+            message: 'Successfully retrieved bank data!',
+            content: dana,
+        });
+    } else {
+        return response(res, {
+            code: 404,
+            success: false,
+            message: "Bank tidak ditemukan!",
         });
     }
 });

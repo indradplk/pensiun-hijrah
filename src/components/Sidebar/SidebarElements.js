@@ -64,11 +64,48 @@ export const SidebarLink = styled(LinkR)`
   margin-bottom: 10px;
 `;
 export const SideBtnWrap = styled.div`
-  display: flex;
   justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  grid-gap: 20px;
+  padding: 10px;
 `;
-export const SidebarRoute = styled(LinkR)`
-  border-radius: 50px;
+export const SidebarRoute1 = styled(LinkR)`
+  border-radius: 8px;
+  background: linear-gradient(
+    108deg,
+    #D7A1FF 0%,
+    #61298A 100%
+  );
+  white-space: nowrap;
+  padding: 12px 22px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2 ease-ease-in-out;
+  text-decoration: none;
+  text-align: center;
+  &:hover {
+    transition: all 0.2 ease-in-out;
+    background: linear-gradient(
+      157.81deg,
+      #F6FFEE -43.27%,
+      #ECFFDB -21.24%,
+      #DBFCBD 12.19%,
+      #BEF48D 29.82%,
+      #A3E169 51.94%,
+      #80C342 90.29%
+    );
+    color: #61298A;
+  }
+`;
+export const SidebarRoute2 = styled(LinkR)`
+  border-radius: 8px;
   background: linear-gradient(
     157.81deg,
     #FFF2E2 -43.27%,
@@ -79,12 +116,26 @@ export const SidebarRoute = styled(LinkR)`
     #F7941E 90.29%
   );
   white-space: nowrap;
-  padding: 16px 64px;
+  padding: 12px 22px;
   color: #fff;
+  font-size: 16px;
   outline: none;
   border: none;
-  font-size: 16px;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: all 0.2 ease-ease-in-out;
   text-decoration: none;
+  text-align: center;
+  &:hover {
+    transition: all 0.2 ease-in-out;
+    background: linear-gradient(
+      157.81deg,
+      #F6FFEE -43.27%,
+      #ECFFDB -21.24%,
+      #DBFCBD 12.19%,
+      #BEF48D 29.82%,
+      #A3E169 51.94%,
+      #80C342 90.29%
+    );
+    color: #61298A;
+  }
 `;

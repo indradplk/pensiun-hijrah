@@ -1,0 +1,704 @@
+[
+    {
+        "id": 1,
+        "code": "001",
+        "full_name": "BANK INDONESIA",
+        "name": "Bank Indonesia"
+    },
+    {
+        "id": 2,
+        "code": "002",
+        "full_name": "PT. BANK RAKYAT INDONESIA (PERSERO)",
+        "name": "Bank Rakyat Indonesia (BRI)"
+    },
+    {
+        "id": 3,
+        "code": "008",
+        "full_name": "PT. BANK MANDIRI (PERSERO) TBK.",
+        "name": "Bank Mandiri"
+    },
+    {
+        "id": 4,
+        "code": "009",
+        "full_name": "PT. BANK NEGARA INDONESIA (PERSERO)",
+        "name": "Bank Negara Indonesia (BNI)"
+    },
+    {
+        "id": 5,
+        "code": "011",
+        "full_name": "PT. BANK DANAMON INDONESIA TBK.",
+        "name": "Bank Danamon"
+    },
+    {
+        "id": 6,
+        "code": "011",
+        "full_name": "PT. BANK DANAMON INDONESIA UNIT USAHA SYARIAH",
+        "name": "Bank Danamon Syariah"
+    },
+    {
+        "id": 7,
+        "code": "013",
+        "full_name": "PT. BANK PERMATA TBK. UNIT USAHA SYARIAH",
+        "name": "Bank Permata Syariah"
+    },
+    {
+        "id": 8,
+        "code": "013",
+        "full_name": "PT. BANK PERMATA TBK.",
+        "name": "Permata Bank"
+    },
+    {
+        "id": 9,
+        "code": "014",
+        "full_name": "PT. BANK CENTRAL ASIA TBK.",
+        "name": "Bank Central Asia (BCA)"
+    },
+    {
+        "id": 10,
+        "code": "016",
+        "full_name": "PT. BANK MAYBANK INDONESIA TBK.",
+        "name": "Maybank"
+    },
+    {
+        "id": 11,
+        "code": "016",
+        "full_name": "PT. BANK MAYBANK INDONESIA TBK. UNIT USAHA SYARIAH",
+        "name": "Maybank Syariah"
+    },
+    {
+        "id": 12,
+        "code": "019",
+        "full_name": "PT. PANIN BANK TBK.",
+        "name": "Bank Panin"
+    },
+    {
+        "id": 13,
+        "code": "022",
+        "full_name": "PT. BANK CIMB NIAGA TBK. (Conventional and Syariah)",
+        "name": "CIMB Niaga"
+    },
+    {
+        "id": 14,
+        "code": "022",
+        "full_name": "PT. BANK NIAGA TBK. SYARIAH",
+        "name": "CIMB Niaga Syariah"
+    },
+    {
+        "id": 15,
+        "code": "023",
+        "full_name": "PT. BANK UOB INDONESIA",
+        "name": "Bank UOB"
+    },
+    {
+        "id": 16,
+        "code": "028",
+        "full_name": "PT. BANK OCBC NISP TBK.",
+        "name": "OCBC NISP"
+    },
+    {
+        "id": 17,
+        "code": "028",
+        "full_name": "PT. BANK OCBC NISP TBK. - UNIT USAHA SYARIAH",
+        "name": "OCBC NISP Syariah"
+    },
+    {
+        "id": 18,
+        "code": "031",
+        "full_name": "CITIBANK",
+        "name": "Citibank"
+    },
+    {
+        "id": 19,
+        "code": "032",
+        "full_name": "KC JPMORGAN CHASE BANK N.A.",
+        "name": "JPMorgan Chase"
+    },
+    {
+        "id": 20,
+        "code": "033",
+        "full_name": "BANK OF AMERICA NA",
+        "name": "Bank of America"
+    },
+    {
+        "id": 21,
+        "code": "037",
+        "full_name": "PT. BANK ARTHA GRAHA INTERNASIONAL TBK.",
+        "name": "Bank Artha Graha"
+    },
+    {
+        "id": 22,
+        "code": "040",
+        "full_name": "BANGKOK BANK PUBLIC CO.LTD",
+        "name": "Bangkok Bank"
+    },
+    {
+        "id": 23,
+        "code": "046",
+        "full_name": "PT. BANK DBS INDONESIA",
+        "name": "Bank DBS"
+    },
+    {
+        "id": 24,
+        "code": "047",
+        "full_name": "PT. BANK RESONA PERDANIA",
+        "name": "Bank Resona Perdania"
+    },
+    {
+        "id": 25,
+        "code": "048",
+        "full_name": "PT. BANK MIZUHO INDONESIA",
+        "name": "Bank Mizuho"
+    },
+    {
+        "id": 26,
+        "code": "050",
+        "full_name": "STANDARD CHARTERED BANK",
+        "name": "Standard Chartered Bank"
+    },
+    {
+        "id": 27,
+        "code": "054",
+        "full_name": "PT. BANK CAPITAL INDONESIA",
+        "name": "Bank Capital"
+    },
+    {
+        "id": 28,
+        "code": "057",
+        "full_name": "PT. BANK BNP PARIBAS INDONESIA",
+        "name": "Bank BNP Paribas"
+    },
+    {
+        "id": 29,
+        "code": "061",
+        "full_name": "PT. BANK ANZ INDONESIA",
+        "name": "Bank ANZ"
+    },
+    {
+        "id": 30,
+        "code": "069",
+        "full_name": "KC BANK OF CHINA LIMITED",
+        "name": "Bank of China"
+    },
+    {
+        "id": 31,
+        "code": "076",
+        "full_name": "PT. BANK BUMI ARTA",
+        "name": "Bank Bumi Arta"
+    },
+    {
+        "id": 32,
+        "code": "087",
+        "full_name": "PT. BANK HSBC INDONESIA",
+        "name": "Bank HSBC"
+    },
+    {
+        "id": 33,
+        "code": "095",
+        "full_name": "PT. BANK JTRUST INDONESIA TBK.",
+        "name": "JTrust Bank"
+    },
+    {
+        "id": 34,
+        "code": "097",
+        "full_name": "PT. BANK MAYAPADA INTERNASIONAL TBK.",
+        "name": "Bank Mayapada"
+    },
+    {
+        "id": 35,
+        "code": "110",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH JABAR DAN BANTEN",
+        "name": "Bank BJB"
+    },
+    {
+        "id": 36,
+        "code": "111",
+        "full_name": "PT. BANK DKI",
+        "name": "Bank DKI"
+    },
+    {
+        "id": 37,
+        "code": "111",
+        "full_name": "PT. BANK DKI UNIT USAHA SYARIAH",
+        "name": "Bank DKI Syariah"
+    },
+    {
+        "id": 38,
+        "code": "112",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH DIY",
+        "name": "BPD DIY"
+    },
+    {
+        "id": 39,
+        "code": "112",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH DIY UNIT USAHA SYARIAH",
+        "name": "BPD DIY Syariah"
+    },
+    {
+        "id": 40,
+        "code": "113",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH JAWA TENGAH",
+        "name": "Bank Jateng"
+    },
+    {
+        "id": 41,
+        "code": "113",
+        "full_name": "PT. BPD JAWA TENGAH UNIT USAHA SYARIAH",
+        "name": "Bank Jateng Syariah"
+    },
+    {
+        "id": 42,
+        "code": "114",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH JATIM",
+        "name": "Bank Jatim"
+    },
+    {
+        "id": 43,
+        "code": "114",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH JATIM - UNIT USAHA SYARIAH",
+        "name": "Bank Jatim Syariah"
+    },
+    {
+        "id": 44,
+        "code": "115",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH JAMBI",
+        "name": "Bank Jambi"
+    },
+    {
+        "id": 45,
+        "code": "116",
+        "full_name": "PT. BPD ISTIMEWA ACEH SYARIAH",
+        "name": "BPD Aceh Syariah"
+    },
+    {
+        "id": 46,
+        "code": "117",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH SUMUT",
+        "name": "BPD Sumut"
+    },
+    {
+        "id": 47,
+        "code": "117",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH SUMUT UUS",
+        "name": "BPD Sumut Syariah"
+    },
+    {
+        "id": 48,
+        "code": "118",
+        "full_name": "PT. BANK NAGARI",
+        "name": "Bank Nagari"
+    },
+    {
+        "id": 49,
+        "code": "119",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH RIAU KEPRI",
+        "name": "Bank Riau"
+    },
+    {
+        "id": 50,
+        "code": "120",
+        "full_name": "PT. BPD SUMSEL DAN BABEL",
+        "name": "Bank Sumsel Babel"
+    },
+    {
+        "id": 51,
+        "code": "120",
+        "full_name": "PT. BPD SUMSEL DAN BABEL UNIT USAHA SYARIAH",
+        "name": "Bank Sumsel Babel Syariah"
+    },
+    {
+        "id": 52,
+        "code": "121",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH LAMPUNG",
+        "name": "Bank Lampung"
+    },
+    {
+        "id": 53,
+        "code": "122",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH KALSEL",
+        "name": "Bank Kalsel"
+    },
+    {
+        "id": 54,
+        "code": "122",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH KALSEL - UNIT USAHA SYARIAH",
+        "name": "Bank Kalsel Syariah"
+    },
+    {
+        "id": 55,
+        "code": "123",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH KALBAR",
+        "name": "Bank Kalbar"
+    },
+    {
+        "id": 56,
+        "code": "123",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH KALBAR - UNIT USAHA SYARIAH",
+        "name": "Bank Kalbar Syariah"
+    },
+    {
+        "id": 57,
+        "code": "124",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH KALTIM",
+        "name": "BPD Kaltimtara"
+    },
+    {
+        "id": 58,
+        "code": "124",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH KALTIM - UNIT USAHA SYARIAH",
+        "name": "BPD Kaltimtara Syariah"
+    },
+    {
+        "id": 59,
+        "code": "125",
+        "full_name": "PT. BPD KALIMANTAN TENGAH",
+        "name": "Bank Kalteng"
+    },
+    {
+        "id": 60,
+        "code": "126",
+        "full_name": "PT. BANK SULSELBAR",
+        "name": "Bank Sulselbar"
+    },
+    {
+        "id": 61,
+        "code": "126",
+        "full_name": "PT. BPD SULAWESI SELATAN DAN SULAWESI BARAT UNIT USAHA SYARIAH",
+        "name": "Bank Sulselbar Syariah"
+    },
+    {
+        "id": 62,
+        "code": "127",
+        "full_name": "PT. BANK SULUT",
+        "name": "Bank SulutGo"
+    },
+    {
+        "id": 63,
+        "code": "128",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH NTB",
+        "name": "BPD NTB"
+    },
+    {
+        "id": 64,
+        "code": "129",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH BALI",
+        "name": "BPD Bali"
+    },
+    {
+        "id": 65,
+        "code": "130",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH NTT",
+        "name": "Bank NTT"
+    },
+    {
+        "id": 66,
+        "code": "131",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH MALUKU",
+        "name": "Bank Maluku & Maluku Utara"
+    },
+    {
+        "id": 67,
+        "code": "132",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH PAPUA",
+        "name": "Bank Papua"
+    },
+    {
+        "id": 68,
+        "code": "133",
+        "full_name": "PT. BPD BENGKULU",
+        "name": "Bank Bengkulu"
+    },
+    {
+        "id": 69,
+        "code": "134",
+        "full_name": "PT. BPD SULAWESI TENGAH",
+        "name": "BPD Sulteng"
+    },
+    {
+        "id": 70,
+        "code": "135",
+        "full_name": "PT. BPD SULAWESI TENGGARA",
+        "name": "BPD Sultra"
+    },
+    {
+        "id": 71,
+        "code": "146",
+        "full_name": "PT. BANK OF INDIA INDONESIA TBK.",
+        "name": "Bank of India Indonesia"
+    },
+    {
+        "id": 72,
+        "code": "147",
+        "full_name": "PT. BANK MUAMALAT INDONESIA",
+        "name": "Bank Muamalat"
+    },
+    {
+        "id": 73,
+        "code": "151",
+        "full_name": "PT. BANK MESTIKA DHARMA",
+        "name": "Bank Mestika"
+    },
+    {
+        "id": 74,
+        "code": "152",
+        "full_name": "PT. BANK SHINHAN INDONESIA",
+        "name": "Shinhan Bank"
+    },
+    {
+        "id": 75,
+        "code": "153",
+        "full_name": "PT. BANK SINARMAS",
+        "name": "Bank Sinarmas"
+    },
+    {
+        "id": 76,
+        "code": "153",
+        "full_name": "PT. BANK SINARMAS UNIT USAHA SYARIAH",
+        "name": "Bank Sinarmas Syariah"
+    },
+    {
+        "id": 77,
+        "code": "157",
+        "full_name": "PT. BANK MASPION INDONESIA",
+        "name": "Bank Maspion"
+    },
+    {
+        "id": 78,
+        "code": "161",
+        "full_name": "PT. BANK GANESHA",
+        "name": "Bank Ganesha"
+    },
+    {
+        "id": 79,
+        "code": "164",
+        "full_name": "PT. BANK ICBC INDONESIA",
+        "name": "ICBC"
+    },
+    {
+        "id": 80,
+        "code": "167",
+        "full_name": "PT. BANK QNB INDONESIA TBK.",
+        "name": "Bank QNB Indonesia"
+    },
+    {
+        "id": 81,
+        "code": "200",
+        "full_name": "PT. BANK TABUNGAN NEGARA (PERSERO)",
+        "name": "Bank Tabungan Negara (BTN)"
+    },
+    {
+        "id": 82,
+        "code": "200",
+        "full_name": "PT. BANK TABUNGAN NEGARA (PERSERO) UNIT USAHA SYARIAH",
+        "name": "Bank Tabungan Negara (BTN) Syariah"
+    },
+    {
+        "id": 83,
+        "code": "212",
+        "full_name": "PT. BANK WOORI SAUDARA INDONESIA 1906 TBK.",
+        "name": "Bank Woori Saudara"
+    },
+    {
+        "id": 84,
+        "code": "213",
+        "full_name": "PT. BANK TABUNGAN PENSIUNAN NASIONAL",
+        "name": "Bank SMBC Indonesia"
+    },
+    {
+        "id": 85,
+        "code": "405",
+        "full_name": "PT. BANK VICTORIA SYARIAH",
+        "name": "Bank Victoria Syariah"
+    },
+    {
+        "id": 86,
+        "code": "425",
+        "full_name": "PT. BANK JABAR BANTEN SYARIAH",
+        "name": "Bank BJB Syariah"
+    },
+    {
+        "id": 87,
+        "code": "426",
+        "full_name": "PT. BANK MEGA TBK.",
+        "name": "Bank Mega"
+    },
+    {
+        "id": 88,
+        "code": "441",
+        "full_name": "PT. BANK KB BUKOPIN TBK.",
+        "name": "Bank Bukopin"
+    },
+    {
+        "id": 89,
+        "code": "451",
+        "full_name": "PT. BANK SYARIAH INDONESIA TBK.",
+        "name": "Bank Syariah Indonesia (BSI)"
+    },
+    {
+        "id": 90,
+        "code": "472",
+        "full_name": "PT. BANK JASA JAKARTA",
+        "name": "Bank Jasa Jakarta"
+    },
+    {
+        "id": 91,
+        "code": "484",
+        "full_name": "PT. BANK KEB HANA INDONESIA",
+        "name": "KEB Hana Bank"
+    },
+    {
+        "id": 92,
+        "code": "485",
+        "full_name": "PT. BANK MNC INTERNASIONAL TBK.",
+        "name": "MNC Bank"
+    },
+    {
+        "id": 93,
+        "code": "490",
+        "full_name": "PT. BANK YUDHA BHAKTI",
+        "name": "Bank Neo Commerce"
+    },
+    {
+        "id": 94,
+        "code": "498",
+        "full_name": "PT. BANK SBI INDONESIA",
+        "name": "Bank SBI Indonesia"
+    },
+    {
+        "id": 95,
+        "code": "501",
+        "full_name": "PT. BANK DIGITAL BCA",
+        "name": "BCA Digital"
+    },
+    {
+        "id": 96,
+        "code": "503",
+        "full_name": "PT. BANK NATIONALNOBU",
+        "name": "Bank National Nobu"
+    },
+    {
+        "id": 97,
+        "code": "506",
+        "full_name": "PT. BANK MEGA SYARIAH",
+        "name": "Bank Mega Syariah"
+    },
+    {
+        "id": 98,
+        "code": "513",
+        "full_name": "PT. BANK INA PERDANA",
+        "name": "Bank INA"
+    },
+    {
+        "id": 99,
+        "code": "517",
+        "full_name": "PT. BANK PANIN SYARIAH",
+        "name": "Bank Panin Syariah"
+    },
+    {
+        "id": 100,
+        "code": "520",
+        "full_name": "PT. PRIMA MASTER BANK",
+        "name": "Prima Master Bank"
+    },
+    {
+        "id": 101,
+        "code": "521",
+        "full_name": "PT. BANK SYARIAH BUKOPIN",
+        "name": "Bank Syariah Bukopin"
+    },
+    {
+        "id": 102,
+        "code": "523",
+        "full_name": "PT. BANK SAHABAT SAMPOERNA",
+        "name": "Bank Sahabat Sampoerna"
+    },
+    {
+        "id": 103,
+        "code": "526",
+        "full_name": "PT. BANK OKE INDONESIA",
+        "name": "Bank OKE"
+    },
+    {
+        "id": 104,
+        "code": "531",
+        "full_name": "PT. BANK AMAR INDONESIA",
+        "name": "Bank Amar"
+    },
+    {
+        "id": 105,
+        "code": "535",
+        "full_name": "PT. BANK SEABANK INDONESIA",
+        "name": "Seabank"
+    },
+    {
+        "id": 106,
+        "code": "536",
+        "full_name": "PT. BANK BCA SYARIAH",
+        "name": "BCA Syariah"
+    },
+    {
+        "id": 107,
+        "code": "542",
+        "full_name": "PT. BANK JAGO TBK.",
+        "name": "Bank Jago"
+    },
+    {
+        "id": 108,
+        "code": "542",
+        "full_name": "PT. BANK JAGO UNIT USAHA SYARIAH",
+        "name": "Bank Jago Syariah"
+    },
+    {
+        "id": 109,
+        "code": "547",
+        "full_name": "PT. BANK TABUNGAN PENSIUNAN NASIONAL SYARIAH",
+        "name": "BTPN Syariah"
+    },
+    {
+        "id": 110,
+        "code": "548",
+        "full_name": "PT. BANK MULTI ARTA SENTOSA",
+        "name": "Bank Multiarta Sentosa"
+    },
+    {
+        "id": 111,
+        "code": "553",
+        "full_name": "PT. BANK MAYORA",
+        "name": "Bank Mayora"
+    },
+    {
+        "id": 112,
+        "code": "555",
+        "full_name": "PT. BANK INDEX SELINDO",
+        "name": "Bank Index"
+    },
+    {
+        "id": 113,
+        "code": "564",
+        "full_name": "PT. BANK MANDIRI TASPEN POS",
+        "name": "Bank Mandiri Taspen"
+    },
+    {
+        "id": 114,
+        "code": "566",
+        "full_name": "PT. BANK VICTORIA INTERNATIONAL",
+        "name": "Bank Victoria"
+    },
+    {
+        "id": 115,
+        "code": "567",
+        "full_name": "PT. ALLO BANK INDONESIA TBK.",
+        "name": "Bank Allo"
+    },
+    {
+        "id": 116,
+        "code": "783",
+        "full_name": "PT. BANK PEMBANGUNAN DAERAH RIAU KEPRI SYARIAH",
+        "name": "Bank Riau Syariah"
+    },
+    {
+        "id": 117,
+        "code": "949",
+        "full_name": "PT. BANK CTBC INDONESIA",
+        "name": "CTBC Indonesia"
+    }
+]

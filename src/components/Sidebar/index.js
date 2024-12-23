@@ -124,7 +124,7 @@ const Sidebar = ({ isOpen, toggle }) => {
         </SidebarMenu>
         <SideBtnWrap>
           <SidebarRoute1 to="/peserta/">Cek Saldo</SidebarRoute1>
-          <SidebarRoute2 to="/peserta/">Registrasi</SidebarRoute2>
+          <SidebarRoute2 to="/peserta/registrasi">Registrasi</SidebarRoute2>
         </SideBtnWrap>
       </SidebarWrapper>
     </SidebarContainer>

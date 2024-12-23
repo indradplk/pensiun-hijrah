@@ -77,7 +77,13 @@ const TanyaDPLK = ({userData}) => {
         },
       })
       .then((res) => {
-        const modifiedData = res.data.content.map((item) => {
+        const sortedData = res.data.content.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB - dateA;
+        });
+
+        const modifiedData = sortedData.map((item) => {
           let statusText;
           if (item.status === false || item.status === 0) {
             statusText = 'Belum direspon';

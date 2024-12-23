@@ -98,7 +98,13 @@ const Announcement = ({ userData }) => {
     axios
       .get(process.env.REACT_APP_API_BASE_URL + '/announcement')
       .then((res) => {
-        const modifiedData = res.data.content.map((item) => ({
+        const sortedData = res.data.content.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB - dateA;
+        });
+
+        const modifiedData = sortedData.map((item) => ({
           ...item,
           status: item.status ? 'Aktif' : 'Nonaktif'
         }));

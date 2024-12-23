@@ -144,6 +144,7 @@ const Registrasi = () => {
   const [subdistrictsKantor, setKecamatanKantor] = useState([]);
   const [villagesKantor, setKelurahanKantor] = useState([]);
   const [cabangDaftar, setCabangDaftar] = useState([]);
+  const [namaBank, setNamaBank] = useState([]);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -318,6 +319,15 @@ const Registrasi = () => {
       .catch((error) => console.error(error.response.data.message));
   }, []);
 
+  useEffect(() => {
+    axios
+    .get(`${process.env.REACT_APP_API_BASE_URL}/master/bank`)
+      .then(response => {
+        setNamaBank(response.data.content);
+      })
+      .catch((error) => console.error(error.response.data.message));
+  }, []);
+
   const handleOfficeChange = (selectedOption) => {
     setFormData(prevState => ({
       ...prevState,
@@ -325,9 +335,21 @@ const Registrasi = () => {
     }));
   };
 
+  const handleBankChange = (selectedOption) => {
+    setFormData(prevState => ({
+      ...prevState,
+      rekening_muamalat: selectedOption.value,
+    }));
+  };
+
   const options = cabangDaftar.map(office => ({
     value: office.kode_cabang,
     label: `${office.nama} - ${office.alamat}`
+  }))
+
+  const optionsBank = namaBank.map(bank => ({
+    value: bank.name,
+    label: `${bank.name}`
   }))
 
   const customStyles = {
@@ -1409,7 +1431,14 @@ const Registrasi = () => {
               <FormCardWrapper>
                 <FormDiv>
                   <FormLabel htmlFor="rekening_muamalat">Nama Bank</FormLabel>
-                  <FormInput id="rekening_muamalat" type="text" name="rekening_muamalat" value={formData.rekening_muamalat} onChange={handleChange} />
+                  <Select
+                    id="rekening_muamalat"
+                    name="rekening_muamalat"
+                    options={optionsBank}
+                    onChange={handleBankChange}
+                    placeholder="Pilih bank..."
+                    styles={customStyles}
+                  />
                   {/* <FormLabel htmlFor="rekening_1">Nama Bank</FormLabel> */}
                   <FormInput id="rekening_1" type="hidden" name="rekening_1" value={formData.rekening_1} onChange={handleChange} />
                   {/* <FormLabel htmlFor="rekening_2">Nama Bank</FormLabel> */}

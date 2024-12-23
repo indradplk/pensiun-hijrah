@@ -1,5 +1,7 @@
 import React from 'react';
-import Logo from '../../../assets/images/LogoPensiunHijrah.png';
+import DPLK from '../../../assets/images/DPLK.png';
+import BMI from '../../../assets/images/BMI.png';
+import BPKH from '../../../assets/images/BPKH.png';
 import {
   FaFacebook,
   FaInstagram,
@@ -21,6 +23,11 @@ import {
   SocialMediaWrap,
   WebsiteRights,
   SocialLogoIcon,
+  FindUsContainer,
+  FindUsWrapper,
+  FindUsColumn,
+  Heading,
+  SocialIconsColumn,
 } from './FooterElements';
 import { animateScroll as scroll } from 'react-scroll';
 
@@ -48,14 +55,13 @@ const Footer = () => {
               <FooterLink to="/product/pensiun-hijrah-eksekutif/" onClick={toggleHome}>Pensiun Hijrah Eksekutif</FooterLink>
               <FooterLink to="/product/zakat-dana-pensiun/" onClick={toggleHome}>Zakat Dana Pensiun</FooterLink>
             </FooterLinkItems>
-          </FooterLinkWrapper>
-
-          <FooterLinkWrapper>
             <FooterLinkItems>
               <FooterLinkTitle><b>Simulasi</b></FooterLinkTitle>
               <FooterLink to="/simulasi/" onClick={toggleHome}>Berdasarkan Iuran</FooterLink>
               <FooterLink to="/simulasi/based-on-needs/" onClick={toggleHome}>Berdasarkan Kebutuhan</FooterLink>
             </FooterLinkItems>
+          </FooterLinkWrapper>
+          <FooterLinkWrapper>
             <FooterLinkItems>
               <FooterLinkTitle><b>Pusat Media</b></FooterLinkTitle>
               <FooterLink to="/media/keuangan/" onClick={toggleHome}>Laporan Keuangan</FooterLink>
@@ -68,49 +74,74 @@ const Footer = () => {
             <FooterLinkItems>
               <FooterLinkTitle><b>Bantuan</b></FooterLinkTitle>
               <FooterLink to="/bantuan/panduan/" onClick={toggleHome}>Panduan</FooterLink>
-              <FooterLink to="/bantuan/formulir/" onClick={toggleHome}>Download Formulir</FooterLink>
+              <FooterLink to="/bantuan/download/" onClick={toggleHome}>Download</FooterLink>
               <FooterLink to="/bantuan/faq/" onClick={toggleHome}>Sering Ditanyakan</FooterLink>
               <FooterLink to="/bantuan/kontak/" onClick={toggleHome}>Hubungi Kami</FooterLink>
             </FooterLinkItems>
           </FooterLinkWrapper>
         </FooterLinkContainer>
+        <FindUsContainer>
+          <FindUsWrapper>
+            <FindUsColumn>
+              <SocialIconsColumn>
+                <SocialLogo to="/" onClick={toggleHome}>
+                  <SocialLogoIcon src={DPLK} />
+                </SocialLogo>
+                <SocialIconLink
+                  href='https://www.bankmuamalat.co.id/'
+                  target="_blank"
+                  arial-label="BMI"
+                >
+                  <SocialLogoIcon src={BMI} />
+                </SocialIconLink>
+                <SocialIconLink
+                  href='https://bpkh.go.id/'
+                  target="_blank"
+                  arial-label="BPKH"
+                >
+                  <SocialLogoIcon src={BPKH} />
+                </SocialIconLink>
+              </SocialIconsColumn>
+            </FindUsColumn>
+            <FindUsColumn>
+              <SocialIcons>
+                <SocialIconLink
+                  href="https://www.facebook.com/dplksyariah.muamalat.5"
+                  target="_blank"
+                  arial-label="Facebook">
+                  <FaFacebook />
+                </SocialIconLink>
+                <SocialIconLink
+                  href="https://www.instagram.com/dplksyariahmuamalat/"
+                  target="_blank"
+                  arial-label="Instagram"
+                >
+                  <FaInstagram />
+                </SocialIconLink>
+                <SocialIconLink
+                  href="https://youtube.com/@dplksyariahmuamalat3802?si=um9rfefCu_6gvJYI"
+                  target="_blank"
+                  arial-label="Youtube"
+                >
+                  <FaYoutube />
+                </SocialIconLink>
+                <SocialIconLink
+                  href="https://wa.me/6281333393820"
+                  target="_blank"
+                  arial-label="WhatsApp"
+                >
+                  <FaWhatsapp />
+                </SocialIconLink>
+              </SocialIcons>
+            </FindUsColumn>
+          </FindUsWrapper>
+        </FindUsContainer>
         <SocialMedia>
           <SocialMediaWrap>
-            <SocialLogo to="/" onClick={toggleHome}>
-              <SocialLogoIcon src={Logo} />
-            </SocialLogo>
             <WebsiteRights>
+              DPLK Syariah Muamalat terdaftar dan diawasi oleh Otoritas Jasa Keuangan (OJK)<br/>
               Pensiun Hijrah © {new Date().getFullYear()} All rights reserved.
             </WebsiteRights>
-            <SocialIcons>
-              <SocialIconLink
-                href="https://www.facebook.com/dplksyariah.muamalat.5"
-                target="_blank"
-                arial-label="Facebook">
-                <FaFacebook />
-              </SocialIconLink>
-              <SocialIconLink
-                href="https://www.instagram.com/dplksyariahmuamalat/"
-                target="_blank"
-                arial-label="Instagram"
-              >
-                <FaInstagram />
-              </SocialIconLink>
-              <SocialIconLink
-                href="https://youtube.com/@dplksyariahmuamalat3802?si=um9rfefCu_6gvJYI"
-                target="_blank"
-                arial-label="Youtube"
-              >
-                <FaYoutube />
-              </SocialIconLink>
-              <SocialIconLink
-                href="https://wa.me/6281333393820"
-                target="_blank"
-                arial-label="WhatsApp"
-              >
-                <FaWhatsapp />
-              </SocialIconLink>
-            </SocialIcons>
           </SocialMediaWrap>
         </SocialMedia>
       </FooterWrap>

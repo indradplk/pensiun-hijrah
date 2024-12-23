@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { id } from 'date-fns/locale/id';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import DPLK from '../../../assets/images/DPLK.png';
 import Header from '../../../assets/images/header.png';
 import Footer from '../../../assets/images/footer.png';
 
@@ -16,6 +17,7 @@ const Riwayat = ({ userData }) => {
   const token = cookies.get('token');
   const [state, setState] = useState({
     data: [],
+    dataUser: [],
     isMobile: false
   });
 
@@ -25,6 +27,7 @@ const Riwayat = ({ userData }) => {
 
   useEffect(() => {
     fetchData();
+    fetchUser();
     const handleWindowSizeChange = () => {
       setState((prevState) => ({
         ...prevState,
@@ -81,7 +84,32 @@ const Riwayat = ({ userData }) => {
         console.error('Terjadi kesalahan. Silakan coba lagi.');
       }
     }
-  }; 
+  };
+  
+  const fetchUser = async () => {
+    try {
+      const user = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/ppip/peserta/${userData.username}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setState((prevState) => ({
+        ...prevState,
+        dataUser: user.data.content
+      }));
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.message) {
+        console.error(error.response.data.message);
+      } else {
+        console.error('Terjadi kesalahan. Silakan coba lagi.');
+      }
+    }
+  };
 
   const formatDate = (dateString) => {
     const dateParts = dateString.split('-');
@@ -102,15 +130,70 @@ const Riwayat = ({ userData }) => {
     const doc = new jsPDF();
 
     // Tambahkan gambar header di atas
-    const headerWidth = 175;
-    const headerHeight = 18.12;
-    const headerX = (doc.internal.pageSize.getWidth() - headerWidth) / 2;
-    const headerY = 10;
-    doc.addImage(Header, 'PNG', headerX, headerY, headerWidth, headerHeight);
+    const headerWidth = 48;
+    const headerHeight = 20;
+    const headerX = 150;
+    const headerY = 5;
+    doc.addImage(DPLK, 'PNG', headerX, headerY, headerWidth, headerHeight);
+
+    const tanggalTransaksi = state.data
+      .map(item => item.TGL_TRANSAKSI)
+      .filter(Boolean)
+      .sort((a, b) => new Date(a) - new Date(b));
+
+    const tanggalAwal = tanggalTransaksi[0] || '-';
+    const tanggalAkhir = tanggalTransaksi[tanggalTransaksi.length - 1] || '-';
+    const today = new Date();
+    const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
   
     // Tambahkan judul pada PDF
+    doc.setFont('helvetica', 'bold'); 
     doc.setFontSize(14);
-    doc.text('Riwayat Transaksi 3 Bulan Terakhir', 105, 50, null, null, 'center');
+    doc.text('Riwayat Transaksi /', 15, 30, null, null, 'left');
+
+    doc.setFont('helvetica', 'italic'); 
+    doc.setFontSize(14);
+    doc.text('Statement of Account', 62, 30, null, null, 'left');
+
+    doc.setFont('helvetica', 'bold'); 
+    doc.setFontSize(12);
+    doc.text(`Periode: ${formatDate(tanggalAwal)} - ${formatDate(tanggalAkhir)}`, 15, 35, null, null, 'left');
+    
+    doc.setFont('helvetica', 'bold'); 
+    doc.setFontSize(12);
+    doc.text(
+      `${state.dataUser.map(item => item.nama_lengkap).join('\n')} (${state.dataUser.map(item => item.no_peserta).join('\n')})`, 15, 50, { align: 'left' }
+    );  
+
+    doc.setFont('helvetica', 'normal'); 
+    doc.setFontSize(10);
+    doc.text(
+      `${state.dataUser.map(item => (item.alamat_jalan ? item.alamat_jalan : '-')).join('\n')}`, 15, 55, { align: 'left' }
+    );  
+
+    doc.setFont('helvetica', 'normal'); 
+    doc.setFontSize(10);
+    doc.text(
+      `RT/RW ${state.dataUser.map(item => (item.alamat_rtrw ? item.alamat_rtrw : '-')).join('\n')}`, 15, 60, { align: 'left' }
+    );  
+
+    doc.setFont('helvetica', 'normal'); 
+    doc.setFontSize(10);
+    doc.text(
+      `${state.dataUser.map(item => (item.alamat_kelurahan ? item.alamat_kelurahan : '-')).join('\n')}, ${state.dataUser.map(item => (item.ALAMAT_KECAMATAN ? item.ALAMAT_KECAMATAN : '-')).join('\n')}`, 15, 65, { align: 'left' }
+    );   
+
+    doc.setFont('helvetica', 'normal'); 
+    doc.setFontSize(10);
+    doc.text(
+      `${state.dataUser.map(item => (item.alamat_kota ? item.alamat_kota : '-')).join('\n')}, ${state.dataUser.map(item => (item.ALAMAT_PROPINSI ? item.ALAMAT_PROPINSI : '-')).join('\n')}`, 15, 70, { align: 'left' }
+    );
+
+    doc.setFont('helvetica', 'normal'); 
+    doc.setFontSize(10);
+    doc.text(
+      `${state.dataUser.map(item => (item.alamat_kode_pos ? item.alamat_kode_pos : '-')).join('\n')}`, 15, 75, { align: 'left' }
+    );
 
     let saldoSebelumPDF = saldoSebelum;
   
@@ -118,7 +201,7 @@ const Riwayat = ({ userData }) => {
     doc.autoTable({
       headStyles: { fillColor: '#D7A1FF', textColor: [255, 255, 255], fontStyle: 'bold' },
       margin: { top: 30 },
-      startY: 60,
+      startY: 80,
       head: [['Tanggal', 'Transaksi', 'Nominal', 'Saldo']],
       body: state.data.map(item => {
         const saldo = item.MUTASI_IURAN_PK + item.MUTASI_IURAN_PST + item.MUTASI_PENGEMBANGAN + item.MUTASI_PERALIHAN;
@@ -140,7 +223,7 @@ const Riwayat = ({ userData }) => {
     doc.addImage(Footer, 'PNG', footerX, footerY, footerWidth, footerHeight);
   
     // Simpan atau unduh PDF
-    doc.save('riwayat_transaksi.pdf');
+    doc.save(`${state.dataUser.map(item => item.no_peserta)}_statement_${formattedDate}.pdf`);
   };  
 
   return (

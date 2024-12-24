@@ -20,7 +20,13 @@ const VideoSection = () => {
     axios
       .get(process.env.REACT_APP_API_BASE_URL + '/video?status=true')
       .then((response) => {
-        setVideoData(response.data.content);
+        const sortedData = response.data.content.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB - dateA;
+        });
+
+        setVideoData(sortedData);
       })
       .catch((error) => {
         console.error(error);

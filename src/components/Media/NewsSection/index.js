@@ -33,13 +33,17 @@ const NewsSection = () => {
     axios
       .get(process.env.REACT_APP_API_BASE_URL + '/news?status=true')
       .then((response) => {
-        const formattedData = response.data.content.map(item => ({
+        const sortedData = response.data.content.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB - dateA;
+        });
+
+        const formattedData = sortedData.map(item => ({
           ...item,
           kategori: convertKategori(item.kategori),
           createdAt: format(new Date(item.createdAt), 'dd MMM yyyy', { locale: id }),
         }));
-
-        formattedData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
         setNewsData(formattedData);
       })

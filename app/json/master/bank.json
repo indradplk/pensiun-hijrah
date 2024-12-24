@@ -1,11 +1,5 @@
 [
     {
-        "id": 1,
-        "code": "001",
-        "full_name": "BANK INDONESIA",
-        "name": "Bank Indonesia"
-    },
-    {
         "id": 2,
         "code": "002",
         "full_name": "PT. BANK RAKYAT INDONESIA (PERSERO)",

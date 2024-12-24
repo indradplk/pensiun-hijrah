@@ -64,7 +64,13 @@ const Registrasi = ({ userData }) => {
         },
       })
       .then((response) => {
-        const modifiedData = response.data.content.map((item) => {
+        const sortedData = response.data.content.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return dateB - dateA;
+        });
+        
+        const modifiedData = sortedData.map((item) => {
           let statusText;
           if (item.status === null || item.status === '') {
             statusText = 'Belum diproses';

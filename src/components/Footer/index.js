@@ -1,5 +1,7 @@
 import React from 'react';
-import Logo from '../../assets/images/LogoPensiunHijrah.png';
+import DPLK from '../../assets/images/DPLK.png';
+import BMI from '../../assets/images/BMI.png';
+import BPKH from '../../assets/images/BPKH.png';
 import {
   FaFacebook,
   FaInstagram,
@@ -25,6 +27,7 @@ import {
   FindUsWrapper,
   FindUsColumn,
   Heading,
+  SocialIconsColumn,
 } from './FooterElements';
 import { animateScroll as scroll } from 'react-scroll';
 
@@ -79,9 +82,27 @@ const Footer = () => {
         </FooterLinkContainer>
         <FindUsContainer>
           <FindUsWrapper>
-            <SocialLogo to="/" onClick={toggleHome}>
-              <SocialLogoIcon src={Logo} />
-            </SocialLogo>
+            <FindUsColumn>
+              <SocialIconsColumn>
+                <SocialLogo to="/" onClick={toggleHome}>
+                  <SocialLogoIcon src={DPLK} />
+                </SocialLogo>
+                <SocialIconLink
+                  href='https://www.bankmuamalat.co.id/'
+                  target="_blank"
+                  arial-label="BMI"
+                >
+                  <SocialLogoIcon src={BMI} />
+                </SocialIconLink>
+                <SocialIconLink
+                  href='https://bpkh.go.id/'
+                  target="_blank"
+                  arial-label="BPKH"
+                >
+                  <SocialLogoIcon src={BPKH} />
+                </SocialIconLink>
+              </SocialIconsColumn>
+            </FindUsColumn>
             <FindUsColumn>
               <SocialIcons>
                 <SocialIconLink

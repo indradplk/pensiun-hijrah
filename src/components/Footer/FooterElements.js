@@ -156,6 +156,23 @@ export const SocialIcons = styled.div`
   align-items: center;
   width: 240px;
 `;
+export const SocialIconsColumn = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  margin-top: -5px;
+  margin-right: 80px;
+
+  @media screen and (max-width: 853px) {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    margin-top: 0;
+    margin-right: 0;
+  }
+`;
 export const SocialIconLink = styled.a`
   color: #1E1E1E;
   font-size: 24px;

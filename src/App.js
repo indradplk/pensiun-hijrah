@@ -26,6 +26,7 @@ import RiwayatPPUKP from './pages/perusahaan/riwayat';
 import ResetPerusahaan from './pages/perusahaan/reset-password';
 import PasswordPerusahaanPage from './pages/perusahaan/lupa-password';
 import RegistrasiPPUKP from './pages/perusahaan/registrasi';
+import DaftarPesertaPPUKP from './pages/perusahaan/daftar-peserta';
 
 import About from './pages/about/pensiun-hijrah';
 import Management from './pages/about/manajemen';
@@ -109,6 +110,7 @@ function App() {
         <Route path="/perusahaan/ubah-password/" component={ResetPerusahaan} exact />
         <Route path="/perusahaan/lupa-password/" component={PasswordPerusahaanPage} exact />
         <Route path="/perusahaan/registrasi/" component={RegistrasiPPUKP} exact />
+        <Route path="/perusahaan/daftar-peserta/" component={DaftarPesertaPPUKP} exact />
 
         <Route path="/about/dplk/" component={About} exact />
         <Route path="/about/manajemen/" component={Management} exact />

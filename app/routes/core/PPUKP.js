@@ -6,6 +6,7 @@ const { verifyRole } = require('../../helpers/roleVerification');
 const router = Router();
 
 router.get('/perusahaan/:noPeserta', authenticateToken, verifyRole('perusahaan'), ppukpController.getOne);
+router.get('/daftar-karyawan/:noPeserta', authenticateToken, verifyRole('perusahaan'), ppukpController.getEmployee);
 router.get('/saldo/:noPeserta', authenticateToken, verifyRole('perusahaan'), ppukpController.getBalance);
 router.get('/transaksi/:noPeserta', authenticateToken, verifyRole('perusahaan'), ppukpController.getTransaction);
 

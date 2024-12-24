@@ -86,27 +86,45 @@ const Profil = ({ userData }) => {
                 <td>{item.nama_lengkap}</td>
               </tr>
               <tr>
+                <td><b>NPWP</b></td>
+                <td>{item.NPWP}</td>
+              </tr>
+              <tr>
                 <td><b>Email</b></td>
                 <td>{item.ALAMAT_EMAIL}</td>
               </tr>
               <tr>
-                <td><b>Nomor HP/Telepon</b></td>
-                <td>{item.alamat_telepon}</td>
+                <td><b>Nomor Telepon</b></td>
+                <td>
+                  <>
+                    {item.alamat_telepon ? item.alamat_telepon : ''}
+                    {item.ALAMAT_TELEPON2 ? ` / ${item.ALAMAT_TELEPON2}` : ''} 
+                  </>
+                </td>
               </tr>
               <tr>
                 <td><b>Paket Investasi</b></td>
                 <td>Paket {item.kode_paket_investasi}</td>
               </tr>
               <tr>
-                <td><b>Alamat Sesuai Kartu Identitas</b></td>
+                <td><b>Alamat</b></td>
                 <td>
-                  {`${item.alamat_jalan ? `${item.alamat_jalan} RT ${item.alamat_rtrw}, ` : ''}`}
-                  {`${item.alamat_kelurahan ? `${item.alamat_kelurahan}, ` : ''}`}
-                  {`${item.ALAMAT_KECAMATAN ? `${item.ALAMAT_KECAMATAN}, ` : ''}`}
-                  <br/>
-                  {`${item.alamat_kota ? `${item.alamat_kota}, ` : ''}`}
-                  {`${item.ALAMAT_PROPINSI ? `${item.ALAMAT_PROPINSI} ` : ''}`}
-                  {`${item.alamat_kode_pos ? `${item.alamat_kode_pos}` : ''}`}
+                  <>
+                    {item.alamat_jalan ? item.alamat_jalan : ''} 
+                    {item.alamat_rtrw ? ` RT ${item.alamat_rtrw}` : ''} 
+                    <br />
+                  </>
+                  <>
+                    {item.alamat_kelurahan ? item.alamat_kelurahan : ''}
+                    {item.ALAMAT_KECAMATAN ? `, ${item.ALAMAT_KECAMATAN}` : ''} 
+                    <br />
+                  </>
+                  <>
+                    {item.alamat_kota ? item.alamat_kota : ''} 
+                    {item.ALAMAT_PROPINSI ? `, ${item.ALAMAT_PROPINSI}` : ''} 
+                    {item.alamat_kode_pos ? `, ${item.alamat_kode_pos}` : ''} 
+                    <br />
+                  </>
                 </td>
               </tr>
               <tr>

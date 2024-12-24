@@ -23,18 +23,58 @@ exports.getOne = async (req, res) => {
     }
 
     const query = `
-      SELECT n.no_peserta , n.NO_IDENTITAS_DIRI , n.NPWP , n.nama_lengkap , n.ALAMAT_EMAIL , n.JENIS_KELAMIN , n.alamat_jalan , n.alamat_rtrw , n.alamat_kelurahan , n.ALAMAT_KECAMATAN , n.alamat_kota , n.ALAMAT_PROPINSI , n.alamat_kode_pos , n.tempat_lahir , n.alamat_telepon ,
-      CONVERT(VARCHAR, n.tanggal_lahir, 103) AS tanggal_lahir ,
-      CONVERT(VARCHAR, n.tgl_registrasi, 103) AS tgl_registrasi ,
-      CONVERT(VARCHAR, r.tgl_pensiun, 103) AS tgl_pensiun ,
-      CONVERT(VARCHAR, r.tgl_pensiun_dipercepat, 103) AS tgl_pensiun_dipercepat ,
-      r.kode_paket_investasi , n.ibu_kandung , r.usia_pensiun , n.pekerjaan , n.kode_pemilikan , r.penghasilan_tetap , n.nama_perusahaan , n.kode_jenis_usaha , r.penghasilan_tidak_tetap , r.STATUS_DPLK 
-      FROM TRANSAKSIDPLK t
-      INNER JOIN NASABAHDPLK n ON n.no_peserta = t.NO_PESERTA
-      INNER JOIN REKENINGDPLK r ON r.no_peserta = t.NO_PESERTA
-      WHERE n.no_peserta = '${noPeserta}' AND t.ISCOMMITTED = 'T'
-      GROUP BY n.no_peserta , n.NO_IDENTITAS_DIRI , n.NPWP , n.nama_lengkap , n.ALAMAT_EMAIL , n.JENIS_KELAMIN , n.alamat_jalan , n.alamat_rtrw , n.alamat_kelurahan , n.ALAMAT_KECAMATAN , n.alamat_kota , n.ALAMAT_PROPINSI , n.alamat_kode_pos, n.alamat_telepon , n.tempat_lahir , n.tanggal_lahir , n.tgl_registrasi ,
-      r.tgl_pensiun , r.tgl_pensiun_dipercepat , r.kode_paket_investasi , n.ibu_kandung , r.usia_pensiun , n.pekerjaan , n.kode_pemilikan , r.penghasilan_tetap , n.nama_perusahaan , n.kode_jenis_usaha , r.penghasilan_tidak_tetap , r.STATUS_DPLK
+      SELECT 
+        rd.no_peserta, 
+        nd.nama_lengkap, 
+        nd.KODE_NASABAH_CORPORATE,
+        rd.kode_cab_daftar, 
+        br.branchname, 
+        nd.NPWP, 
+        CONVERT(VARCHAR, nd.tgl_registrasi, 103) AS tgl_registrasi, 
+        nd.ALAMAT_EMAIL,
+        nd.alamat_jalan, 
+        nd.alamat_rtrw, 
+        nd.alamat_kelurahan, 
+        nd.ALAMAT_KECAMATAN, 
+        nd.alamat_kota, 
+        nd.ALAMAT_PROPINSI, 
+        nd.alamat_kode_pos,
+        nd.alamat_kantor_jalan,  
+        nd.ALAMAT_KANTOR_KELURAHAN, 
+        nd.ALAMAT_KANTOR_KECAMATAN, 
+        nd.alamat_kantor_kota, 
+        nd.alamat_kantor_propinsi, 
+        nd.alamat_kantor_kode_pos,
+        nd.ALAMAT_SURAT_JALAN, 
+        nd.ALAMAT_SURAT_RTRW, 
+        nd.ALAMAT_SURAT_KELURAHAN, 
+        nd.ALAMAT_SURAT_KECAMATAN, 
+        nd.ALAMAT_SURAT_KOTA, 
+        nd.ALAMAT_SURAT_PROPINSI, 
+        nd.ALAMAT_SURAT_KODE_POS,
+        nd.alamat_telepon, 
+        nd.ALAMAT_TELEPON2, 
+        nd.alamat_kantor_telepon, 
+        nd.ALAMAT_KANTOR_TELEPON2, 
+        nd.ALAMAT_SURAT_TELEPON, 
+        nd.ALAMAT_SURAT_TELEPON2,
+        rd.kode_paket_investasi, 
+        rd.usia_pensiun,
+        CONVERT(VARCHAR, rd.tgl_pensiun, 103) AS tgl_pensiun,
+        CONVERT(VARCHAR, rd.tgl_pensiun_dipercepat, 103) AS tgl_pensiun_dipercepat,
+        nd.pekerjaan, 
+        nd.kode_jenis_usaha, 
+        nd.kode_pemilikan, 
+        nd.NO_REFERENSI, 
+        nd.dplk_referensi 
+    FROM 
+        nasabahdplk nd
+    JOIN 
+        rekeningdplk rd ON nd.no_peserta = rd.no_peserta
+    JOIN 
+        branchlocation br ON rd.kode_cab_daftar = br.branch_code
+    WHERE 
+        rd.no_peserta = '${noPeserta}'
     `;
 
     const pool = await connectToDatabasePPUKP();
@@ -49,6 +89,83 @@ exports.getOne = async (req, res) => {
         });
     } else {
         throw new NotFoundError(`User with username: ${noPeserta} not found!`);
+    }
+  } catch (error) {
+    if (error.name === 'NotFoundError') {
+      return response(res, {
+        code: 404,
+        success: false,
+        message: error.message,
+      });
+    }
+  
+    return response(res, {
+      code: 500,
+      success: false,
+      message: error.message || 'Something went wrong!',
+    });
+  }
+};
+
+exports.getEmployee = async (req, res) => {
+  try {
+    const { noPeserta } = req.params;
+    const userUpdate = req.user.username;
+    const role = req.user.role;
+
+    // Only allow user to see themselves
+    if (role !== 'admin' && noPeserta !== userUpdate) { 
+      return response(res, {
+        code: 403,
+        success: false,
+        message: 'You are not authorized to see another user!',
+      });
+    }
+
+    const query = `
+      SELECT 
+        rd.no_peserta,
+        nd.NAMA_LENGKAP,
+        rd.kode_paket_investasi,
+        nd.NO_IDENTITAS_DIRI,
+        nd.tempat_lahir,
+        CASE 
+            WHEN nd.NPWP = 'NULL' THEN ''
+            ELSE nd.NPWP
+        END AS NPWP,
+        CONVERT(VARCHAR, nd.TANGGAL_LAHIR, 103) AS TANGGAL_LAHIR,
+        CONVERT(VARCHAR, nd.TGL_REGISTRASI, 103) AS TGL_REGISTRASI,
+        rd.STATUS_DPLK
+    FROM 
+        nasabahdplk nd
+    JOIN 
+        rekeningdplk rd ON nd.no_peserta = rd.no_peserta
+    JOIN 
+        nasabahdplkcorporate nc ON nd.kode_nasabah_corporate = nc.kode_nasabah_corporate
+    WHERE 
+        nd.kode_nasabah_corporate LIKE (
+            SELECT KODE_NASABAH_CORPORATE FROM nasabahdplk WHERE no_peserta = '${noPeserta}'
+        )
+    ORDER BY 
+        CASE 
+            WHEN rd.STATUS_DPLK = 'A' THEN 0
+            ELSE 1
+        END,
+        rd.no_peserta
+    `;
+
+    const pool = await connectToDatabasePPUKP();
+    const result = await pool.request().query(query);
+
+    if (result.recordset.length > 0) {
+        return response(res, {
+          code: 200,
+          success: true,
+          message: `Successfully retrieved employee data!`,
+          content: result.recordset,
+        });
+    } else {
+        throw new NotFoundError(`List employee with username: ${noPeserta} not found!`);
     }
   } catch (error) {
     if (error.name === 'NotFoundError') {

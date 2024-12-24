@@ -86,6 +86,9 @@ const Sidebar = ({ isOpen, toggle, userData }) => {
             <SidebarLink to="/perusahaan/profil/" onClick={toggleHome}>
               Profil
             </SidebarLink>
+            <SidebarLink to="/perusahaan/daftar-peserta/" onClick={toggleHome}>
+              Daftar Peserta
+            </SidebarLink>
             <SidebarLink to="/perusahaan/ubah-password/" onClick={toggleHome}>
               Ubah Password
             </SidebarLink>

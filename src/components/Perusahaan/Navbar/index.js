@@ -83,6 +83,7 @@ const NavbarPerusahaan = ({ toggle, userData }) => {
               <NavItems>
                 <NavDropdown title="Peserta">
                   <NavLinks to="/perusahaan/profil/" onClick={toggleHome} userData={userData}>Profil</NavLinks>
+                  <NavLinks to="/perusahaan/daftar-peserta/" onClick={toggleHome} userData={userData}>Daftar Peserta</NavLinks>
                   <NavLinks to="/perusahaan/ubah-password/" onClick={toggleHome} userData={userData}>Ubah Password</NavLinks>
                 </NavDropdown>
               </NavItems>

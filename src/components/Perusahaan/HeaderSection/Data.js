@@ -19,3 +19,6 @@ export const LupaPasswordHeader = {
 export const RegistrasiHeader = {
     headline: 'Registrasi Perusahaan',
 };
+export const DaftarHeader = {
+    headline: 'Daftar Peserta',
+};

@@ -60,7 +60,7 @@ app.use('/admin', Admin);
 app.use('/peserta', Peserta);
 app.use('/perusahaan', Perusahaan);
 app.use('/slider', Slider);
-app.use('report', Report);
+app.use('/report', Report);
 app.use('/panduan', Panduan);
 app.use('/news', News);
 app.use('/announcement', Announcement);
